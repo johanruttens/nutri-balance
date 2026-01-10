@@ -1,0 +1,390 @@
+/*
+  Localizable.strings (Dutch)
+  NutriBalance
+
+  Dutch localization for NutriBalance app.
+*/
+
+// MARK: - Common
+"common.save" = "Opslaan";
+"common.cancel" = "Annuleren";
+"common.delete" = "Verwijderen";
+"common.edit" = "Bewerken";
+"common.done" = "Klaar";
+"common.add" = "Toevoegen";
+"common.search" = "Zoeken";
+"common.next" = "Volgende";
+"common.back" = "Terug";
+"common.skip" = "Overslaan";
+"common.continue" = "Doorgaan";
+"common.close" = "Sluiten";
+"common.ok" = "OK";
+"common.yes" = "Ja";
+"common.no" = "Nee";
+"common.today" = "Vandaag";
+"common.yesterday" = "Gisteren";
+"common.loading" = "Laden...";
+"common.error" = "Fout";
+"common.success" = "Gelukt";
+"common.retry" = "Opnieuw";
+
+// MARK: - Tab Bar
+"tab.today" = "Vandaag";
+"tab.analytics" = "Statistieken";
+"tab.dashboard" = "Dashboard";
+"tab.progress" = "Voortgang";
+"tab.settings" = "Instellingen";
+
+// MARK: - Meal Categories
+"meal.breakfast" = "Ontbijt";
+"meal.morningSnack" = "Tussendoortje ochtend";
+"meal.lunch" = "Lunch";
+"meal.afternoonSnack" = "Tussendoortje middag";
+"meal.dinner" = "Avondeten";
+"meal.eveningSnack" = "Avondsnack";
+"meal.other" = "Overig";
+
+// MARK: - Drink Types
+"drink.water" = "Water";
+"drink.coffee" = "Koffie";
+"drink.tea" = "Thee";
+"drink.juice" = "Sap";
+"drink.soda" = "Frisdrank";
+"drink.milk" = "Melk";
+"drink.alcoholic" = "Alcoholisch";
+"drink.smoothie" = "Smoothie";
+"drink.other" = "Overig";
+
+// MARK: - Nutrition
+"nutrition.calories" = "Calorieën";
+"nutrition.protein" = "Eiwitten";
+"nutrition.carbs" = "Koolhydraten";
+"nutrition.fat" = "Vetten";
+"nutrition.fiber" = "Vezels";
+"nutrition.sugar" = "Suikers";
+"nutrition.kcal" = "kcal";
+"nutrition.grams" = "g";
+
+// MARK: - Units
+"unit.grams" = "Gram";
+"unit.milliliters" = "Milliliter";
+"unit.pieces" = "Stuks";
+"unit.cups" = "Kopjes";
+"unit.tablespoons" = "Eetlepels";
+"unit.teaspoons" = "Theelepels";
+"unit.slices" = "Plakjes";
+"unit.servings" = "Porties";
+
+// MARK: - Dashboard
+"dashboard.title" = "Dashboard";
+"dashboard.today" = "Vandaag";
+"dashboard.remaining" = "%d kcal resterend";
+"dashboard.over" = "%d kcal over";
+"dashboard.quickAdd" = "Snel Toevoegen";
+"dashboard.addFood" = "Voeding Toevoegen";
+"dashboard.addWater" = "Water Toevoegen";
+"dashboard.logWeight" = "Gewicht Noteren";
+"dashboard.dailySummary" = "Dagelijks Overzicht";
+"dashboard.weeklyProgress" = "Wekelijkse Voortgang";
+"dashboard.noEntries" = "Nog geen invoer";
+"dashboard.startLogging" = "Begin met het bijhouden van je maaltijden";
+
+// MARK: - Onboarding
+"onboarding.welcome.title" = "Welkom bij NutriBalance";
+"onboarding.welcome.subtitle" = "Jouw persoonlijke voedingsassistent";
+"onboarding.welcome.getStarted" = "Aan de Slag";
+"onboarding.name.title" = "Wat is je naam?";
+"onboarding.name.placeholder" = "Voer je voornaam in";
+"onboarding.name.lastName" = "Achternaam (optioneel)";
+"onboarding.goals.title" = "Stel Je Doelen In";
+"onboarding.goals.currentWeight" = "Huidig Gewicht";
+"onboarding.goals.targetWeight" = "Streefgewicht";
+"onboarding.goals.targetDate" = "Streefdatum";
+"onboarding.goals.activityLevel" = "Activiteitsniveau";
+"onboarding.preferences.title" = "Jouw Voorkeuren";
+"onboarding.preferences.notifications" = "Meldingen Inschakelen";
+"onboarding.preferences.language" = "Taal";
+"onboarding.complete.title" = "Je Bent Klaar!";
+"onboarding.complete.subtitle" = "Laten we beginnen aan je gezondheidsreis";
+"onboarding.complete.start" = "Begin met Bijhouden";
+
+// MARK: - Food Tracking
+"food.addEntry" = "Voeding Toevoegen";
+"food.searchPlaceholder" = "Zoek voeding...";
+"food.name" = "Voedingsnaam";
+"food.portion" = "Portiegrootte";
+"food.unit" = "Eenheid";
+"food.notes" = "Notities";
+"food.optional" = "Optioneel";
+"food.favorites" = "Favorieten";
+"food.recent" = "Recent";
+"food.frequent" = "Vaak Gebruikt";
+"food.noResults" = "Geen resultaten gevonden";
+"food.addToFavorites" = "Toevoegen aan Favorieten";
+"food.removeFromFavorites" = "Verwijderen uit Favorieten";
+
+// MARK: - Hydration
+"hydration.title" = "Hydratatie";
+"hydration.goal" = "Dagelijks Doel";
+"hydration.intake" = "Inname Vandaag";
+"hydration.remaining" = "%d ml resterend";
+"hydration.completed" = "Doel behaald!";
+"hydration.addDrink" = "Drank Toevoegen";
+"hydration.quickAdd" = "Snel Toevoegen";
+
+// MARK: - Weight
+"weight.title" = "Gewicht";
+"weight.current" = "Huidig Gewicht";
+"weight.target" = "Streefgewicht";
+"weight.progress" = "Voortgang";
+"weight.log" = "Gewicht Noteren";
+"weight.history" = "Gewichtsgeschiedenis";
+"weight.trend.losing" = "Dalend";
+"weight.trend.stable" = "Stabiel";
+"weight.trend.gaining" = "Stijgend";
+"weight.kg" = "kg";
+"weight.toGo" = "nog %@ te gaan";
+"weight.goalReached" = "Doel Behaald!";
+
+// MARK: - Activity Levels
+"activity.sedentary" = "Zittend";
+"activity.lightlyActive" = "Licht Actief";
+"activity.moderatelyActive" = "Matig Actief";
+"activity.veryActive" = "Zeer Actief";
+"activity.extraActive" = "Extra Actief";
+"activity.sedentary.description" = "Weinig of geen beweging";
+"activity.lightlyActive.description" = "Lichte beweging 1-3 dagen/week";
+"activity.moderatelyActive.description" = "Matige beweging 3-5 dagen/week";
+"activity.veryActive.description" = "Zware beweging 6-7 dagen/week";
+"activity.extraActive.description" = "Zeer zware beweging & fysiek werk";
+
+// MARK: - BMI
+"bmi.underweight" = "Ondergewicht";
+"bmi.normal" = "Normaal";
+"bmi.overweight" = "Overgewicht";
+"bmi.obese" = "Obesitas";
+
+// MARK: - Analytics
+"analytics.title" = "Statistieken";
+"analytics.weekly" = "Wekelijks";
+"analytics.monthly" = "Maandelijks";
+"analytics.averageCalories" = "Gem. Calorieën";
+"analytics.averageProtein" = "Gem. Eiwitten";
+"analytics.streak" = "Huidige Reeks";
+"analytics.days" = "dagen";
+"analytics.bestDay" = "Beste Dag";
+"analytics.insights" = "Inzichten";
+
+// MARK: - Export
+"export.title" = "Gegevens Exporteren";
+"export.dateRange" = "Datumbereik";
+"export.format" = "Formaat";
+"export.pdf" = "PDF Rapport";
+"export.csv" = "CSV Gegevens";
+"export.generate" = "Rapport Genereren";
+"export.share" = "Delen";
+"export.preview" = "Voorbeeld";
+
+// MARK: - Settings
+"settings.title" = "Instellingen";
+"settings.profile" = "Profiel";
+"settings.goals" = "Doelen";
+"settings.notifications" = "Meldingen";
+"settings.language" = "Taal";
+"settings.export" = "Gegevens Exporteren";
+"settings.privacy" = "Privacybeleid";
+"settings.about" = "Over";
+"settings.version" = "Versie";
+
+// MARK: - Food Categories
+"category.grains" = "Granen & Ontbijtgranen";
+"category.protein" = "Eiwitten";
+"category.dairy" = "Zuivel";
+"category.fruits" = "Fruit";
+"category.vegetables" = "Groenten";
+"category.fats" = "Vetten & Oliën";
+"category.sweets" = "Snoep & Snacks";
+"category.beverages" = "Dranken";
+"category.prepared" = "Kant-en-klaar";
+"category.other" = "Overig";
+
+// MARK: - Achievements
+"achievement.category.streaks" = "Reeksen";
+"achievement.category.weightLoss" = "Gewichtsverlies";
+"achievement.category.logging" = "Bijhouden";
+"achievement.category.hydration" = "Hydratatie";
+"achievement.category.nutrition" = "Voeding";
+"achievement.category.consistency" = "Consistentie";
+
+"achievement.streak7.title" = "7-Dagen Reeks";
+"achievement.streak7.desc" = "Houd je maaltijden 7 dagen achter elkaar bij";
+"achievement.streak30.title" = "30-Dagen Reeks";
+"achievement.streak30.desc" = "Houd je maaltijden 30 dagen achter elkaar bij";
+"achievement.streak100.title" = "100-Dagen Reeks";
+"achievement.streak100.desc" = "Houd je maaltijden 100 dagen achter elkaar bij";
+"achievement.firstKg.title" = "Eerste Kilogram";
+"achievement.firstKg.desc" = "Verlies je eerste kilogram";
+"achievement.halfway.title" = "Halverwege";
+"achievement.halfway.desc" = "Bereik 50% van je gewichtsdoel";
+"achievement.goalReached.title" = "Doel Behaald!";
+"achievement.goalReached.desc" = "Bereik je streefgewicht";
+"achievement.firstEntry.title" = "Van Start";
+"achievement.firstEntry.desc" = "Voer je eerste voedingsinvoer in";
+"achievement.hundredEntries.title" = "Toegewijde Logger";
+"achievement.hundredEntries.desc" = "Voer 100 voedingsinvoeren in";
+"achievement.thousandEntries.title" = "Logging Legende";
+"achievement.thousandEntries.desc" = "Voer 1000 voedingsinvoeren in";
+"achievement.hydrationHero.title" = "Hydratatie Held";
+"achievement.hydrationHero.desc" = "Behaal je dagelijkse waterdoel";
+"achievement.waterWeek.title" = "Water Week";
+"achievement.waterWeek.desc" = "Behaal je waterdoel 7 dagen achter elkaar";
+"achievement.balancedDay.title" = "Gebalanceerde Dag";
+"achievement.balancedDay.desc" = "Bereik gebalanceerde macro's voor een dag";
+"achievement.proteinChampion.title" = "Eiwit Kampioen";
+"achievement.proteinChampion.desc" = "Behaal je eiwitdoel voor 7 dagen";
+"achievement.fiberFriend.title" = "Vezel Vriend";
+"achievement.fiberFriend.desc" = "Eet 25g+ vezels voor 5 dagen";
+"achievement.veggieVictor.title" = "Groente Winnaar";
+"achievement.veggieVictor.desc" = "Eet groenten bij elke maaltijd voor een week";
+"achievement.earlyBird.title" = "Vroege Vogel";
+"achievement.earlyBird.desc" = "Ontbijt voor 9 uur 's ochtends voor een week";
+"achievement.mealPlanner.title" = "Maaltijdplanner";
+"achievement.mealPlanner.desc" = "Houd alle 3 hoofdmaaltijden 7 dagen bij";
+"achievement.weekendWarrior.title" = "Weekend Krijger";
+"achievement.weekendWarrior.desc" = "Blijf binnen caloriedoel in weekenden voor een maand";
+
+// MARK: - Greetings
+"greeting.morning" = "Goedemorgen";
+"greeting.afternoon" = "Goedemiddag";
+"greeting.evening" = "Goedenavond";
+"greeting.night" = "Goedenacht";
+"greeting.welcome" = "Welkom terug";
+
+// MARK: - Errors
+"error.generic" = "Er ging iets mis. Probeer het opnieuw.";
+"error.network" = "Netwerkfout. Controleer je verbinding.";
+"error.save" = "Opslaan mislukt. Probeer het opnieuw.";
+"error.load" = "Laden mislukt. Probeer het opnieuw.";
+
+// MARK: - Empty States
+"empty.noData" = "Nog geen gegevens";
+"empty.noEntries" = "Geen invoer voor deze dag";
+"empty.noFavorites" = "Nog geen favorieten";
+"empty.noAchievements" = "Nog geen prestaties ontgrendeld";
+"empty.startTracking" = "Begin met bijhouden om je voortgang te zien";
+
+// MARK: - Dashboard (Aanvullend)
+"dashboard.quickActions" = "Snelle Acties";
+"dashboard.recentEntries" = "Recente Invoer";
+"common.seeAll" = "Alles Bekijken";
+"common.addFood" = "Voeding Toevoegen";
+"common.addDrink" = "Drank Toevoegen";
+"common.logWeight" = "Gewicht Noteren";
+
+// MARK: - Today Screen
+"today.title" = "Vandaag";
+
+// MARK: - Food (Aanvullend)
+"food.addTitle" = "Voeding Toevoegen";
+"food.searchResults" = "Zoekresultaten";
+"food.noResultsMessage" = "Probeer een andere zoekterm of maak een eigen voedingsmiddel";
+"food.createCustom" = "Eigen Voeding Maken";
+"food.brand" = "Merk";
+"food.brandOptional" = "Optioneel";
+"food.nutrition" = "Voedingswaarde";
+"food.serving" = "Portiegrootte";
+"food.details" = "Voedingsdetails";
+
+// MARK: - Hydration (Aanvullend)
+"hydration.goalReached" = "Doel behaald!";
+"hydration.remaining" = "resterend";
+"hydration.effectiveHydration" = "Effectieve hydratatie";
+"hydration.todaysDrinks" = "Dranken Vandaag";
+"hydration.thisWeek" = "Deze Week";
+"hydration.noData" = "Nog geen hydratatie gegevens";
+"hydration.drinkType" = "Soort Drank";
+"hydration.amount" = "Hoeveelheid";
+"hydration.effectiveNote" = "Effectieve hydratatie";
+
+// MARK: - Progress Screen
+"progress.title" = "Voortgang";
+"progress.currentWeight" = "Huidig Gewicht";
+"progress.target" = "Doel";
+"progress.remaining" = "Resterend";
+"progress.goalReached" = "Doel Behaald!";
+"progress.logWeight" = "Gewicht Noteren";
+"progress.weightTrend" = "Gewichtstrend";
+"progress.noData" = "Nog geen gewichtsgegevens";
+"progress.statistics" = "Statistieken";
+"progress.totalLost" = "Totaal Verloren";
+"progress.weeklyAvg" = "Wekelijks Gem.";
+"progress.daysTracked" = "Dagen Bijgehouden";
+"progress.recentEntries" = "Recente Invoer";
+"progress.noEntries" = "Nog geen gewichtsinvoer";
+"progress.enterWeight" = "Voer Je Gewicht In";
+"progress.date" = "Datum";
+"progress.notes" = "Notities (optioneel)";
+"progress.notesPlaceholder" = "Hoe voel je je vandaag?";
+
+// MARK: - Analytics (Aanvullend)
+"analytics.title" = "Statistieken";
+"analytics.exportReport" = "Rapport Exporteren";
+"analytics.avgCalories" = "Gem. Calorieën";
+"analytics.avgHydration" = "Gem. Hydratatie";
+"analytics.calorieIntake" = "Calorie-inname";
+"analytics.noData" = "Geen gegevens voor deze periode";
+"analytics.macroBreakdown" = "Macro-overzicht";
+"analytics.goalProgress" = "Doelvoortgang";
+"analytics.calorieGoal" = "Caloriedoel";
+"analytics.proteinGoal" = "Eiwitdoel";
+"analytics.hydrationGoal" = "Hydratatedoel";
+"analytics.consistency" = "Consistentie";
+"analytics.dayStreak" = "dagen reeks";
+"analytics.daysLogged" = "dagen bijgehouden";
+"analytics.completion" = "voltooid";
+
+// MARK: - Export (Aanvullend)
+"export.from" = "Van";
+"export.to" = "Tot";
+"export.info" = "Genereer een PDF-rapport van je voedingsgegevens voor je diëtist of persoonlijke administratie.";
+"export.generatePDF" = "PDF Rapport Genereren";
+
+// MARK: - Settings (Aanvullend)
+"settings.nutritionGoals" = "Voedingsdoelen";
+"settings.weightGoal" = "Gewichtsdoel";
+"settings.preferences" = "Voorkeuren";
+"settings.data" = "Gegevens";
+"settings.exportData" = "Alle Gegevens Exporteren";
+"settings.deleteData" = "Alle Gegevens Verwijderen";
+"settings.privacyPolicy" = "Privacybeleid";
+"settings.deleteConfirmTitle" = "Alle Gegevens Verwijderen?";
+"settings.deleteConfirmMessage" = "Dit verwijdert permanent al je voedingsinvoer, gewichtslogs en prestaties. Deze actie kan niet ongedaan worden gemaakt.";
+"settings.noName" = "Geen naam ingesteld";
+
+// MARK: - Profiel
+"profile.name" = "Naam";
+"profile.namePlaceholder" = "Voer je naam in";
+"profile.email" = "E-mail";
+"profile.emailPlaceholder" = "Voer je e-mail in";
+"profile.height" = "Lengte";
+"profile.edit" = "Profiel Bewerken";
+
+// MARK: - Doelen
+"goals.nutrition" = "Voedingsdoelen";
+"goals.calories" = "Dagelijkse Calorieën";
+"goals.protein" = "Eiwitten";
+"goals.carbs" = "Koolhydraten";
+"goals.fat" = "Vetten";
+"goals.weight" = "Gewichtsdoel";
+"goals.targetWeight" = "Streefgewicht";
+"goals.edit" = "Doelen Bewerken";
+
+// MARK: - Achievements (Aanvullend)
+"achievements.title" = "Prestaties";
+"achievements.unlocked" = "Ontgrendeld";
+"achievements.inProgress" = "Bezig";
+"achievements.locked" = "Vergrendeld";
+"achievements.details" = "Prestatiedetails";
+"achievements.unlockedOn" = "Ontgrendeld op";
+"achievements.keepGoing" = "Ga zo door!";
+"achievements.notYetUnlocked" = "Nog niet ontgrendeld";

@@ -1,0 +1,121 @@
+import Foundation
+import SwiftUI
+
+/// View model for the Today food tracking screen.
+@MainActor
+final class TodayViewModel: ObservableObject {
+    // MARK: - Published Properties
+
+    @Published var selectedDate: Date = Date()
+    @Published var entries: [FoodEntry] = []
+    @Published var calorieGoal: Int = 1800
+    @Published var isLoading = false
+    @Published var error: Error?
+    @Published var selectedEntry: FoodEntry?
+
+    // MARK: - Computed Properties
+
+    var totalCalories: Int {
+        entries.compactMap(\.calories).reduce(0, +)
+    }
+
+    var totalProtein: Double {
+        entries.compactMap(\.protein).reduce(0, +)
+    }
+
+    var totalCarbs: Double {
+        entries.compactMap(\.carbs).reduce(0, +)
+    }
+
+    var totalFat: Double {
+        entries.compactMap(\.fat).reduce(0, +)
+    }
+
+    // MARK: - Dependencies
+
+    let container: DependencyContainer
+
+    private var getDailyEntriesUseCase: GetDailyEntriesUseCase {
+        container.makeGetDailyEntriesUseCase()
+    }
+
+    private var deleteFoodEntryUseCase: DeleteFoodEntryUseCase {
+        container.makeDeleteFoodEntryUseCase()
+    }
+
+    // MARK: - Initialization
+
+    init(container: DependencyContainer) {
+        self.container = container
+    }
+
+    // MARK: - Public Methods
+
+    func loadEntries() async {
+        isLoading = true
+        error = nil
+
+        do {
+            // Load user preferences
+            let userRepository = container.makeUserRepository()
+            if let user = try await userRepository.getUser() {
+                calorieGoal = user.dailyCalorieGoal
+            }
+
+            // Load entries for selected date
+            entries = try await getDailyEntriesUseCase.execute(for: selectedDate)
+        } catch {
+            self.error = error
+            entries = []
+        }
+
+        isLoading = false
+    }
+
+    func entriesForCategory(_ category: MealCategory) -> [FoodEntry] {
+        entries.filter { $0.mealCategory == category }
+    }
+
+    func deleteEntry(_ entry: FoodEntry) async {
+        do {
+            try await deleteFoodEntryUseCase.execute(entryId: entry.id)
+            entries.removeAll { $0.id == entry.id }
+        } catch {
+            self.error = error
+        }
+    }
+
+    func copyFromPreviousDay() async {
+        guard let previousDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate) else {
+            return
+        }
+
+        do {
+            let previousEntries = try await getDailyEntriesUseCase.execute(for: previousDate)
+            let addFoodEntryUseCase = container.makeAddFoodEntryUseCase()
+
+            for entry in previousEntries {
+                let newEntry = FoodEntry(
+                    date: selectedDate,
+                    mealCategory: entry.mealCategory,
+                    foodName: entry.foodName,
+                    portionSize: entry.portionSize,
+                    portionUnit: entry.portionUnit,
+                    calories: entry.calories,
+                    protein: entry.protein,
+                    carbs: entry.carbs,
+                    fat: entry.fat,
+                    fiber: entry.fiber,
+                    sugar: entry.sugar,
+                    notes: entry.notes,
+                    linkedFoodItemId: entry.linkedFoodItemId
+                )
+                try await addFoodEntryUseCase.execute(entry: newEntry)
+            }
+
+            await loadEntries()
+        } catch {
+            self.error = error
+        }
+    }
+}

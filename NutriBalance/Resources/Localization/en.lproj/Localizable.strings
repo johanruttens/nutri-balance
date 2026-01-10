@@ -1,0 +1,390 @@
+/*
+  Localizable.strings (English)
+  NutriBalance
+
+  English localization for NutriBalance app.
+*/
+
+// MARK: - Common
+"common.save" = "Save";
+"common.cancel" = "Cancel";
+"common.delete" = "Delete";
+"common.edit" = "Edit";
+"common.done" = "Done";
+"common.add" = "Add";
+"common.search" = "Search";
+"common.next" = "Next";
+"common.back" = "Back";
+"common.skip" = "Skip";
+"common.continue" = "Continue";
+"common.close" = "Close";
+"common.ok" = "OK";
+"common.yes" = "Yes";
+"common.no" = "No";
+"common.today" = "Today";
+"common.yesterday" = "Yesterday";
+"common.loading" = "Loading...";
+"common.error" = "Error";
+"common.success" = "Success";
+"common.retry" = "Retry";
+
+// MARK: - Tab Bar
+"tab.today" = "Today";
+"tab.analytics" = "Analytics";
+"tab.dashboard" = "Dashboard";
+"tab.progress" = "Progress";
+"tab.settings" = "Settings";
+
+// MARK: - Meal Categories
+"meal.breakfast" = "Breakfast";
+"meal.morningSnack" = "Morning Snack";
+"meal.lunch" = "Lunch";
+"meal.afternoonSnack" = "Afternoon Snack";
+"meal.dinner" = "Dinner";
+"meal.eveningSnack" = "Evening Snack";
+"meal.other" = "Other";
+
+// MARK: - Drink Types
+"drink.water" = "Water";
+"drink.coffee" = "Coffee";
+"drink.tea" = "Tea";
+"drink.juice" = "Juice";
+"drink.soda" = "Soft Drink";
+"drink.milk" = "Milk";
+"drink.alcoholic" = "Alcoholic";
+"drink.smoothie" = "Smoothie";
+"drink.other" = "Other";
+
+// MARK: - Nutrition
+"nutrition.calories" = "Calories";
+"nutrition.protein" = "Protein";
+"nutrition.carbs" = "Carbohydrates";
+"nutrition.fat" = "Fat";
+"nutrition.fiber" = "Fiber";
+"nutrition.sugar" = "Sugar";
+"nutrition.kcal" = "kcal";
+"nutrition.grams" = "g";
+
+// MARK: - Units
+"unit.grams" = "Grams";
+"unit.milliliters" = "Milliliters";
+"unit.pieces" = "Pieces";
+"unit.cups" = "Cups";
+"unit.tablespoons" = "Tablespoons";
+"unit.teaspoons" = "Teaspoons";
+"unit.slices" = "Slices";
+"unit.servings" = "Servings";
+
+// MARK: - Dashboard
+"dashboard.title" = "Dashboard";
+"dashboard.today" = "Today";
+"dashboard.remaining" = "%d kcal remaining";
+"dashboard.over" = "%d kcal over";
+"dashboard.quickAdd" = "Quick Add";
+"dashboard.addFood" = "Add Food";
+"dashboard.addWater" = "Add Water";
+"dashboard.logWeight" = "Log Weight";
+"dashboard.dailySummary" = "Daily Summary";
+"dashboard.weeklyProgress" = "Weekly Progress";
+"dashboard.noEntries" = "No entries yet";
+"dashboard.startLogging" = "Start logging your meals";
+
+// MARK: - Onboarding
+"onboarding.welcome.title" = "Welcome to NutriBalance";
+"onboarding.welcome.subtitle" = "Your personal nutrition companion";
+"onboarding.welcome.getStarted" = "Get Started";
+"onboarding.name.title" = "What's your name?";
+"onboarding.name.placeholder" = "Enter your first name";
+"onboarding.name.lastName" = "Last name (optional)";
+"onboarding.goals.title" = "Set Your Goals";
+"onboarding.goals.currentWeight" = "Current Weight";
+"onboarding.goals.targetWeight" = "Target Weight";
+"onboarding.goals.targetDate" = "Target Date";
+"onboarding.goals.activityLevel" = "Activity Level";
+"onboarding.preferences.title" = "Your Preferences";
+"onboarding.preferences.notifications" = "Enable Notifications";
+"onboarding.preferences.language" = "Language";
+"onboarding.complete.title" = "You're All Set!";
+"onboarding.complete.subtitle" = "Let's start your health journey";
+"onboarding.complete.start" = "Start Tracking";
+
+// MARK: - Food Tracking
+"food.addEntry" = "Add Food Entry";
+"food.searchPlaceholder" = "Search foods...";
+"food.name" = "Food Name";
+"food.portion" = "Portion Size";
+"food.unit" = "Unit";
+"food.notes" = "Notes";
+"food.optional" = "Optional";
+"food.favorites" = "Favorites";
+"food.recent" = "Recent";
+"food.frequent" = "Frequently Used";
+"food.noResults" = "No results found";
+"food.addToFavorites" = "Add to Favorites";
+"food.removeFromFavorites" = "Remove from Favorites";
+
+// MARK: - Hydration
+"hydration.title" = "Hydration";
+"hydration.goal" = "Daily Goal";
+"hydration.intake" = "Today's Intake";
+"hydration.remaining" = "%d ml remaining";
+"hydration.completed" = "Goal completed!";
+"hydration.addDrink" = "Add Drink";
+"hydration.quickAdd" = "Quick Add";
+
+// MARK: - Weight
+"weight.title" = "Weight";
+"weight.current" = "Current Weight";
+"weight.target" = "Target Weight";
+"weight.progress" = "Progress";
+"weight.log" = "Log Weight";
+"weight.history" = "Weight History";
+"weight.trend.losing" = "Losing";
+"weight.trend.stable" = "Stable";
+"weight.trend.gaining" = "Gaining";
+"weight.kg" = "kg";
+"weight.toGo" = "%@ to go";
+"weight.goalReached" = "Goal Reached!";
+
+// MARK: - Activity Levels
+"activity.sedentary" = "Sedentary";
+"activity.lightlyActive" = "Lightly Active";
+"activity.moderatelyActive" = "Moderately Active";
+"activity.veryActive" = "Very Active";
+"activity.extraActive" = "Extra Active";
+"activity.sedentary.description" = "Little or no exercise";
+"activity.lightlyActive.description" = "Light exercise 1-3 days/week";
+"activity.moderatelyActive.description" = "Moderate exercise 3-5 days/week";
+"activity.veryActive.description" = "Hard exercise 6-7 days/week";
+"activity.extraActive.description" = "Very hard exercise & physical job";
+
+// MARK: - BMI
+"bmi.underweight" = "Underweight";
+"bmi.normal" = "Normal";
+"bmi.overweight" = "Overweight";
+"bmi.obese" = "Obese";
+
+// MARK: - Analytics
+"analytics.title" = "Analytics";
+"analytics.weekly" = "Weekly";
+"analytics.monthly" = "Monthly";
+"analytics.averageCalories" = "Avg. Calories";
+"analytics.averageProtein" = "Avg. Protein";
+"analytics.streak" = "Current Streak";
+"analytics.days" = "days";
+"analytics.bestDay" = "Best Day";
+"analytics.insights" = "Insights";
+
+// MARK: - Export
+"export.title" = "Export Data";
+"export.dateRange" = "Date Range";
+"export.format" = "Format";
+"export.pdf" = "PDF Report";
+"export.csv" = "CSV Data";
+"export.generate" = "Generate Report";
+"export.share" = "Share";
+"export.preview" = "Preview";
+
+// MARK: - Settings
+"settings.title" = "Settings";
+"settings.profile" = "Profile";
+"settings.goals" = "Goals";
+"settings.notifications" = "Notifications";
+"settings.language" = "Language";
+"settings.export" = "Export Data";
+"settings.privacy" = "Privacy Policy";
+"settings.about" = "About";
+"settings.version" = "Version";
+
+// MARK: - Food Categories
+"category.grains" = "Grains & Cereals";
+"category.protein" = "Protein";
+"category.dairy" = "Dairy";
+"category.fruits" = "Fruits";
+"category.vegetables" = "Vegetables";
+"category.fats" = "Fats & Oils";
+"category.sweets" = "Sweets & Snacks";
+"category.beverages" = "Beverages";
+"category.prepared" = "Prepared Foods";
+"category.other" = "Other";
+
+// MARK: - Achievements
+"achievement.category.streaks" = "Streaks";
+"achievement.category.weightLoss" = "Weight Loss";
+"achievement.category.logging" = "Logging";
+"achievement.category.hydration" = "Hydration";
+"achievement.category.nutrition" = "Nutrition";
+"achievement.category.consistency" = "Consistency";
+
+"achievement.streak7.title" = "7-Day Streak";
+"achievement.streak7.desc" = "Log your meals for 7 consecutive days";
+"achievement.streak30.title" = "30-Day Streak";
+"achievement.streak30.desc" = "Log your meals for 30 consecutive days";
+"achievement.streak100.title" = "100-Day Streak";
+"achievement.streak100.desc" = "Log your meals for 100 consecutive days";
+"achievement.firstKg.title" = "First Kilogram";
+"achievement.firstKg.desc" = "Lose your first kilogram";
+"achievement.halfway.title" = "Halfway There";
+"achievement.halfway.desc" = "Reach 50% of your weight goal";
+"achievement.goalReached.title" = "Goal Reached!";
+"achievement.goalReached.desc" = "Reach your target weight";
+"achievement.firstEntry.title" = "Getting Started";
+"achievement.firstEntry.desc" = "Log your first food entry";
+"achievement.hundredEntries.title" = "Dedicated Logger";
+"achievement.hundredEntries.desc" = "Log 100 food entries";
+"achievement.thousandEntries.title" = "Logging Legend";
+"achievement.thousandEntries.desc" = "Log 1000 food entries";
+"achievement.hydrationHero.title" = "Hydration Hero";
+"achievement.hydrationHero.desc" = "Meet your daily water goal";
+"achievement.waterWeek.title" = "Water Week";
+"achievement.waterWeek.desc" = "Meet your water goal for 7 consecutive days";
+"achievement.balancedDay.title" = "Balanced Day";
+"achievement.balancedDay.desc" = "Achieve balanced macros for a day";
+"achievement.proteinChampion.title" = "Protein Champion";
+"achievement.proteinChampion.desc" = "Meet your protein goal for 7 days";
+"achievement.fiberFriend.title" = "Fiber Friend";
+"achievement.fiberFriend.desc" = "Consume 25g+ fiber for 5 days";
+"achievement.veggieVictor.title" = "Veggie Victor";
+"achievement.veggieVictor.desc" = "Log vegetables in every meal for a week";
+"achievement.earlyBird.title" = "Early Bird";
+"achievement.earlyBird.desc" = "Log breakfast before 9 AM for a week";
+"achievement.mealPlanner.title" = "Meal Planner";
+"achievement.mealPlanner.desc" = "Log all 3 main meals for 7 days straight";
+"achievement.weekendWarrior.title" = "Weekend Warrior";
+"achievement.weekendWarrior.desc" = "Stay within calorie goal on weekends for a month";
+
+// MARK: - Greetings
+"greeting.morning" = "Good morning";
+"greeting.afternoon" = "Good afternoon";
+"greeting.evening" = "Good evening";
+"greeting.night" = "Good night";
+"greeting.welcome" = "Welcome back";
+
+// MARK: - Errors
+"error.generic" = "Something went wrong. Please try again.";
+"error.network" = "Network error. Please check your connection.";
+"error.save" = "Failed to save. Please try again.";
+"error.load" = "Failed to load data. Please try again.";
+
+// MARK: - Empty States
+"empty.noData" = "No data yet";
+"empty.noEntries" = "No entries for this day";
+"empty.noFavorites" = "No favorites yet";
+"empty.noAchievements" = "No achievements unlocked yet";
+"empty.startTracking" = "Start tracking to see your progress";
+
+// MARK: - Dashboard (Additional)
+"dashboard.quickActions" = "Quick Actions";
+"dashboard.recentEntries" = "Recent Entries";
+"common.seeAll" = "See All";
+"common.addFood" = "Add Food";
+"common.addDrink" = "Add Drink";
+"common.logWeight" = "Log Weight";
+
+// MARK: - Today Screen
+"today.title" = "Today";
+
+// MARK: - Food (Additional)
+"food.addTitle" = "Add Food";
+"food.searchResults" = "Search Results";
+"food.noResultsMessage" = "Try a different search term or create a custom food";
+"food.createCustom" = "Create Custom Food";
+"food.brand" = "Brand";
+"food.brandOptional" = "Optional";
+"food.nutrition" = "Nutrition Info";
+"food.serving" = "Serving Size";
+"food.details" = "Food Details";
+
+// MARK: - Hydration (Additional)
+"hydration.goalReached" = "Goal reached!";
+"hydration.remaining" = "remaining";
+"hydration.effectiveHydration" = "Effective hydration";
+"hydration.todaysDrinks" = "Today's Drinks";
+"hydration.thisWeek" = "This Week";
+"hydration.noData" = "No hydration data yet";
+"hydration.drinkType" = "Drink Type";
+"hydration.amount" = "Amount";
+"hydration.effectiveNote" = "Effective hydration";
+
+// MARK: - Progress Screen
+"progress.title" = "Progress";
+"progress.currentWeight" = "Current Weight";
+"progress.target" = "Target";
+"progress.remaining" = "Remaining";
+"progress.goalReached" = "Goal Reached!";
+"progress.logWeight" = "Log Weight";
+"progress.weightTrend" = "Weight Trend";
+"progress.noData" = "No weight data yet";
+"progress.statistics" = "Statistics";
+"progress.totalLost" = "Total Lost";
+"progress.weeklyAvg" = "Weekly Avg";
+"progress.daysTracked" = "Days Tracked";
+"progress.recentEntries" = "Recent Entries";
+"progress.noEntries" = "No weight entries yet";
+"progress.enterWeight" = "Enter Your Weight";
+"progress.date" = "Date";
+"progress.notes" = "Notes (optional)";
+"progress.notesPlaceholder" = "How are you feeling today?";
+
+// MARK: - Analytics (Additional)
+"analytics.title" = "Analytics";
+"analytics.exportReport" = "Export Report";
+"analytics.avgCalories" = "Avg. Calories";
+"analytics.avgHydration" = "Avg. Hydration";
+"analytics.calorieIntake" = "Calorie Intake";
+"analytics.noData" = "No data for this period";
+"analytics.macroBreakdown" = "Macro Breakdown";
+"analytics.goalProgress" = "Goal Progress";
+"analytics.calorieGoal" = "Calorie Goal";
+"analytics.proteinGoal" = "Protein Goal";
+"analytics.hydrationGoal" = "Hydration Goal";
+"analytics.consistency" = "Consistency";
+"analytics.dayStreak" = "day streak";
+"analytics.daysLogged" = "days logged";
+"analytics.completion" = "completion";
+
+// MARK: - Export (Additional)
+"export.from" = "From";
+"export.to" = "To";
+"export.info" = "Generate a PDF report of your nutrition data for your dietitian or personal records.";
+"export.generatePDF" = "Generate PDF Report";
+
+// MARK: - Settings (Additional)
+"settings.nutritionGoals" = "Nutrition Goals";
+"settings.weightGoal" = "Weight Goal";
+"settings.preferences" = "Preferences";
+"settings.data" = "Data";
+"settings.exportData" = "Export All Data";
+"settings.deleteData" = "Delete All Data";
+"settings.privacyPolicy" = "Privacy Policy";
+"settings.deleteConfirmTitle" = "Delete All Data?";
+"settings.deleteConfirmMessage" = "This will permanently delete all your food entries, weight logs, and achievements. This action cannot be undone.";
+"settings.noName" = "No name set";
+
+// MARK: - Profile
+"profile.name" = "Name";
+"profile.namePlaceholder" = "Enter your name";
+"profile.email" = "Email";
+"profile.emailPlaceholder" = "Enter your email";
+"profile.height" = "Height";
+"profile.edit" = "Edit Profile";
+
+// MARK: - Goals
+"goals.nutrition" = "Nutrition Goals";
+"goals.calories" = "Daily Calories";
+"goals.protein" = "Protein";
+"goals.carbs" = "Carbohydrates";
+"goals.fat" = "Fat";
+"goals.weight" = "Weight Goal";
+"goals.targetWeight" = "Target Weight";
+"goals.edit" = "Edit Goals";
+
+// MARK: - Achievements (Additional)
+"achievements.title" = "Achievements";
+"achievements.unlocked" = "Unlocked";
+"achievements.inProgress" = "In Progress";
+"achievements.locked" = "Locked";
+"achievements.details" = "Achievement Details";
+"achievements.unlockedOn" = "Unlocked on";
+"achievements.keepGoing" = "Keep going!";
+"achievements.notYetUnlocked" = "Not yet unlocked";
