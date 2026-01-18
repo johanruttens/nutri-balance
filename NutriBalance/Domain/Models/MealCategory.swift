@@ -20,19 +20,19 @@ enum MealCategory: Int16, CaseIterable, Identifiable, Codable {
     var displayName: String {
         switch self {
         case .breakfast:
-            return String(localized: "meal.breakfast", defaultValue: "Breakfast")
+            return L("meal.breakfast")
         case .morningSnack:
-            return String(localized: "meal.morningSnack", defaultValue: "Morning Snack")
+            return L("meal.morningSnack")
         case .lunch:
-            return String(localized: "meal.lunch", defaultValue: "Lunch")
+            return L("meal.lunch")
         case .afternoonSnack:
-            return String(localized: "meal.afternoonSnack", defaultValue: "Afternoon Snack")
+            return L("meal.afternoonSnack")
         case .dinner:
-            return String(localized: "meal.dinner", defaultValue: "Dinner")
+            return L("meal.dinner")
         case .eveningSnack:
-            return String(localized: "meal.eveningSnack", defaultValue: "Evening Snack")
+            return L("meal.eveningSnack")
         case .other:
-            return String(localized: "meal.other", defaultValue: "Other")
+            return L("meal.other")
         }
     }
 

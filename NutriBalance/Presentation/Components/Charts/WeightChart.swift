@@ -74,7 +74,7 @@ struct WeightLineChart: View {
             AxisMarks { value in
                 AxisValueLabel {
                     if let date = value.as(Date.self) {
-                        Text(date, format: .dateTime.day().month())
+                        Text(LDate(date, style: .dayMonth))
                             .font(Typography.caption2)
                             .foregroundColor(ColorPalette.textSecondary)
                     }

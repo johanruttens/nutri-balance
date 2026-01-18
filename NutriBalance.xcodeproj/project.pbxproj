@@ -1,0 +1,1025 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1503A08A2F1CDAB500B91A7B /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1503A0892F1CDAB500B91A7B /* HapticManager.swift */; };
+		A10000000000000000000001 /* NutriBalanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000001 /* NutriBalanceApp.swift */; };
+		A10000000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000002 /* ContentView.swift */; };
+		A10000000000000000000003 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000003 /* DependencyContainer.swift */; };
+		A10000000000000000000004 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000004 /* Assets.xcassets */; };
+		A10000000000000000000005 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000005 /* Localizable.strings */; };
+		A10000000000000000000010 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000010 /* ColorPalette.swift */; };
+		A10000000000000000000011 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000011 /* Typography.swift */; };
+		A10000000000000000000012 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000012 /* AppTheme.swift */; };
+		A10000000000000000000020 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000020 /* User.swift */; };
+		A10000000000000000000021 /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000021 /* FoodEntry.swift */; };
+		A10000000000000000000022 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000022 /* FoodItem.swift */; };
+		A10000000000000000000023 /* DrinkEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000023 /* DrinkEntry.swift */; };
+		A10000000000000000000024 /* DrinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000024 /* DrinkType.swift */; };
+		A10000000000000000000025 /* WeightEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000025 /* WeightEntry.swift */; };
+		A10000000000000000000026 /* MealCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000026 /* MealCategory.swift */; };
+		A10000000000000000000027 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000027 /* Achievement.swift */; };
+		A10000000000000000000028 /* DailySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000028 /* DailySummary.swift */; };
+		A10000000000000000000030 /* UserRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000030 /* UserRepositoryProtocol.swift */; };
+		A10000000000000000000031 /* FoodEntryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000031 /* FoodEntryRepositoryProtocol.swift */; };
+		A10000000000000000000032 /* FoodItemRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000032 /* FoodItemRepositoryProtocol.swift */; };
+		A10000000000000000000033 /* DrinkEntryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000033 /* DrinkEntryRepositoryProtocol.swift */; };
+		A10000000000000000000034 /* WeightRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000034 /* WeightRepositoryProtocol.swift */; };
+		A10000000000000000000035 /* AchievementRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000035 /* AchievementRepositoryProtocol.swift */; };
+		A10000000000000000000040 /* CreateUserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000040 /* CreateUserUseCase.swift */; };
+		A10000000000000000000041 /* FoodTrackingUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000041 /* FoodTrackingUseCases.swift */; };
+		A10000000000000000000042 /* FavoritesUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000042 /* FavoritesUseCases.swift */; };
+		A10000000000000000000043 /* HydrationUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000043 /* HydrationUseCases.swift */; };
+		A10000000000000000000044 /* WeightUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000044 /* WeightUseCases.swift */; };
+		A10000000000000000000045 /* AnalyticsUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000045 /* AnalyticsUseCases.swift */; };
+		A10000000000000000000046 /* GeneratePDFReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000046 /* GeneratePDFReportUseCase.swift */; };
+		A10000000000000000000050 /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000050 /* CoreDataModel.swift */; };
+		A10000000000000000000051 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000051 /* PersistenceController.swift */; };
+		A10000000000000000000052 /* CDUser+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000052 /* CDUser+Extensions.swift */; };
+		A10000000000000000000053 /* CDFoodEntry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000053 /* CDFoodEntry+Extensions.swift */; };
+		A10000000000000000000054 /* CDFoodItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000054 /* CDFoodItem+Extensions.swift */; };
+		A10000000000000000000055 /* CDDrinkEntry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000055 /* CDDrinkEntry+Extensions.swift */; };
+		A10000000000000000000056 /* CDWeightEntry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000056 /* CDWeightEntry+Extensions.swift */; };
+		A10000000000000000000057 /* CDAchievement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000057 /* CDAchievement+Extensions.swift */; };
+		A10000000000000000000058 /* CDMealTemplate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000058 /* CDMealTemplate+Extensions.swift */; };
+		A10000000000000000000060 /* UserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000060 /* UserMapper.swift */; };
+		A10000000000000000000061 /* FoodEntryMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000061 /* FoodEntryMapper.swift */; };
+		A10000000000000000000062 /* FoodItemMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000062 /* FoodItemMapper.swift */; };
+		A10000000000000000000063 /* DrinkEntryMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000063 /* DrinkEntryMapper.swift */; };
+		A10000000000000000000064 /* WeightEntryMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000064 /* WeightEntryMapper.swift */; };
+		A10000000000000000000065 /* AchievementMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000065 /* AchievementMapper.swift */; };
+		A10000000000000000000070 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000070 /* UserRepository.swift */; };
+		A10000000000000000000071 /* FoodEntryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000071 /* FoodEntryRepository.swift */; };
+		A10000000000000000000072 /* FoodItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000072 /* FoodItemRepository.swift */; };
+		A10000000000000000000073 /* DrinkEntryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000073 /* DrinkEntryRepository.swift */; };
+		A10000000000000000000074 /* WeightRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000074 /* WeightRepository.swift */; };
+		A10000000000000000000075 /* AchievementRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000075 /* AchievementRepository.swift */; };
+		A10000000000000000000080 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000080 /* MainTabView.swift */; };
+		A10000000000000000000081 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000081 /* PrimaryButton.swift */; };
+		A10000000000000000000082 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000082 /* SearchField.swift */; };
+		A10000000000000000000083 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000083 /* EmptyStateView.swift */; };
+		A10000000000000000000084 /* ProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000084 /* ProgressRing.swift */; };
+		A10000000000000000000085 /* FoodEntryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000085 /* FoodEntryCard.swift */; };
+		A10000000000000000000086 /* MealCategoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000086 /* MealCategoryCard.swift */; };
+		A10000000000000000000087 /* SummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000087 /* SummaryCard.swift */; };
+		A10000000000000000000088 /* WeightCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000088 /* WeightCard.swift */; };
+		A10000000000000000000089 /* NutritionCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000089 /* NutritionCharts.swift */; };
+		A1000000000000000000008A /* WeightChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000008A /* WeightChart.swift */; };
+		A1000000000000000000008B /* HydrationChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000008B /* HydrationChart.swift */; };
+		A10000000000000000000090 /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000090 /* OnboardingContainerView.swift */; };
+		A10000000000000000000091 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000091 /* OnboardingViewModel.swift */; };
+		A10000000000000000000092 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000092 /* DashboardView.swift */; };
+		A10000000000000000000093 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000093 /* DashboardViewModel.swift */; };
+		A10000000000000000000094 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000094 /* TodayView.swift */; };
+		A10000000000000000000095 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000095 /* TodayViewModel.swift */; };
+		A10000000000000000000096 /* AddFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000096 /* AddFoodView.swift */; };
+		A10000000000000000000097 /* AddFoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000097 /* AddFoodViewModel.swift */; };
+		A10000000000000000000098 /* HydrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000098 /* HydrationView.swift */; };
+		A10000000000000000000099 /* HydrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000099 /* HydrationViewModel.swift */; };
+		A1000000000000000000009A /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000009A /* ProgressView.swift */; };
+		A1000000000000000000009B /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000009B /* ProgressViewModel.swift */; };
+		A1000000000000000000009C /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000009C /* AnalyticsView.swift */; };
+		A1000000000000000000009D /* AnalyticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000009D /* AnalyticsViewModel.swift */; };
+		A1000000000000000000009E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000009E /* SettingsView.swift */; };
+		A1000000000000000000009F /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000009F /* SettingsViewModel.swift */; };
+		A100000000000000000000A0 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000000A0 /* AchievementsView.swift */; };
+		A100000000000000000000A1 /* AchievementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000000A1 /* AchievementsViewModel.swift */; };
+		A100000000000000000000B0 /* PDFGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000000B0 /* PDFGenerator.swift */; };
+		A100000000000000000000C0 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000000C0 /* AccessibilityIdentifiers.swift */; };
+		A100000000000000000000D0 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000000D0 /* LocalizationManager.swift */; };
+		A100000000000000000000E0 /* FoodDataSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000000E0 /* FoodDataSeeder.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1503A0892F1CDAB500B91A7B /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		B10000000000000000000001 /* NutriBalanceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutriBalanceApp.swift; sourceTree = "<group>"; };
+		B10000000000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B10000000000000000000003 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		B10000000000000000000004 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B10000000000000000000006 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B10000000000000000000007 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B10000000000000000000010 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		B10000000000000000000011 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		B10000000000000000000012 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		B10000000000000000000020 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B10000000000000000000021 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
+		B10000000000000000000022 /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
+		B10000000000000000000023 /* DrinkEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkEntry.swift; sourceTree = "<group>"; };
+		B10000000000000000000024 /* DrinkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkType.swift; sourceTree = "<group>"; };
+		B10000000000000000000025 /* WeightEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightEntry.swift; sourceTree = "<group>"; };
+		B10000000000000000000026 /* MealCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCategory.swift; sourceTree = "<group>"; };
+		B10000000000000000000027 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		B10000000000000000000028 /* DailySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySummary.swift; sourceTree = "<group>"; };
+		B10000000000000000000030 /* UserRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryProtocol.swift; sourceTree = "<group>"; };
+		B10000000000000000000031 /* FoodEntryRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryRepositoryProtocol.swift; sourceTree = "<group>"; };
+		B10000000000000000000032 /* FoodItemRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemRepositoryProtocol.swift; sourceTree = "<group>"; };
+		B10000000000000000000033 /* DrinkEntryRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkEntryRepositoryProtocol.swift; sourceTree = "<group>"; };
+		B10000000000000000000034 /* WeightRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRepositoryProtocol.swift; sourceTree = "<group>"; };
+		B10000000000000000000035 /* AchievementRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementRepositoryProtocol.swift; sourceTree = "<group>"; };
+		B10000000000000000000040 /* CreateUserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserUseCase.swift; sourceTree = "<group>"; };
+		B10000000000000000000041 /* FoodTrackingUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackingUseCases.swift; sourceTree = "<group>"; };
+		B10000000000000000000042 /* FavoritesUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesUseCases.swift; sourceTree = "<group>"; };
+		B10000000000000000000043 /* HydrationUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydrationUseCases.swift; sourceTree = "<group>"; };
+		B10000000000000000000044 /* WeightUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightUseCases.swift; sourceTree = "<group>"; };
+		B10000000000000000000045 /* AnalyticsUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsUseCases.swift; sourceTree = "<group>"; };
+		B10000000000000000000046 /* GeneratePDFReportUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePDFReportUseCase.swift; sourceTree = "<group>"; };
+		B10000000000000000000050 /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
+		B10000000000000000000051 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		B10000000000000000000052 /* CDUser+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDUser+Extensions.swift"; sourceTree = "<group>"; };
+		B10000000000000000000053 /* CDFoodEntry+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDFoodEntry+Extensions.swift"; sourceTree = "<group>"; };
+		B10000000000000000000054 /* CDFoodItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDFoodItem+Extensions.swift"; sourceTree = "<group>"; };
+		B10000000000000000000055 /* CDDrinkEntry+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDDrinkEntry+Extensions.swift"; sourceTree = "<group>"; };
+		B10000000000000000000056 /* CDWeightEntry+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDWeightEntry+Extensions.swift"; sourceTree = "<group>"; };
+		B10000000000000000000057 /* CDAchievement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDAchievement+Extensions.swift"; sourceTree = "<group>"; };
+		B10000000000000000000058 /* CDMealTemplate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMealTemplate+Extensions.swift"; sourceTree = "<group>"; };
+		B10000000000000000000060 /* UserMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMapper.swift; sourceTree = "<group>"; };
+		B10000000000000000000061 /* FoodEntryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryMapper.swift; sourceTree = "<group>"; };
+		B10000000000000000000062 /* FoodItemMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemMapper.swift; sourceTree = "<group>"; };
+		B10000000000000000000063 /* DrinkEntryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkEntryMapper.swift; sourceTree = "<group>"; };
+		B10000000000000000000064 /* WeightEntryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightEntryMapper.swift; sourceTree = "<group>"; };
+		B10000000000000000000065 /* AchievementMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementMapper.swift; sourceTree = "<group>"; };
+		B10000000000000000000070 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		B10000000000000000000071 /* FoodEntryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryRepository.swift; sourceTree = "<group>"; };
+		B10000000000000000000072 /* FoodItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemRepository.swift; sourceTree = "<group>"; };
+		B10000000000000000000073 /* DrinkEntryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkEntryRepository.swift; sourceTree = "<group>"; };
+		B10000000000000000000074 /* WeightRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRepository.swift; sourceTree = "<group>"; };
+		B10000000000000000000075 /* AchievementRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementRepository.swift; sourceTree = "<group>"; };
+		B10000000000000000000080 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		B10000000000000000000081 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		B10000000000000000000082 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		B10000000000000000000083 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		B10000000000000000000084 /* ProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRing.swift; sourceTree = "<group>"; };
+		B10000000000000000000085 /* FoodEntryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryCard.swift; sourceTree = "<group>"; };
+		B10000000000000000000086 /* MealCategoryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCategoryCard.swift; sourceTree = "<group>"; };
+		B10000000000000000000087 /* SummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCard.swift; sourceTree = "<group>"; };
+		B10000000000000000000088 /* WeightCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCard.swift; sourceTree = "<group>"; };
+		B10000000000000000000089 /* NutritionCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionCharts.swift; sourceTree = "<group>"; };
+		B1000000000000000000008A /* WeightChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightChart.swift; sourceTree = "<group>"; };
+		B1000000000000000000008B /* HydrationChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydrationChart.swift; sourceTree = "<group>"; };
+		B10000000000000000000090 /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
+		B10000000000000000000091 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		B10000000000000000000092 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		B10000000000000000000093 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		B10000000000000000000094 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		B10000000000000000000095 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		B10000000000000000000096 /* AddFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodView.swift; sourceTree = "<group>"; };
+		B10000000000000000000097 /* AddFoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewModel.swift; sourceTree = "<group>"; };
+		B10000000000000000000098 /* HydrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydrationView.swift; sourceTree = "<group>"; };
+		B10000000000000000000099 /* HydrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydrationViewModel.swift; sourceTree = "<group>"; };
+		B1000000000000000000009A /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		B1000000000000000000009B /* ProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewModel.swift; sourceTree = "<group>"; };
+		B1000000000000000000009C /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
+		B1000000000000000000009D /* AnalyticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsViewModel.swift; sourceTree = "<group>"; };
+		B1000000000000000000009E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B1000000000000000000009F /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		B100000000000000000000A0 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
+		B100000000000000000000A1 /* AchievementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewModel.swift; sourceTree = "<group>"; };
+		B100000000000000000000B0 /* PDFGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFGenerator.swift; sourceTree = "<group>"; };
+		B100000000000000000000C0 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
+		B100000000000000000000D0 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
+		B100000000000000000000E0 /* FoodDataSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDataSeeder.swift; sourceTree = "<group>"; };
+		C10000000000000000000001 /* NutriBalance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutriBalance.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D10000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E10000000000000000000000 = {
+			isa = PBXGroup;
+			children = (
+				E10000000000000000000001 /* NutriBalance */,
+				E10000000000000000000002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E10000000000000000000001 /* NutriBalance */ = {
+			isa = PBXGroup;
+			children = (
+				E10000000000000000000010 /* App */,
+				E10000000000000000000020 /* Core */,
+				E10000000000000000000030 /* Data */,
+				E10000000000000000000040 /* Domain */,
+				E10000000000000000000050 /* Presentation */,
+				E10000000000000000000080 /* Services */,
+				E10000000000000000000070 /* Resources */,
+			);
+			path = NutriBalance;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C10000000000000000000001 /* NutriBalance.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000010 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				1503A0892F1CDAB500B91A7B /* HapticManager.swift */,
+				B10000000000000000000001 /* NutriBalanceApp.swift */,
+				B10000000000000000000002 /* ContentView.swift */,
+				B10000000000000000000003 /* DependencyContainer.swift */,
+				B100000000000000000000D0 /* LocalizationManager.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000020 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E10000000000000000000021 /* Utilities */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000021 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B100000000000000000000C0 /* AccessibilityIdentifiers.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000030 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E10000000000000000000031 /* CoreData */,
+				E10000000000000000000032 /* Mappers */,
+				E10000000000000000000033 /* Repositories */,
+				E100000000000000000000F0 /* Seeders */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000031 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000050 /* CoreDataModel.swift */,
+				B10000000000000000000051 /* PersistenceController.swift */,
+				E10000000000000000000034 /* Entities */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000032 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000060 /* UserMapper.swift */,
+				B10000000000000000000061 /* FoodEntryMapper.swift */,
+				B10000000000000000000062 /* FoodItemMapper.swift */,
+				B10000000000000000000063 /* DrinkEntryMapper.swift */,
+				B10000000000000000000064 /* WeightEntryMapper.swift */,
+				B10000000000000000000065 /* AchievementMapper.swift */,
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000033 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000070 /* UserRepository.swift */,
+				B10000000000000000000071 /* FoodEntryRepository.swift */,
+				B10000000000000000000072 /* FoodItemRepository.swift */,
+				B10000000000000000000073 /* DrinkEntryRepository.swift */,
+				B10000000000000000000074 /* WeightRepository.swift */,
+				B10000000000000000000075 /* AchievementRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000034 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000052 /* CDUser+Extensions.swift */,
+				B10000000000000000000053 /* CDFoodEntry+Extensions.swift */,
+				B10000000000000000000054 /* CDFoodItem+Extensions.swift */,
+				B10000000000000000000055 /* CDDrinkEntry+Extensions.swift */,
+				B10000000000000000000056 /* CDWeightEntry+Extensions.swift */,
+				B10000000000000000000057 /* CDAchievement+Extensions.swift */,
+				B10000000000000000000058 /* CDMealTemplate+Extensions.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000040 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E10000000000000000000041 /* Models */,
+				E10000000000000000000042 /* Interfaces */,
+				E10000000000000000000043 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000041 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000020 /* User.swift */,
+				B10000000000000000000021 /* FoodEntry.swift */,
+				B10000000000000000000022 /* FoodItem.swift */,
+				B10000000000000000000023 /* DrinkEntry.swift */,
+				B10000000000000000000024 /* DrinkType.swift */,
+				B10000000000000000000025 /* WeightEntry.swift */,
+				B10000000000000000000026 /* MealCategory.swift */,
+				B10000000000000000000027 /* Achievement.swift */,
+				B10000000000000000000028 /* DailySummary.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000042 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000030 /* UserRepositoryProtocol.swift */,
+				B10000000000000000000031 /* FoodEntryRepositoryProtocol.swift */,
+				B10000000000000000000032 /* FoodItemRepositoryProtocol.swift */,
+				B10000000000000000000033 /* DrinkEntryRepositoryProtocol.swift */,
+				B10000000000000000000034 /* WeightRepositoryProtocol.swift */,
+				B10000000000000000000035 /* AchievementRepositoryProtocol.swift */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000043 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				E10000000000000000000044 /* Onboarding */,
+				E10000000000000000000045 /* FoodTracking */,
+				E10000000000000000000046 /* Favorites */,
+				E10000000000000000000047 /* Hydration */,
+				E10000000000000000000048 /* Weight */,
+				E10000000000000000000049 /* Analytics */,
+				E1000000000000000000004A /* Export */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000044 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000040 /* CreateUserUseCase.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000045 /* FoodTracking */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000041 /* FoodTrackingUseCases.swift */,
+			);
+			path = FoodTracking;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000046 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000042 /* FavoritesUseCases.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000047 /* Hydration */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000043 /* HydrationUseCases.swift */,
+			);
+			path = Hydration;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000048 /* Weight */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000044 /* WeightUseCases.swift */,
+			);
+			path = Weight;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000049 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000045 /* AnalyticsUseCases.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		E1000000000000000000004A /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000046 /* GeneratePDFReportUseCase.swift */,
+			);
+			path = Export;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000050 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E10000000000000000000051 /* Theme */,
+				E10000000000000000000052 /* Components */,
+				E10000000000000000000053 /* Navigation */,
+				E10000000000000000000054 /* Screens */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000051 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000010 /* ColorPalette.swift */,
+				B10000000000000000000011 /* Typography.swift */,
+				B10000000000000000000012 /* AppTheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000052 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E10000000000000000000055 /* Buttons */,
+				E10000000000000000000056 /* Inputs */,
+				E10000000000000000000057 /* Common */,
+				E10000000000000000000058 /* Cards */,
+				E10000000000000000000059 /* Charts */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000053 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000080 /* MainTabView.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000054 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				E1000000000000000000005A /* Onboarding */,
+				E1000000000000000000005B /* Dashboard */,
+				E1000000000000000000005C /* Today */,
+				E1000000000000000000005D /* Hydration */,
+				E1000000000000000000005E /* Progress */,
+				E1000000000000000000005F /* Analytics */,
+				E10000000000000000000060 /* Settings */,
+				E10000000000000000000061 /* Achievements */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000055 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000081 /* PrimaryButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000056 /* Inputs */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000082 /* SearchField.swift */,
+			);
+			path = Inputs;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000057 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000083 /* EmptyStateView.swift */,
+				B10000000000000000000084 /* ProgressRing.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000058 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000085 /* FoodEntryCard.swift */,
+				B10000000000000000000086 /* MealCategoryCard.swift */,
+				B10000000000000000000087 /* SummaryCard.swift */,
+				B10000000000000000000088 /* WeightCard.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000059 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000089 /* NutritionCharts.swift */,
+				B1000000000000000000008A /* WeightChart.swift */,
+				B1000000000000000000008B /* HydrationChart.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		E1000000000000000000005A /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000090 /* OnboardingContainerView.swift */,
+				B10000000000000000000091 /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		E1000000000000000000005B /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000092 /* DashboardView.swift */,
+				B10000000000000000000093 /* DashboardViewModel.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		E1000000000000000000005C /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000094 /* TodayView.swift */,
+				B10000000000000000000095 /* TodayViewModel.swift */,
+				B10000000000000000000096 /* AddFoodView.swift */,
+				B10000000000000000000097 /* AddFoodViewModel.swift */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
+		E1000000000000000000005D /* Hydration */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000098 /* HydrationView.swift */,
+				B10000000000000000000099 /* HydrationViewModel.swift */,
+			);
+			path = Hydration;
+			sourceTree = "<group>";
+		};
+		E1000000000000000000005E /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				B1000000000000000000009A /* ProgressView.swift */,
+				B1000000000000000000009B /* ProgressViewModel.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		E1000000000000000000005F /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				B1000000000000000000009C /* AnalyticsView.swift */,
+				B1000000000000000000009D /* AnalyticsViewModel.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000060 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B1000000000000000000009E /* SettingsView.swift */,
+				B1000000000000000000009F /* SettingsViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000061 /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				B100000000000000000000A0 /* AchievementsView.swift */,
+				B100000000000000000000A1 /* AchievementsViewModel.swift */,
+			);
+			path = Achievements;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000062 /* PDF */ = {
+			isa = PBXGroup;
+			children = (
+				B100000000000000000000B0 /* PDFGenerator.swift */,
+			);
+			path = PDF;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000070 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000004 /* Assets.xcassets */,
+				E10000000000000000000071 /* Localization */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000071 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000005 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		E10000000000000000000080 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E10000000000000000000062 /* PDF */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E100000000000000000000F0 /* Seeders */ = {
+			isa = PBXGroup;
+			children = (
+				B100000000000000000000E0 /* FoodDataSeeder.swift */,
+			);
+			path = Seeders;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F10000000000000000000001 /* NutriBalance */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F10000000000000000000010 /* Build configuration list for PBXNativeTarget "NutriBalance" */;
+			buildPhases = (
+				F10000000000000000000002 /* Sources */,
+				D10000000000000000000001 /* Frameworks */,
+				F10000000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NutriBalance;
+			productName = NutriBalance;
+			productReference = C10000000000000000000001 /* NutriBalance.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F10000000000000000000000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					F10000000000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = F10000000000000000000020 /* Build configuration list for PBXProject "NutriBalance" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				nl,
+				Base,
+			);
+			mainGroup = E10000000000000000000000;
+			productRefGroup = E10000000000000000000002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F10000000000000000000001 /* NutriBalance */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F10000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000004 /* Assets.xcassets in Resources */,
+				A10000000000000000000005 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F10000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000001 /* NutriBalanceApp.swift in Sources */,
+				A10000000000000000000002 /* ContentView.swift in Sources */,
+				A10000000000000000000003 /* DependencyContainer.swift in Sources */,
+				A10000000000000000000010 /* ColorPalette.swift in Sources */,
+				A10000000000000000000011 /* Typography.swift in Sources */,
+				A10000000000000000000012 /* AppTheme.swift in Sources */,
+				A10000000000000000000020 /* User.swift in Sources */,
+				A10000000000000000000021 /* FoodEntry.swift in Sources */,
+				A10000000000000000000022 /* FoodItem.swift in Sources */,
+				A10000000000000000000023 /* DrinkEntry.swift in Sources */,
+				A10000000000000000000024 /* DrinkType.swift in Sources */,
+				A10000000000000000000025 /* WeightEntry.swift in Sources */,
+				A10000000000000000000026 /* MealCategory.swift in Sources */,
+				A10000000000000000000027 /* Achievement.swift in Sources */,
+				A10000000000000000000028 /* DailySummary.swift in Sources */,
+				A10000000000000000000030 /* UserRepositoryProtocol.swift in Sources */,
+				1503A08A2F1CDAB500B91A7B /* HapticManager.swift in Sources */,
+				A10000000000000000000031 /* FoodEntryRepositoryProtocol.swift in Sources */,
+				A10000000000000000000032 /* FoodItemRepositoryProtocol.swift in Sources */,
+				A10000000000000000000033 /* DrinkEntryRepositoryProtocol.swift in Sources */,
+				A10000000000000000000034 /* WeightRepositoryProtocol.swift in Sources */,
+				A10000000000000000000035 /* AchievementRepositoryProtocol.swift in Sources */,
+				A10000000000000000000040 /* CreateUserUseCase.swift in Sources */,
+				A10000000000000000000041 /* FoodTrackingUseCases.swift in Sources */,
+				A10000000000000000000042 /* FavoritesUseCases.swift in Sources */,
+				A10000000000000000000043 /* HydrationUseCases.swift in Sources */,
+				A10000000000000000000044 /* WeightUseCases.swift in Sources */,
+				A10000000000000000000045 /* AnalyticsUseCases.swift in Sources */,
+				A10000000000000000000046 /* GeneratePDFReportUseCase.swift in Sources */,
+				A10000000000000000000050 /* CoreDataModel.swift in Sources */,
+				A10000000000000000000051 /* PersistenceController.swift in Sources */,
+				A10000000000000000000052 /* CDUser+Extensions.swift in Sources */,
+				A10000000000000000000053 /* CDFoodEntry+Extensions.swift in Sources */,
+				A10000000000000000000054 /* CDFoodItem+Extensions.swift in Sources */,
+				A10000000000000000000055 /* CDDrinkEntry+Extensions.swift in Sources */,
+				A10000000000000000000056 /* CDWeightEntry+Extensions.swift in Sources */,
+				A10000000000000000000057 /* CDAchievement+Extensions.swift in Sources */,
+				A10000000000000000000058 /* CDMealTemplate+Extensions.swift in Sources */,
+				A10000000000000000000060 /* UserMapper.swift in Sources */,
+				A10000000000000000000061 /* FoodEntryMapper.swift in Sources */,
+				A10000000000000000000062 /* FoodItemMapper.swift in Sources */,
+				A10000000000000000000063 /* DrinkEntryMapper.swift in Sources */,
+				A10000000000000000000064 /* WeightEntryMapper.swift in Sources */,
+				A10000000000000000000065 /* AchievementMapper.swift in Sources */,
+				A10000000000000000000070 /* UserRepository.swift in Sources */,
+				A10000000000000000000071 /* FoodEntryRepository.swift in Sources */,
+				A10000000000000000000072 /* FoodItemRepository.swift in Sources */,
+				A10000000000000000000073 /* DrinkEntryRepository.swift in Sources */,
+				A10000000000000000000074 /* WeightRepository.swift in Sources */,
+				A10000000000000000000075 /* AchievementRepository.swift in Sources */,
+				A10000000000000000000080 /* MainTabView.swift in Sources */,
+				A10000000000000000000081 /* PrimaryButton.swift in Sources */,
+				A10000000000000000000082 /* SearchField.swift in Sources */,
+				A10000000000000000000083 /* EmptyStateView.swift in Sources */,
+				A10000000000000000000084 /* ProgressRing.swift in Sources */,
+				A10000000000000000000085 /* FoodEntryCard.swift in Sources */,
+				A10000000000000000000086 /* MealCategoryCard.swift in Sources */,
+				A10000000000000000000087 /* SummaryCard.swift in Sources */,
+				A10000000000000000000088 /* WeightCard.swift in Sources */,
+				A10000000000000000000089 /* NutritionCharts.swift in Sources */,
+				A1000000000000000000008A /* WeightChart.swift in Sources */,
+				A1000000000000000000008B /* HydrationChart.swift in Sources */,
+				A10000000000000000000090 /* OnboardingContainerView.swift in Sources */,
+				A10000000000000000000091 /* OnboardingViewModel.swift in Sources */,
+				A10000000000000000000092 /* DashboardView.swift in Sources */,
+				A10000000000000000000093 /* DashboardViewModel.swift in Sources */,
+				A10000000000000000000094 /* TodayView.swift in Sources */,
+				A10000000000000000000095 /* TodayViewModel.swift in Sources */,
+				A10000000000000000000096 /* AddFoodView.swift in Sources */,
+				A10000000000000000000097 /* AddFoodViewModel.swift in Sources */,
+				A10000000000000000000098 /* HydrationView.swift in Sources */,
+				A10000000000000000000099 /* HydrationViewModel.swift in Sources */,
+				A1000000000000000000009A /* ProgressView.swift in Sources */,
+				A1000000000000000000009B /* ProgressViewModel.swift in Sources */,
+				A1000000000000000000009C /* AnalyticsView.swift in Sources */,
+				A1000000000000000000009D /* AnalyticsViewModel.swift in Sources */,
+				A1000000000000000000009E /* SettingsView.swift in Sources */,
+				A1000000000000000000009F /* SettingsViewModel.swift in Sources */,
+				A100000000000000000000A0 /* AchievementsView.swift in Sources */,
+				A100000000000000000000A1 /* AchievementsViewModel.swift in Sources */,
+				A100000000000000000000B0 /* PDFGenerator.swift in Sources */,
+				A100000000000000000000C0 /* AccessibilityIdentifiers.swift in Sources */,
+				A100000000000000000000D0 /* LocalizationManager.swift in Sources */,
+				A100000000000000000000E0 /* FoodDataSeeder.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B10000000000000000000005 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B10000000000000000000006 /* en */,
+				B10000000000000000000007 /* nl */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		G10000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		G10000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		G10000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = NutriBalance;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nutribalance.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		G10000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = NutriBalance;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nutribalance.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F10000000000000000000010 /* Build configuration list for PBXNativeTarget "NutriBalance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G10000000000000000000003 /* Debug */,
+				G10000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F10000000000000000000020 /* Build configuration list for PBXProject "NutriBalance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G10000000000000000000001 /* Debug */,
+				G10000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F10000000000000000000000 /* Project object */;
+}

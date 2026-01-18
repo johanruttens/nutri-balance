@@ -35,21 +35,21 @@ struct CalorieSummaryCard: View {
                 // Stats
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
                     StatRow(
-                        title: isOverGoal ? "Over" : "Remaining",
+                        title: isOverGoal ? L("ui.over") : L("ui.remaining"),
                         value: isOverGoal ? "\(consumed - goal)" : "\(remaining)",
                         unit: "kcal",
                         color: isOverGoal ? ColorPalette.error : ColorPalette.primary
                     )
 
-                    StatRow(title: "Goal", value: "\(goal)", unit: "kcal", color: ColorPalette.textSecondary)
+                    StatRow(title: L("ui.goal"), value: "\(goal)", unit: "kcal", color: ColorPalette.textSecondary)
                 }
             }
 
             // Macro breakdown
             HStack(spacing: AppTheme.Spacing.lg) {
-                MacroIndicator(title: "Protein", value: protein, color: Color.red.opacity(0.8))
-                MacroIndicator(title: "Carbs", value: carbs, color: Color.orange.opacity(0.8))
-                MacroIndicator(title: "Fat", value: fat, color: Color.yellow.opacity(0.8))
+                MacroIndicator(title: L("macro.protein"), value: protein, color: Color.red.opacity(0.8))
+                MacroIndicator(title: L("macro.carbs"), value: carbs, color: Color.orange.opacity(0.8))
+                MacroIndicator(title: L("macro.fat"), value: fat, color: Color.yellow.opacity(0.8))
             }
         }
         .padding(AppTheme.Spacing.standard)
@@ -180,7 +180,7 @@ struct HydrationSummaryCard: View {
             }
 
             VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                Text("Hydration")
+                Text(L("hydration.title"))
                     .font(Typography.headline)
                     .foregroundColor(ColorPalette.textPrimary)
 

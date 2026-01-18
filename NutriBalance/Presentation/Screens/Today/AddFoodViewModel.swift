@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import Combine
 
 /// View model for adding food entries.
 @MainActor
@@ -21,12 +22,68 @@ final class AddFoodViewModel: ObservableObject {
     let container: DependencyContainer
     let date: Date
 
+    // MARK: - Private Properties
+
+    private var searchTask: Task<Void, Never>?
+    private var cancellables = Set<AnyCancellable>()
+
     // MARK: - Initialization
 
     init(container: DependencyContainer, mealCategory: MealCategory, date: Date) {
         self.container = container
         self.selectedCategory = mealCategory
         self.date = date
+
+        // Set up debounced search
+        setupSearchDebounce()
+    }
+
+    private func setupSearchDebounce() {
+        $searchQuery
+            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .sink { [weak self] query in
+                guard let self = self else { return }
+                Task { @MainActor in
+                    await self.performSearch(query: query)
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    private func performSearch(query: String) async {
+        guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            searchResults = []
+            isSearching = false
+            return
+        }
+
+        // Cancel any existing search task
+        searchTask?.cancel()
+
+        searchTask = Task {
+            isSearching = true
+
+            do {
+                try await Task.sleep(nanoseconds: 50_000_000) // Small delay for cancellation check
+                guard !Task.isCancelled else { return }
+
+                let repository = container.foodItemRepository
+                let results = try await repository.searchItems(query: query)
+
+                guard !Task.isCancelled else { return }
+                searchResults = results
+            } catch {
+                if !Task.isCancelled {
+                    self.error = error
+                    searchResults = []
+                }
+            }
+
+            isSearching = false
+        }
+
+        await searchTask?.value
     }
 
     // MARK: - Public Methods
@@ -38,23 +95,9 @@ final class AddFoodViewModel: ObservableObject {
         }
     }
 
+    /// Manual search trigger (for submit button)
     func search() async {
-        guard !searchQuery.isEmpty else {
-            searchResults = []
-            return
-        }
-
-        isSearching = true
-
-        do {
-            let repository = container.makeFoodItemRepository()
-            searchResults = try await repository.search(query: searchQuery)
-        } catch {
-            self.error = error
-            searchResults = []
-        }
-
-        isSearching = false
+        await performSearch(query: searchQuery)
     }
 
     func selectFood(_ food: FoodItem) {

@@ -3,17 +3,23 @@ import SwiftUI
 /// Primary call-to-action button with teal background.
 struct PrimaryButton: View {
     let title: String
+    var icon: String? = nil
     let action: () -> Void
     var isLoading: Bool = false
     var isDisabled: Bool = false
 
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            HapticManager.shared.lightImpact()
+            action()
+        }) {
             HStack(spacing: AppTheme.Spacing.sm) {
                 if isLoading {
-                    ProgressView()
+                    SwiftUI.ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         .scaleEffect(0.8)
+                } else if let icon = icon {
+                    Image(systemName: icon)
                 }
                 Text(title)
                     .font(Typography.headline)
@@ -31,21 +37,27 @@ struct PrimaryButton: View {
 /// Secondary button with outline style.
 struct SecondaryButton: View {
     let title: String
+    var icon: String? = nil
     let action: () -> Void
     var isDisabled: Bool = false
 
     var body: some View {
         Button(action: action) {
-            Text(title)
-                .font(Typography.headline)
-                .foregroundColor(isDisabled ? ColorPalette.divider : ColorPalette.primary)
-                .frame(maxWidth: .infinity)
-                .frame(height: AppTheme.Size.buttonHeight)
-                .background(Color.clear)
-                .overlay(
-                    RoundedRectangle(cornerRadius: AppTheme.CornerRadius.medium)
-                        .stroke(isDisabled ? ColorPalette.divider : ColorPalette.primary, lineWidth: 2)
-                )
+            HStack(spacing: AppTheme.Spacing.sm) {
+                if let icon = icon {
+                    Image(systemName: icon)
+                }
+                Text(title)
+            }
+            .font(Typography.headline)
+            .foregroundColor(isDisabled ? ColorPalette.divider : ColorPalette.primary)
+            .frame(maxWidth: .infinity)
+            .frame(height: AppTheme.Size.buttonHeight)
+            .background(Color.clear)
+            .overlay(
+                RoundedRectangle(cornerRadius: AppTheme.CornerRadius.medium)
+                    .stroke(isDisabled ? ColorPalette.divider : ColorPalette.primary, lineWidth: 2)
+            )
         }
         .disabled(isDisabled)
     }
@@ -117,7 +129,10 @@ struct QuickActionButton: View {
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            HapticManager.shared.lightImpact()
+            action()
+        }) {
             VStack(spacing: AppTheme.Spacing.sm) {
                 Image(systemName: systemName)
                     .font(.system(size: 24))

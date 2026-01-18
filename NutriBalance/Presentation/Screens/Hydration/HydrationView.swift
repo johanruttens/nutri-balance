@@ -4,6 +4,9 @@ import SwiftUI
 struct HydrationView: View {
     @StateObject private var viewModel: HydrationViewModel
     @State private var showAddDrink = false
+    @State private var showDeleteConfirmation = false
+    @State private var entryToDelete: DrinkEntry?
+    @State private var entryToEdit: DrinkEntry?
 
     init(container: DependencyContainer) {
         _viewModel = StateObject(wrappedValue: HydrationViewModel(container: container))
@@ -29,8 +32,12 @@ struct HydrationView: View {
                     if !viewModel.todayEntries.isEmpty {
                         DrinksListSection(
                             entries: viewModel.todayEntries,
+                            onEdit: { entry in
+                                entryToEdit = entry
+                            },
                             onDelete: { entry in
-                                Task { await viewModel.deleteEntry(entry) }
+                                entryToDelete = entry
+                                showDeleteConfirmation = true
                             }
                         )
                     }
@@ -41,13 +48,14 @@ struct HydrationView: View {
                 .padding(AppTheme.Spacing.standard)
             }
             .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "hydration.title"))
+            .navigationTitle(L("hydration.title"))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: { showAddDrink = true }) {
                         Image(systemName: "plus")
                     }
+                    .accessibilityLabel(L("accessibility.addButton"))
                 }
             }
             .refreshable {
@@ -60,6 +68,28 @@ struct HydrationView: View {
                 AddDrinkView(container: viewModel.container) {
                     Task { await viewModel.loadData() }
                 }
+            }
+            .sheet(item: $entryToEdit) { entry in
+                AddDrinkView(container: viewModel.container, editingEntry: entry) {
+                    Task { await viewModel.loadData() }
+                }
+            }
+            .alert(
+                L("common.confirmDelete"),
+                isPresented: $showDeleteConfirmation,
+                presenting: entryToDelete
+            ) { entry in
+                Button(L("common.cancel"), role: .cancel) {
+                    entryToDelete = nil
+                }
+                Button(L("common.delete"), role: .destructive) {
+                    Task {
+                        await viewModel.deleteEntry(entry)
+                        entryToDelete = nil
+                    }
+                }
+            } message: { entry in
+                Text(String(format: L("common.deleteDrinkMessage"), entry.drinkType.displayName))
             }
         }
     }
@@ -126,7 +156,7 @@ struct HydrationProgressSection: View {
                 HStack {
                     Image(systemName: "star.fill")
                         .foregroundColor(.yellow)
-                    Text(String(localized: "hydration.goalReached"))
+                    Text(L("hydration.goalReached"))
                         .font(Typography.headline)
                         .foregroundColor(ColorPalette.success)
                     Image(systemName: "star.fill")
@@ -134,7 +164,7 @@ struct HydrationProgressSection: View {
                 }
             } else {
                 let remaining = goal - intake
-                Text("\(Int(remaining)) ml " + String(localized: "hydration.remaining"))
+                Text("\(Int(remaining)) ml " + L("hydration.remaining"))
                     .font(Typography.callout)
                     .foregroundColor(ColorPalette.textSecondary)
             }
@@ -144,7 +174,7 @@ struct HydrationProgressSection: View {
                 HStack(spacing: AppTheme.Spacing.xs) {
                     Image(systemName: "info.circle")
                         .font(.system(size: 12))
-                    Text(String(localized: "hydration.effectiveHydration") + ": \(Int(effectiveIntake)) ml")
+                    Text(L("hydration.effectiveHydration") + ": \(Int(effectiveIntake)) ml")
                         .font(Typography.caption1)
                 }
                 .foregroundColor(ColorPalette.textTertiary)
@@ -169,7 +199,7 @@ struct QuickAddSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            Text(String(localized: "hydration.quickAdd"))
+            Text(L("hydration.quickAdd"))
                 .font(Typography.headline)
                 .foregroundColor(ColorPalette.textPrimary)
 
@@ -205,22 +235,31 @@ struct QuickAddSection: View {
 /// Today's drinks list section.
 struct DrinksListSection: View {
     let entries: [DrinkEntry]
+    let onEdit: (DrinkEntry) -> Void
     let onDelete: (DrinkEntry) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            Text(String(localized: "hydration.todaysDrinks"))
+            Text(L("hydration.todaysDrinks"))
                 .font(Typography.headline)
                 .foregroundColor(ColorPalette.textPrimary)
 
             VStack(spacing: 0) {
                 ForEach(entries) { entry in
                     DrinkEntryRow(entry: entry)
+                        .swipeActions(edge: .leading) {
+                            Button {
+                                onEdit(entry)
+                            } label: {
+                                Label(L("common.edit"), systemImage: "pencil")
+                            }
+                            .tint(ColorPalette.primary)
+                        }
                         .swipeActions(edge: .trailing) {
                             Button(role: .destructive) {
                                 onDelete(entry)
                             } label: {
-                                Label(String(localized: "common.delete"), systemImage: "trash")
+                                Label(L("common.delete"), systemImage: "trash")
                             }
                         }
 
@@ -248,7 +287,7 @@ struct DrinkEntryRow: View {
                     .fill(entry.drinkType.color.opacity(0.15))
                     .frame(width: 44, height: 44)
 
-                Image(systemName: entry.drinkType.icon)
+                Image(systemName: entry.drinkType.iconName)
                     .font(.system(size: 20))
                     .foregroundColor(entry.drinkType.color)
             }
@@ -259,7 +298,7 @@ struct DrinkEntryRow: View {
                     .font(Typography.body)
                     .foregroundColor(ColorPalette.textPrimary)
 
-                Text(entry.date, style: .time)
+                Text(LDate(entry.date, style: .time))
                     .font(Typography.caption1)
                     .foregroundColor(ColorPalette.textSecondary)
             }
@@ -289,12 +328,12 @@ struct WeeklyHydrationSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            Text(String(localized: "hydration.thisWeek"))
+            Text(L("hydration.thisWeek"))
                 .font(Typography.headline)
                 .foregroundColor(ColorPalette.textPrimary)
 
             if data.isEmpty {
-                Text(String(localized: "hydration.noData"))
+                Text(L("hydration.noData"))
                     .font(Typography.body)
                     .foregroundColor(ColorPalette.textSecondary)
                     .frame(maxWidth: .infinity)
@@ -313,6 +352,7 @@ struct WeeklyHydrationSection: View {
 /// Add drink view.
 struct AddDrinkView: View {
     let container: DependencyContainer
+    let editingEntry: DrinkEntry?
     let onComplete: () -> Void
 
     @Environment(\.dismiss) private var dismiss
@@ -320,13 +360,27 @@ struct AddDrinkView: View {
     @State private var amount: Double = 250
     @State private var isSaving = false
 
+    init(container: DependencyContainer, editingEntry: DrinkEntry? = nil, onComplete: @escaping () -> Void) {
+        self.container = container
+        self.editingEntry = editingEntry
+        self.onComplete = onComplete
+        if let entry = editingEntry {
+            _selectedType = State(initialValue: entry.drinkType)
+            _amount = State(initialValue: entry.amount)
+        }
+    }
+
+    private var isEditing: Bool {
+        editingEntry != nil
+    }
+
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: AppTheme.Spacing.xl) {
                     // Drink type selector
                     VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                        Text(String(localized: "hydration.drinkType"))
+                        Text(L("hydration.drinkType"))
                             .font(Typography.headline)
                             .foregroundColor(ColorPalette.textPrimary)
 
@@ -347,7 +401,7 @@ struct AddDrinkView: View {
 
                     // Amount selector
                     VStack(spacing: AppTheme.Spacing.lg) {
-                        Text(String(localized: "hydration.amount"))
+                        Text(L("hydration.amount"))
                             .font(Typography.headline)
                             .foregroundColor(ColorPalette.textPrimary)
 
@@ -395,7 +449,7 @@ struct AddDrinkView: View {
                     if selectedType.hydrationFactor != 1.0 {
                         HStack {
                             Image(systemName: "info.circle")
-                            Text(String(localized: "hydration.effectiveNote") + ": \(Int(amount * selectedType.hydrationFactor)) ml")
+                            Text(L("hydration.effectiveNote") + ": \(Int(amount * selectedType.hydrationFactor)) ml")
                         }
                         .font(Typography.caption1)
                         .foregroundColor(ColorPalette.textTertiary)
@@ -404,21 +458,21 @@ struct AddDrinkView: View {
                         .cornerRadius(AppTheme.CornerRadius.small)
                     }
 
-                    // Add button
+                    // Add/Save button
                     PrimaryButton(
-                        title: String(localized: "hydration.addDrink"),
-                        isLoading: isSaving,
-                        action: addDrink
+                        title: isEditing ? L("common.save") : L("hydration.addDrink"),
+                        action: saveDrink,
+                        isLoading: isSaving
                     )
                 }
                 .padding(AppTheme.Spacing.standard)
             }
             .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "hydration.addDrink"))
+            .navigationTitle(isEditing ? L("hydration.editDrink") : L("hydration.addDrink"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(String(localized: "common.cancel")) {
+                    Button(L("common.cancel")) {
                         dismiss()
                     }
                 }
@@ -426,20 +480,35 @@ struct AddDrinkView: View {
         }
     }
 
-    private func addDrink() {
+    private func saveDrink() {
         isSaving = true
 
         Task {
-            let entry = DrinkEntry(
-                id: UUID(),
-                date: Date(),
-                drinkType: selectedType,
-                amount: amount,
-                unit: .milliliters
-            )
+            if let existingEntry = editingEntry {
+                // Update existing entry
+                var updatedEntry = existingEntry
+                updatedEntry.drinkType = selectedType
+                updatedEntry.amount = amount
+                updatedEntry.updatedAt = Date()
 
-            let useCase = container.makeLogDrinkUseCase()
-            try? await useCase.execute(entry: entry)
+                let useCase = container.makeUpdateDrinkUseCase()
+                try? await useCase.execute(entry: updatedEntry)
+                ToastManager.shared.showSuccess(L("toast.updated"))
+            } else {
+                // Create new entry
+                let entry = DrinkEntry(
+                    id: UUID(),
+                    date: Date(),
+                    drinkType: selectedType,
+                    amount: amount,
+                    createdAt: Date(),
+                    updatedAt: Date()
+                )
+
+                let useCase = container.makeLogDrinkUseCase()
+                try? await useCase.execute(entry: entry)
+                ToastManager.shared.showSuccess(L("toast.added"))
+            }
 
             isSaving = false
             onComplete()
@@ -462,7 +531,7 @@ struct DrinkTypeButton: View {
                         .fill(isSelected ? type.color : type.color.opacity(0.15))
                         .frame(width: 50, height: 50)
 
-                    Image(systemName: type.icon)
+                    Image(systemName: type.iconName)
                         .font(.system(size: 24))
                         .foregroundColor(isSelected ? .white : type.color)
                 }

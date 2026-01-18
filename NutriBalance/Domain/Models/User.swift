@@ -127,13 +127,13 @@ struct User: Identifiable, Equatable, Codable {
         guard let bmi = bmi else { return nil }
         switch bmi {
         case ..<18.5:
-            return String(localized: "bmi.underweight", defaultValue: "Underweight")
+            return L("bmi.underweight")
         case 18.5..<25:
-            return String(localized: "bmi.normal", defaultValue: "Normal")
+            return L("bmi.normal")
         case 25..<30:
-            return String(localized: "bmi.overweight", defaultValue: "Overweight")
+            return L("bmi.overweight")
         default:
-            return String(localized: "bmi.obese", defaultValue: "Obese")
+            return L("bmi.obese")
         }
     }
 
@@ -170,30 +170,30 @@ enum ActivityLevel: Int16, CaseIterable, Identifiable, Codable {
     var displayName: String {
         switch self {
         case .sedentary:
-            return String(localized: "activity.sedentary", defaultValue: "Sedentary")
+            return L("activity.sedentary")
         case .lightlyActive:
-            return String(localized: "activity.lightlyActive", defaultValue: "Lightly Active")
+            return L("activity.lightlyActive")
         case .moderatelyActive:
-            return String(localized: "activity.moderatelyActive", defaultValue: "Moderately Active")
+            return L("activity.moderatelyActive")
         case .veryActive:
-            return String(localized: "activity.veryActive", defaultValue: "Very Active")
+            return L("activity.veryActive")
         case .extraActive:
-            return String(localized: "activity.extraActive", defaultValue: "Extra Active")
+            return L("activity.extraActive")
         }
     }
 
     var description: String {
         switch self {
         case .sedentary:
-            return String(localized: "activity.sedentary.description", defaultValue: "Little or no exercise")
+            return L("activity.sedentary.description")
         case .lightlyActive:
-            return String(localized: "activity.lightlyActive.description", defaultValue: "Light exercise 1-3 days/week")
+            return L("activity.lightlyActive.description")
         case .moderatelyActive:
-            return String(localized: "activity.moderatelyActive.description", defaultValue: "Moderate exercise 3-5 days/week")
+            return L("activity.moderatelyActive.description")
         case .veryActive:
-            return String(localized: "activity.veryActive.description", defaultValue: "Hard exercise 6-7 days/week")
+            return L("activity.veryActive.description")
         case .extraActive:
-            return String(localized: "activity.extraActive.description", defaultValue: "Very hard exercise & physical job")
+            return L("activity.extraActive.description")
         }
     }
 

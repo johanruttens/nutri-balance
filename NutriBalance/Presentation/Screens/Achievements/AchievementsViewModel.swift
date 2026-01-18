@@ -49,8 +49,7 @@ final class AchievementsViewModel: ObservableObject {
         error = nil
 
         do {
-            let repository = container.makeAchievementRepository()
-            let storedAchievements = try await repository.getAll()
+            let storedAchievements = try await container.achievementRepository.getAllAchievements()
 
             // Create achievement objects for all types
             var allAchievements: [Achievement] = []
@@ -89,77 +88,86 @@ final class AchievementsViewModel: ObservableObject {
 
     private func calculateProgress(for type: AchievementType) async -> Double {
         switch type {
-        case .firstEntry:
-            return await hasAnyFoodEntry() ? 1.0 : 0.0
-
-        case .weekStreak:
+        // Streak achievements
+        case .streak7Days:
             let streak = await getCurrentStreak()
             return min(1.0, Double(streak) / 7.0)
-
-        case .monthStreak:
+        case .streak30Days:
             let streak = await getCurrentStreak()
             return min(1.0, Double(streak) / 30.0)
-
-        case .hundredDays:
+        case .streak100Days:
             let totalDays = await getTotalLoggedDays()
             return min(1.0, Double(totalDays) / 100.0)
 
+        // Weight loss achievements
+        case .firstKilogram:
+            let weightLost = await getWeightLost()
+            return min(1.0, weightLost / 1.0)
+        case .halfwayThere:
+            return await getGoalProgress() / 100.0
+        case .goalReached:
+            return await hasReachedGoalWeight() ? 1.0 : 0.0
+
+        // Logging achievements
+        case .firstEntry:
+            return await hasAnyFoodEntry() ? 1.0 : 0.0
+        case .hundredEntries:
+            let count = await getFoodEntryCount()
+            return min(1.0, Double(count) / 100.0)
+        case .thousandEntries:
+            let count = await getFoodEntryCount()
+            return min(1.0, Double(count) / 1000.0)
+
+        // Hydration achievements
         case .hydrationHero:
+            let daysAtGoal = await getHydrationGoalDays()
+            return min(1.0, Double(daysAtGoal) / 1.0)
+        case .waterWeek:
             let daysAtGoal = await getHydrationGoalDays()
             return min(1.0, Double(daysAtGoal) / 7.0)
 
-        case .proteinPro:
+        // Nutrition achievements
+        case .balancedDay:
+            let daysBalanced = await getBalancedDays()
+            return min(1.0, Double(daysBalanced) / 1.0)
+        case .proteinChampion:
             let daysAtGoal = await getProteinGoalDays()
             return min(1.0, Double(daysAtGoal) / 7.0)
+        case .fiberFriend:
+            let daysFiber = await getFiberGoalDays()
+            return min(1.0, Double(daysFiber) / 5.0)
+        case .veggieVictor:
+            return 0.0 // Simplified
 
-        case .balancedEater:
-            let daysBalanced = await getBalancedDays()
-            return min(1.0, Double(daysBalanced) / 7.0)
-
-        case .firstKgLost, .fiveKgLost, .tenKgLost:
-            let weightLost = await getWeightLost()
-            let target: Double
-            switch type {
-            case .firstKgLost: target = 1.0
-            case .fiveKgLost: target = 5.0
-            case .tenKgLost: target = 10.0
-            default: target = 1.0
-            }
-            return min(1.0, weightLost / target)
-
-        case .goalWeight:
-            return await hasReachedGoalWeight() ? 1.0 : 0.0
-
-        case .tenFoods, .fiftyFoods, .hundredFoods:
-            let count = await getFoodItemCount()
-            let target: Int
-            switch type {
-            case .tenFoods: target = 10
-            case .fiftyFoods: target = 50
-            case .hundredFoods: target = 100
-            default: target = 10
-            }
-            return min(1.0, Double(count) / Double(target))
-
+        // Consistency achievements
         case .earlyBird:
             return await hasLoggedBreakfastStreak() ? 1.0 : 0.0
-
-        case .nightOwl:
-            return await hasLoggedDinnerStreak() ? 1.0 : 0.0
-
-        case .perfectWeek:
+        case .mealPlanner:
             return await hasPerfectWeek() ? 1.0 : 0.0
+        case .weekendWarrior:
+            return 0.0 // Simplified
         }
     }
 
     // Helper methods for progress calculation
     private func hasAnyFoodEntry() async -> Bool {
         do {
-            let repository = container.makeFoodEntryRepository()
-            let entries = try await repository.getForDate(Date())
+            let entries = try await container.foodEntryRepository.getEntries(for: Date())
             return !entries.isEmpty
         } catch {
             return false
+        }
+    }
+
+    private func getFoodEntryCount() async -> Int {
+        do {
+            // Get entries for the last year
+            let calendar = Calendar.current
+            let oneYearAgo = calendar.date(byAdding: .year, value: -1, to: Date()) ?? Date()
+            let entries = try await container.foodEntryRepository.getEntries(from: oneYearAgo, to: Date())
+            return entries.count
+        } catch {
+            return 0
         }
     }
 
@@ -168,11 +176,9 @@ final class AchievementsViewModel: ObservableObject {
         let calendar = Calendar.current
         var currentDate = Date()
 
-        let repository = container.makeFoodEntryRepository()
-
         while true {
             do {
-                let entries = try await repository.getForDate(currentDate)
+                let entries = try await container.foodEntryRepository.getEntries(for: currentDate)
                 if entries.isEmpty { break }
                 streak += 1
 
@@ -203,6 +209,11 @@ final class AchievementsViewModel: ObservableObject {
         return 0 // Simplified
     }
 
+    private func getFiberGoalDays() async -> Int {
+        // Count days meeting fiber goal
+        return 0 // Simplified
+    }
+
     private func getBalancedDays() async -> Int {
         // Count days with balanced macros
         return 0 // Simplified
@@ -210,8 +221,7 @@ final class AchievementsViewModel: ObservableObject {
 
     private func getWeightLost() async -> Double {
         do {
-            let repository = container.makeWeightRepository()
-            let entries = try await repository.getHistory(limit: 100)
+            let entries = try await container.weightRepository.getEntriesForLastDays(365)
 
             guard let latest = entries.first,
                   let oldest = entries.last else {
@@ -224,14 +234,32 @@ final class AchievementsViewModel: ObservableObject {
         }
     }
 
+    private func getGoalProgress() async -> Double {
+        do {
+            guard let user = try await container.userRepository.getCurrentUser() else {
+                return 0
+            }
+
+            let entries = try await container.weightRepository.getEntriesForLastDays(365)
+            guard let latestWeight = entries.first?.weight,
+                  let startWeight = entries.last?.weight else {
+                return 0
+            }
+
+            let totalToLose = startWeight - user.targetWeight
+            guard totalToLose > 0 else { return 100.0 }
+
+            let lost = startWeight - latestWeight
+            return Double((lost / totalToLose) * 100.0)
+        } catch {
+            return 0
+        }
+    }
+
     private func hasReachedGoalWeight() async -> Bool {
         do {
-            let userRepository = container.makeUserRepository()
-            let weightRepository = container.makeWeightRepository()
-
-            guard let user = try await userRepository.getUser(),
-                  let entries = try? await weightRepository.getHistory(limit: 1),
-                  let latest = entries.first else {
+            guard let user = try await container.userRepository.getCurrentUser(),
+                  let latest = try? await container.weightRepository.getLatestEntry() else {
                 return false
             }
 
@@ -241,23 +269,8 @@ final class AchievementsViewModel: ObservableObject {
         }
     }
 
-    private func getFoodItemCount() async -> Int {
-        do {
-            let repository = container.makeFoodItemRepository()
-            let items = try await repository.getFavorites()
-            return items.count
-        } catch {
-            return 0
-        }
-    }
-
     private func hasLoggedBreakfastStreak() async -> Bool {
         // Check for 7-day breakfast logging streak
-        return false // Simplified
-    }
-
-    private func hasLoggedDinnerStreak() async -> Bool {
-        // Check for 7-day dinner logging streak
         return false // Simplified
     }
 

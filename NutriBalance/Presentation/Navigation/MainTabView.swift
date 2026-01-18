@@ -25,7 +25,7 @@ struct MainTabView: View {
                 }
                 .tag(Tab.dashboard)
 
-            ProgressView(container: container)
+            WeightProgressView(container: container)
                 .tabItem {
                     Label(Tab.progress.title, systemImage: Tab.progress.icon)
                 }
@@ -55,15 +55,15 @@ enum Tab: String, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .today:
-            return String(localized: "tab.today", defaultValue: "Today")
+            return L("tab.today")
         case .analytics:
-            return String(localized: "tab.analytics", defaultValue: "Analytics")
+            return L("tab.analytics")
         case .dashboard:
-            return String(localized: "tab.dashboard", defaultValue: "Dashboard")
+            return L("tab.dashboard")
         case .progress:
-            return String(localized: "tab.progress", defaultValue: "Progress")
+            return L("tab.progress")
         case .settings:
-            return String(localized: "tab.settings", defaultValue: "Settings")
+            return L("tab.settings")
         }
     }
 

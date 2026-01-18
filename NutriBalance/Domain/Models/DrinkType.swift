@@ -21,23 +21,23 @@ enum DrinkType: Int16, CaseIterable, Identifiable, Codable {
     var displayName: String {
         switch self {
         case .water:
-            return String(localized: "drink.water", defaultValue: "Water")
+            return L("drink.water")
         case .coffee:
-            return String(localized: "drink.coffee", defaultValue: "Coffee")
+            return L("drink.coffee")
         case .tea:
-            return String(localized: "drink.tea", defaultValue: "Tea")
+            return L("drink.tea")
         case .juice:
-            return String(localized: "drink.juice", defaultValue: "Juice")
+            return L("drink.juice")
         case .soda:
-            return String(localized: "drink.soda", defaultValue: "Soft Drink")
+            return L("drink.soda")
         case .milk:
-            return String(localized: "drink.milk", defaultValue: "Milk")
+            return L("drink.milk")
         case .alcoholic:
-            return String(localized: "drink.alcoholic", defaultValue: "Alcoholic")
+            return L("drink.alcoholic")
         case .smoothie:
-            return String(localized: "drink.smoothie", defaultValue: "Smoothie")
+            return L("drink.smoothie")
         case .other:
-            return String(localized: "drink.other", defaultValue: "Other")
+            return L("drink.other")
         }
     }
 

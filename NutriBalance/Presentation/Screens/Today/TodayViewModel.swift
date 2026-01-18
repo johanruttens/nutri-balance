@@ -9,6 +9,8 @@ final class TodayViewModel: ObservableObject {
     @Published var selectedDate: Date = Date()
     @Published var entries: [FoodEntry] = []
     @Published var calorieGoal: Int = 1800
+    @Published var hydrationIntake: Double = 0
+    @Published var hydrationGoal: Double = 2000
     @Published var isLoading = false
     @Published var error: Error?
     @Published var selectedEntry: FoodEntry?
@@ -57,16 +59,23 @@ final class TodayViewModel: ObservableObject {
 
         do {
             // Load user preferences
-            let userRepository = container.makeUserRepository()
-            if let user = try await userRepository.getUser() {
+            let userRepository = container.userRepository
+            if let user = try await userRepository.getCurrentUser() {
                 calorieGoal = user.dailyCalorieGoal
+                hydrationGoal = user.dailyWaterGoal
             }
 
             // Load entries for selected date
             entries = try await getDailyEntriesUseCase.execute(for: selectedDate)
+
+            // Load hydration data for selected date
+            let hydrationUseCase = container.makeGetDailyHydrationUseCase()
+            let hydrationData = try await hydrationUseCase.execute(for: selectedDate)
+            hydrationIntake = hydrationData.totalHydration
         } catch {
             self.error = error
             entries = []
+            hydrationIntake = 0
         }
 
         isLoading = false
@@ -77,11 +86,33 @@ final class TodayViewModel: ObservableObject {
     }
 
     func deleteEntry(_ entry: FoodEntry) async {
+        // Store entry for potential undo
+        let deletedEntry = entry
+
         do {
-            try await deleteFoodEntryUseCase.execute(entryId: entry.id)
+            try await deleteFoodEntryUseCase.execute(entry: entry)
             entries.removeAll { $0.id == entry.id }
+
+            // Show undo toast
+            ToastManager.shared.showUndo(L("toast.deleted")) { [weak self] in
+                Task { @MainActor in
+                    await self?.restoreEntry(deletedEntry)
+                }
+            }
         } catch {
             self.error = error
+            ToastManager.shared.showError()
+        }
+    }
+
+    private func restoreEntry(_ entry: FoodEntry) async {
+        do {
+            let addFoodEntryUseCase = container.makeAddFoodEntryUseCase()
+            _ = try await addFoodEntryUseCase.execute(entry: entry)
+            await loadEntries()
+            ToastManager.shared.showSuccess(L("toast.undone"))
+        } catch {
+            ToastManager.shared.showError()
         }
     }
 
@@ -110,7 +141,7 @@ final class TodayViewModel: ObservableObject {
                     notes: entry.notes,
                     linkedFoodItemId: entry.linkedFoodItemId
                 )
-                try await addFoodEntryUseCase.execute(entry: newEntry)
+                _ = try await addFoodEntryUseCase.execute(entry: newEntry)
             }
 
             await loadEntries()

@@ -116,21 +116,21 @@ enum PortionUnit: String, CaseIterable, Identifiable, Codable {
     var displayName: String {
         switch self {
         case .grams:
-            return String(localized: "unit.grams", defaultValue: "Grams")
+            return L("unit.grams")
         case .milliliters:
-            return String(localized: "unit.milliliters", defaultValue: "Milliliters")
+            return L("unit.milliliters")
         case .pieces:
-            return String(localized: "unit.pieces", defaultValue: "Pieces")
+            return L("unit.pieces")
         case .cups:
-            return String(localized: "unit.cups", defaultValue: "Cups")
+            return L("unit.cups")
         case .tablespoons:
-            return String(localized: "unit.tablespoons", defaultValue: "Tablespoons")
+            return L("unit.tablespoons")
         case .teaspoons:
-            return String(localized: "unit.teaspoons", defaultValue: "Teaspoons")
+            return L("unit.teaspoons")
         case .slices:
-            return String(localized: "unit.slices", defaultValue: "Slices")
+            return L("unit.slices")
         case .servings:
-            return String(localized: "unit.servings", defaultValue: "Servings")
+            return L("unit.servings")
         }
     }
 

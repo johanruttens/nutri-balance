@@ -150,7 +150,7 @@ struct WeightEntryRow: View {
         HStack(spacing: AppTheme.Spacing.md) {
             // Date
             VStack(alignment: .leading, spacing: 2) {
-                Text(entry.date, style: .date)
+                Text(LDate(entry.date, style: .medium))
                     .font(Typography.body)
                     .foregroundColor(ColorPalette.textPrimary)
 

@@ -177,25 +177,25 @@ enum FoodItemCategory: String, CaseIterable, Identifiable, Codable {
     var displayName: String {
         switch self {
         case .grains:
-            return String(localized: "category.grains", defaultValue: "Grains & Cereals")
+            return L("category.grains")
         case .protein:
-            return String(localized: "category.protein", defaultValue: "Protein")
+            return L("category.protein")
         case .dairy:
-            return String(localized: "category.dairy", defaultValue: "Dairy")
+            return L("category.dairy")
         case .fruits:
-            return String(localized: "category.fruits", defaultValue: "Fruits")
+            return L("category.fruits")
         case .vegetables:
-            return String(localized: "category.vegetables", defaultValue: "Vegetables")
+            return L("category.vegetables")
         case .fats:
-            return String(localized: "category.fats", defaultValue: "Fats & Oils")
+            return L("category.fats")
         case .sweets:
-            return String(localized: "category.sweets", defaultValue: "Sweets & Snacks")
+            return L("category.sweets")
         case .beverages:
-            return String(localized: "category.beverages", defaultValue: "Beverages")
+            return L("category.beverages")
         case .prepared:
-            return String(localized: "category.prepared", defaultValue: "Prepared Foods")
+            return L("category.prepared")
         case .other:
-            return String(localized: "category.other", defaultValue: "Other")
+            return L("category.other")
         }
     }
 

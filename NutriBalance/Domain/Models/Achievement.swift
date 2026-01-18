@@ -83,82 +83,82 @@ enum AchievementType: String, CaseIterable, Identifiable, Codable {
     var displayName: String {
         switch self {
         case .streak7Days:
-            return String(localized: "achievement.streak7.title", defaultValue: "7-Day Streak")
+            return L("achievement.streak7.title")
         case .streak30Days:
-            return String(localized: "achievement.streak30.title", defaultValue: "30-Day Streak")
+            return L("achievement.streak30.title")
         case .streak100Days:
-            return String(localized: "achievement.streak100.title", defaultValue: "100-Day Streak")
+            return L("achievement.streak100.title")
         case .firstKilogram:
-            return String(localized: "achievement.firstKg.title", defaultValue: "First Kilogram")
+            return L("achievement.firstKg.title")
         case .halfwayThere:
-            return String(localized: "achievement.halfway.title", defaultValue: "Halfway There")
+            return L("achievement.halfway.title")
         case .goalReached:
-            return String(localized: "achievement.goalReached.title", defaultValue: "Goal Reached!")
+            return L("achievement.goalReached.title")
         case .firstEntry:
-            return String(localized: "achievement.firstEntry.title", defaultValue: "Getting Started")
+            return L("achievement.firstEntry.title")
         case .hundredEntries:
-            return String(localized: "achievement.hundredEntries.title", defaultValue: "Dedicated Logger")
+            return L("achievement.hundredEntries.title")
         case .thousandEntries:
-            return String(localized: "achievement.thousandEntries.title", defaultValue: "Logging Legend")
+            return L("achievement.thousandEntries.title")
         case .hydrationHero:
-            return String(localized: "achievement.hydrationHero.title", defaultValue: "Hydration Hero")
+            return L("achievement.hydrationHero.title")
         case .waterWeek:
-            return String(localized: "achievement.waterWeek.title", defaultValue: "Water Week")
+            return L("achievement.waterWeek.title")
         case .balancedDay:
-            return String(localized: "achievement.balancedDay.title", defaultValue: "Balanced Day")
+            return L("achievement.balancedDay.title")
         case .proteinChampion:
-            return String(localized: "achievement.proteinChampion.title", defaultValue: "Protein Champion")
+            return L("achievement.proteinChampion.title")
         case .fiberFriend:
-            return String(localized: "achievement.fiberFriend.title", defaultValue: "Fiber Friend")
+            return L("achievement.fiberFriend.title")
         case .veggieVictor:
-            return String(localized: "achievement.veggieVictor.title", defaultValue: "Veggie Victor")
+            return L("achievement.veggieVictor.title")
         case .earlyBird:
-            return String(localized: "achievement.earlyBird.title", defaultValue: "Early Bird")
+            return L("achievement.earlyBird.title")
         case .mealPlanner:
-            return String(localized: "achievement.mealPlanner.title", defaultValue: "Meal Planner")
+            return L("achievement.mealPlanner.title")
         case .weekendWarrior:
-            return String(localized: "achievement.weekendWarrior.title", defaultValue: "Weekend Warrior")
+            return L("achievement.weekendWarrior.title")
         }
     }
 
     var description: String {
         switch self {
         case .streak7Days:
-            return String(localized: "achievement.streak7.desc", defaultValue: "Log your meals for 7 consecutive days")
+            return L("achievement.streak7.desc")
         case .streak30Days:
-            return String(localized: "achievement.streak30.desc", defaultValue: "Log your meals for 30 consecutive days")
+            return L("achievement.streak30.desc")
         case .streak100Days:
-            return String(localized: "achievement.streak100.desc", defaultValue: "Log your meals for 100 consecutive days")
+            return L("achievement.streak100.desc")
         case .firstKilogram:
-            return String(localized: "achievement.firstKg.desc", defaultValue: "Lose your first kilogram")
+            return L("achievement.firstKg.desc")
         case .halfwayThere:
-            return String(localized: "achievement.halfway.desc", defaultValue: "Reach 50% of your weight goal")
+            return L("achievement.halfway.desc")
         case .goalReached:
-            return String(localized: "achievement.goalReached.desc", defaultValue: "Reach your target weight")
+            return L("achievement.goalReached.desc")
         case .firstEntry:
-            return String(localized: "achievement.firstEntry.desc", defaultValue: "Log your first food entry")
+            return L("achievement.firstEntry.desc")
         case .hundredEntries:
-            return String(localized: "achievement.hundredEntries.desc", defaultValue: "Log 100 food entries")
+            return L("achievement.hundredEntries.desc")
         case .thousandEntries:
-            return String(localized: "achievement.thousandEntries.desc", defaultValue: "Log 1000 food entries")
+            return L("achievement.thousandEntries.desc")
         case .hydrationHero:
-            return String(localized: "achievement.hydrationHero.desc", defaultValue: "Meet your daily water goal")
+            return L("achievement.hydrationHero.desc")
         case .waterWeek:
-            return String(localized: "achievement.waterWeek.desc", defaultValue: "Meet your water goal for 7 consecutive days")
+            return L("achievement.waterWeek.desc")
         case .balancedDay:
-            return String(localized: "achievement.balancedDay.desc", defaultValue: "Achieve balanced macros for a day")
+            return L("achievement.balancedDay.desc")
         case .proteinChampion:
-            return String(localized: "achievement.proteinChampion.desc", defaultValue: "Meet your protein goal for 7 days")
+            return L("achievement.proteinChampion.desc")
         case .fiberFriend:
-            return String(localized: "achievement.fiberFriend.desc", defaultValue: "Consume 25g+ fiber for 5 days")
+            return L("achievement.fiberFriend.desc")
         case .veggieVictor:
-            return String(localized: "achievement.veggieVictor.desc", defaultValue: "Log vegetables in every meal for a week")
+            return L("achievement.veggieVictor.desc")
         case .earlyBird:
-            return String(localized: "achievement.earlyBird.desc", defaultValue: "Log breakfast before 9 AM for a week")
+            return L("achievement.earlyBird.desc")
         case .mealPlanner:
-            return String(localized: "achievement.mealPlanner.desc", defaultValue: "Log all 3 main meals for 7 days straight")
+            return L("achievement.mealPlanner.desc")
         case .weekendWarrior:
-            return String(localized: "achievement.weekendWarrior.desc", defaultValue: "Stay within calorie goal on weekends for a month")
+            return L("achievement.weekendWarrior.desc")
         }
     }
 
@@ -297,17 +297,17 @@ enum AchievementCategory: String, CaseIterable, Identifiable {
     var displayName: String {
         switch self {
         case .streaks:
-            return String(localized: "achievement.category.streaks", defaultValue: "Streaks")
+            return L("achievement.category.streaks")
         case .weightLoss:
-            return String(localized: "achievement.category.weightLoss", defaultValue: "Weight Loss")
+            return L("achievement.category.weightLoss")
         case .logging:
-            return String(localized: "achievement.category.logging", defaultValue: "Logging")
+            return L("achievement.category.logging")
         case .hydration:
-            return String(localized: "achievement.category.hydration", defaultValue: "Hydration")
+            return L("achievement.category.hydration")
         case .nutrition:
-            return String(localized: "achievement.category.nutrition", defaultValue: "Nutrition")
+            return L("achievement.category.nutrition")
         case .consistency:
-            return String(localized: "achievement.category.consistency", defaultValue: "Consistency")
+            return L("achievement.category.consistency")
         }
     }
 

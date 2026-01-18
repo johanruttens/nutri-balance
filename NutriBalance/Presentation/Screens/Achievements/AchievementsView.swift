@@ -22,7 +22,7 @@ struct AchievementsView: View {
                     // Unlocked achievements
                     if !viewModel.unlockedAchievements.isEmpty {
                         AchievementSection(
-                            title: String(localized: "achievements.unlocked"),
+                            title: L("achievements.unlocked"),
                             achievements: viewModel.unlockedAchievements,
                             onTap: { selectedAchievement = $0 }
                         )
@@ -31,7 +31,7 @@ struct AchievementsView: View {
                     // In progress achievements
                     if !viewModel.inProgressAchievements.isEmpty {
                         AchievementSection(
-                            title: String(localized: "achievements.inProgress"),
+                            title: L("achievements.inProgress"),
                             achievements: viewModel.inProgressAchievements,
                             onTap: { selectedAchievement = $0 }
                         )
@@ -40,7 +40,7 @@ struct AchievementsView: View {
                     // Locked achievements
                     if !viewModel.lockedAchievements.isEmpty {
                         AchievementSection(
-                            title: String(localized: "achievements.locked"),
+                            title: L("achievements.locked"),
                             achievements: viewModel.lockedAchievements,
                             onTap: { selectedAchievement = $0 }
                         )
@@ -49,7 +49,7 @@ struct AchievementsView: View {
                 .padding(AppTheme.Spacing.standard)
             }
             .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "achievements.title"))
+            .navigationTitle(L("achievements.title"))
             .navigationBarTitleDisplayMode(.large)
             .refreshable {
                 await viewModel.loadAchievements()
@@ -96,7 +96,7 @@ struct AchievementStatsHeader: View {
                 .font(Typography.numberLarge)
                 .foregroundColor(ColorPalette.textPrimary)
 
-            Text(String(localized: "achievements.unlocked"))
+            Text(L("achievements.unlocked"))
                 .font(Typography.caption1)
                 .foregroundColor(ColorPalette.textSecondary)
 
@@ -168,7 +168,7 @@ struct AchievementCard: View {
                     .fill(isUnlocked ? achievement.type.color.opacity(0.2) : ColorPalette.divider)
                     .frame(width: 60, height: 60)
 
-                Image(systemName: achievement.type.icon)
+                Image(systemName: achievement.type.iconName)
                     .font(.system(size: 28))
                     .foregroundColor(isUnlocked ? achievement.type.color : ColorPalette.textTertiary)
 
@@ -185,7 +185,7 @@ struct AchievementCard: View {
             }
 
             // Name
-            Text(achievement.type.title)
+            Text(achievement.type.displayName)
                 .font(Typography.caption1)
                 .foregroundColor(isUnlocked ? ColorPalette.textPrimary : ColorPalette.textTertiary)
                 .multilineTextAlignment(.center)
@@ -245,14 +245,14 @@ struct AchievementDetailView: View {
                         )
                         .frame(width: 100, height: 100)
 
-                    Image(systemName: achievement.type.icon)
+                    Image(systemName: achievement.type.iconName)
                         .font(.system(size: 44))
                         .foregroundColor(isUnlocked ? .white : ColorPalette.textTertiary)
                 }
 
                 // Title and description
                 VStack(spacing: AppTheme.Spacing.md) {
-                    Text(achievement.type.title)
+                    Text(achievement.type.displayName)
                         .font(Typography.title2)
                         .foregroundColor(ColorPalette.textPrimary)
 
@@ -279,11 +279,11 @@ struct AchievementDetailView: View {
                             .font(.system(size: 24))
                             .foregroundColor(ColorPalette.success)
 
-                        Text(String(localized: "achievements.unlockedOn"))
+                        Text(L("achievements.unlockedOn"))
                             .font(Typography.caption1)
                             .foregroundColor(ColorPalette.textSecondary)
 
-                        Text(unlockedAt, style: .date)
+                        Text(LDate(unlockedAt, style: .medium))
                             .font(Typography.callout)
                             .foregroundColor(ColorPalette.textPrimary)
                     }
@@ -297,14 +297,14 @@ struct AchievementDetailView: View {
                             .tint(achievement.type.color)
                             .frame(width: 150)
 
-                        Text(String(localized: "achievements.keepGoing"))
+                        Text(L("achievements.keepGoing"))
                             .font(Typography.caption1)
                             .foregroundColor(ColorPalette.textSecondary)
                     }
                 } else {
                     HStack(spacing: AppTheme.Spacing.xs) {
                         Image(systemName: "lock.fill")
-                        Text(String(localized: "achievements.notYetUnlocked"))
+                        Text(L("achievements.notYetUnlocked"))
                     }
                     .font(Typography.callout)
                     .foregroundColor(ColorPalette.textTertiary)
@@ -314,11 +314,11 @@ struct AchievementDetailView: View {
             }
             .padding(AppTheme.Spacing.standard)
             .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "achievements.details"))
+            .navigationTitle(L("achievements.details"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(String(localized: "common.done")) {
+                    Button(L("common.done")) {
                         dismiss()
                     }
                 }

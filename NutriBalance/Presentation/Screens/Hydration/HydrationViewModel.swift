@@ -52,7 +52,8 @@ final class HydrationViewModel: ObservableObject {
             date: Date(),
             drinkType: .water,
             amount: amount,
-            unit: .milliliters
+            createdAt: Date(),
+            updatedAt: Date()
         )
 
         do {
@@ -64,12 +65,33 @@ final class HydrationViewModel: ObservableObject {
     }
 
     func deleteEntry(_ entry: DrinkEntry) async {
+        // Store entry for potential undo
+        let deletedEntry = entry
+
         do {
-            let repository = container.makeDrinkEntryRepository()
-            try await repository.delete(id: entry.id)
+            let repository = container.drinkEntryRepository
+            try await repository.deleteEntry(entry)
             await loadTodayData()
+
+            // Show undo toast
+            ToastManager.shared.showUndo(L("toast.deleted")) { [weak self] in
+                Task { @MainActor in
+                    await self?.restoreEntry(deletedEntry)
+                }
+            }
         } catch {
             self.error = error
+            ToastManager.shared.showError()
+        }
+    }
+
+    private func restoreEntry(_ entry: DrinkEntry) async {
+        do {
+            try await logDrinkUseCase.execute(entry: entry)
+            await loadTodayData()
+            ToastManager.shared.showSuccess(L("toast.undone"))
+        } catch {
+            ToastManager.shared.showError()
         }
     }
 
@@ -77,7 +99,8 @@ final class HydrationViewModel: ObservableObject {
 
     private func loadTodayData() async {
         do {
-            todayEntries = try await getDailyHydrationUseCase.execute(for: Date())
+            let result = try await getDailyHydrationUseCase.execute(for: Date())
+            todayEntries = result.entries
 
             // Calculate totals
             dailyIntake = todayEntries.reduce(0) { $0 + $1.amount }
@@ -105,10 +128,11 @@ final class HydrationViewModel: ObservableObject {
             }
 
             do {
-                let entries = try await getDailyHydrationUseCase.execute(for: date)
-                let intake = entries.reduce(0) { $0 + $1.amount }
+                let result = try await getDailyHydrationUseCase.execute(for: date)
+                let intake = result.totalHydration
 
-                let dayLabel = calendar.shortWeekdaySymbols[calendar.component(.weekday, from: date) - 1]
+                // Locale-safe weekday label using LocalizationManager
+                let dayLabel = LDate(date, style: .weekdayShort)
 
                 data.append(DailyHydrationData(
                     date: date,
@@ -116,7 +140,14 @@ final class HydrationViewModel: ObservableObject {
                     intake: intake
                 ))
             } catch {
-                // Skip days with errors
+                // Add day with zero intake on error to maintain chart continuity
+                let dayLabel = LDate(date, style: .weekdayShort)
+
+                data.append(DailyHydrationData(
+                    date: date,
+                    dayLabel: dayLabel,
+                    intake: 0
+                ))
             }
         }
 

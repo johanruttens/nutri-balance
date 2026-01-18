@@ -20,34 +20,34 @@ struct SettingsView: View {
                     ProfileRow(user: viewModel.user)
                         .onTapGesture { showEditProfile = true }
                 } header: {
-                    Text(String(localized: "settings.profile"))
+                    Text(L("settings.profile"))
                 }
 
                 // Goals section
                 Section {
                     SettingsRow(
                         icon: "target",
-                        title: String(localized: "settings.nutritionGoals"),
+                        title: L("settings.nutritionGoals"),
                         value: "\(viewModel.user?.dailyCalorieGoal ?? 0) kcal"
                     )
                     .onTapGesture { showEditGoals = true }
 
                     SettingsRow(
                         icon: "scalemass",
-                        title: String(localized: "settings.weightGoal"),
+                        title: L("settings.weightGoal"),
                         value: "\(String(format: "%.1f", viewModel.user?.targetWeight ?? 0)) kg"
                     )
                     .onTapGesture { showEditGoals = true }
                 } header: {
-                    Text(String(localized: "settings.goals"))
+                    Text(L("settings.goals"))
                 }
 
                 // Preferences section
                 Section {
                     Toggle(isOn: $viewModel.notificationsEnabled) {
-                        SettingsLabel(icon: "bell.fill", title: String(localized: "settings.notifications"))
+                        SettingsLabel(icon: "bell.fill", title: L("settings.notifications"))
                     }
-                    .onChange(of: viewModel.notificationsEnabled) { _, newValue in
+                    .onChange(of: viewModel.notificationsEnabled) { newValue in
                         Task { await viewModel.updateNotifications(enabled: newValue) }
                     }
 
@@ -56,49 +56,52 @@ struct SettingsView: View {
                             Text(language.displayName).tag(language)
                         }
                     } label: {
-                        SettingsLabel(icon: "globe", title: String(localized: "settings.language"))
+                        SettingsLabel(icon: "globe", title: L("settings.language"))
+                    }
+                    .onChange(of: viewModel.selectedLanguage) { newLanguage in
+                        Task { await viewModel.updateLanguage(language: newLanguage) }
                     }
                 } header: {
-                    Text(String(localized: "settings.preferences"))
+                    Text(L("settings.preferences"))
                 }
 
                 // Data section
                 Section {
                     Button(action: { viewModel.exportData() }) {
-                        SettingsLabel(icon: "square.and.arrow.up", title: String(localized: "settings.exportData"))
+                        SettingsLabel(icon: "square.and.arrow.up", title: L("settings.exportData"))
                     }
 
                     Button(role: .destructive, action: { viewModel.showDeleteConfirmation = true }) {
                         SettingsLabel(
                             icon: "trash",
-                            title: String(localized: "settings.deleteData"),
+                            title: L("settings.deleteData"),
                             color: ColorPalette.error
                         )
                     }
                 } header: {
-                    Text(String(localized: "settings.data"))
+                    Text(L("settings.data"))
                 }
 
                 // About section
                 Section {
                     Button(action: { showPrivacyPolicy = true }) {
-                        SettingsLabel(icon: "hand.raised.fill", title: String(localized: "settings.privacyPolicy"))
+                        SettingsLabel(icon: "hand.raised.fill", title: L("settings.privacyPolicy"))
                     }
 
                     Button(action: { showAbout = true }) {
-                        SettingsLabel(icon: "info.circle", title: String(localized: "settings.about"))
+                        SettingsLabel(icon: "info.circle", title: L("settings.about"))
                     }
 
                     SettingsRow(
                         icon: "number",
-                        title: String(localized: "settings.version"),
+                        title: L("settings.version"),
                         value: viewModel.appVersion
                     )
                 } header: {
-                    Text(String(localized: "settings.about"))
+                    Text(L("settings.about"))
                 }
             }
-            .navigationTitle(String(localized: "settings.title"))
+            .navigationTitle(L("settings.title"))
             .navigationBarTitleDisplayMode(.large)
             .task {
                 await viewModel.loadUser()
@@ -119,29 +122,14 @@ struct SettingsView: View {
             .sheet(isPresented: $showAbout) {
                 AboutView()
             }
-            .alert(String(localized: "settings.deleteConfirmTitle"), isPresented: $viewModel.showDeleteConfirmation) {
-                Button(String(localized: "common.cancel"), role: .cancel) {}
-                Button(String(localized: "common.delete"), role: .destructive) {
+            .alert(L("settings.deleteConfirmTitle"), isPresented: $viewModel.showDeleteConfirmation) {
+                Button(L("common.cancel"), role: .cancel) {}
+                Button(L("common.delete"), role: .destructive) {
                     Task { await viewModel.deleteAllData() }
                 }
             } message: {
-                Text(String(localized: "settings.deleteConfirmMessage"))
+                Text(L("settings.deleteConfirmMessage"))
             }
-        }
-    }
-}
-
-/// App language options.
-enum AppLanguage: String, CaseIterable, Identifiable {
-    case english = "en"
-    case dutch = "nl"
-
-    var id: String { rawValue }
-
-    var displayName: String {
-        switch self {
-        case .english: return "English"
-        case .dutch: return "Nederlands"
         }
     }
 }
@@ -164,7 +152,7 @@ struct ProfileRow: View {
             }
 
             VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                Text(user?.displayName ?? String(localized: "settings.noName"))
+                Text(user?.displayName ?? L("settings.noName"))
                     .font(Typography.headline)
                     .foregroundColor(ColorPalette.textPrimary)
 
@@ -234,7 +222,8 @@ struct EditProfileView: View {
     let onSave: () -> Void
 
     @Environment(\.dismiss) private var dismiss
-    @State private var name = ""
+    @State private var firstName = ""
+    @State private var lastName = ""
     @State private var email = ""
     @State private var height: Double = 175
     @State private var isSaving = false
@@ -244,22 +233,28 @@ struct EditProfileView: View {
             Form {
                 Section {
                     LabeledTextField(
-                        label: String(localized: "profile.name"),
-                        text: $name,
-                        placeholder: String(localized: "profile.namePlaceholder"),
+                        label: L("profile.firstName"),
+                        text: $firstName,
+                        placeholder: L("profile.firstNamePlaceholder"),
                         isRequired: true
                     )
 
                     LabeledTextField(
-                        label: String(localized: "profile.email"),
+                        label: L("profile.lastName"),
+                        text: $lastName,
+                        placeholder: L("profile.lastNamePlaceholder")
+                    )
+
+                    LabeledTextField(
+                        label: L("profile.email"),
                         text: $email,
-                        placeholder: String(localized: "profile.emailPlaceholder")
+                        placeholder: L("profile.emailPlaceholder")
                     )
                 }
 
                 Section {
                     NumberInputField(
-                        title: String(localized: "profile.height"),
+                        title: L("profile.height"),
                         value: $height,
                         unit: "cm",
                         step: 1,
@@ -267,20 +262,20 @@ struct EditProfileView: View {
                     )
                 }
             }
-            .navigationTitle(String(localized: "profile.edit"))
+            .navigationTitle(L("profile.edit"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(String(localized: "common.cancel")) {
+                    Button(L("common.cancel")) {
                         dismiss()
                     }
                 }
 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(String(localized: "common.save")) {
+                    Button(L("common.save")) {
                         saveProfile()
                     }
-                    .disabled(name.isEmpty || isSaving)
+                    .disabled(firstName.isEmpty || isSaving)
                 }
             }
             .task {
@@ -290,9 +285,10 @@ struct EditProfileView: View {
     }
 
     private func loadProfile() async {
-        let repository = container.makeUserRepository()
-        if let user = try? await repository.getUser() {
-            name = user.firstName
+        let repository = container.userRepository
+        if let user = try? await repository.getCurrentUser() {
+            firstName = user.firstName
+            lastName = user.lastName ?? ""
             email = user.email ?? ""
             height = user.height ?? 175
         }
@@ -304,12 +300,14 @@ struct EditProfileView: View {
         Task {
             let useCase = container.makeUpdateUserPreferencesUseCase()
             try? await useCase.execute(
-                firstName: name,
+                firstName: firstName,
+                lastName: lastName.isEmpty ? nil : lastName,
                 email: email.isEmpty ? nil : email,
                 height: height
             )
 
             isSaving = false
+            ToastManager.shared.showSuccess(L("toast.saved"))
             onSave()
             dismiss()
         }
@@ -332,9 +330,9 @@ struct EditGoalsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(String(localized: "goals.nutrition")) {
+                Section(L("goals.nutrition")) {
                     NumberInputField(
-                        title: String(localized: "goals.calories"),
+                        title: L("goals.calories"),
                         value: $targetCalories,
                         unit: "kcal",
                         step: 50,
@@ -342,7 +340,7 @@ struct EditGoalsView: View {
                     )
 
                     NumberInputField(
-                        title: String(localized: "goals.protein"),
+                        title: L("goals.protein"),
                         value: $targetProtein,
                         unit: "g",
                         step: 5,
@@ -350,7 +348,7 @@ struct EditGoalsView: View {
                     )
 
                     NumberInputField(
-                        title: String(localized: "goals.carbs"),
+                        title: L("goals.carbs"),
                         value: $targetCarbs,
                         unit: "g",
                         step: 10,
@@ -358,7 +356,7 @@ struct EditGoalsView: View {
                     )
 
                     NumberInputField(
-                        title: String(localized: "goals.fat"),
+                        title: L("goals.fat"),
                         value: $targetFat,
                         unit: "g",
                         step: 5,
@@ -366,9 +364,9 @@ struct EditGoalsView: View {
                     )
                 }
 
-                Section(String(localized: "goals.weight")) {
+                Section(L("goals.weight")) {
                     NumberInputField(
-                        title: String(localized: "goals.targetWeight"),
+                        title: L("goals.targetWeight"),
                         value: $targetWeight,
                         unit: "kg",
                         step: 0.5,
@@ -377,17 +375,17 @@ struct EditGoalsView: View {
                     )
                 }
             }
-            .navigationTitle(String(localized: "goals.edit"))
+            .navigationTitle(L("goals.edit"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(String(localized: "common.cancel")) {
+                    Button(L("common.cancel")) {
                         dismiss()
                     }
                 }
 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(String(localized: "common.save")) {
+                    Button(L("common.save")) {
                         saveGoals()
                     }
                     .disabled(isSaving)
@@ -400,12 +398,12 @@ struct EditGoalsView: View {
     }
 
     private func loadGoals() async {
-        let repository = container.makeUserRepository()
-        if let user = try? await repository.getUser() {
+        let repository = container.userRepository
+        if let user = try? await repository.getCurrentUser() {
             targetCalories = Double(user.dailyCalorieGoal)
-            targetProtein = user.targetProtein
-            targetCarbs = user.targetCarbs
-            targetFat = user.targetFat
+            targetProtein = user.targetProtein ?? 0
+            targetCarbs = user.targetCarbs ?? 0
+            targetFat = user.targetFat ?? 0
             targetWeight = user.targetWeight
         }
     }
@@ -424,6 +422,7 @@ struct EditGoalsView: View {
             )
 
             isSaving = false
+            ToastManager.shared.showSuccess(L("toast.saved"))
             onSave()
             dismiss()
         }
@@ -438,40 +437,40 @@ struct PrivacyPolicyView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
-                    Text("Privacy Policy")
+                    Text(L("privacy.title"))
                         .font(Typography.title1)
                         .foregroundColor(ColorPalette.textPrimary)
 
-                    Text("Last updated: January 2025")
+                    Text(L("privacy.lastUpdated"))
                         .font(Typography.caption1)
                         .foregroundColor(ColorPalette.textSecondary)
 
                     Group {
-                        SectionTitle("Data Collection")
-                        Text("NutriBalance stores all your data locally on your device. We do not collect, transmit, or store any personal information on external servers.")
+                        SectionTitle(L("privacy.dataCollection.title"))
+                        Text(L("privacy.dataCollection.content"))
 
-                        SectionTitle("Data Storage")
-                        Text("Your nutrition logs, weight entries, and personal preferences are stored securely in your device's local storage using Apple's Core Data framework.")
+                        SectionTitle(L("privacy.dataStorage.title"))
+                        Text(L("privacy.dataStorage.content"))
 
-                        SectionTitle("Third-Party Services")
-                        Text("This app does not integrate with third-party analytics, advertising, or tracking services.")
+                        SectionTitle(L("privacy.thirdParty.title"))
+                        Text(L("privacy.thirdParty.content"))
 
-                        SectionTitle("Your Rights")
-                        Text("You can export or delete all your data at any time through the Settings menu.")
+                        SectionTitle(L("privacy.rights.title"))
+                        Text(L("privacy.rights.content"))
 
-                        SectionTitle("Contact")
-                        Text("For questions about this privacy policy, please contact us through the app's feedback feature.")
+                        SectionTitle(L("privacy.contact.title"))
+                        Text(L("privacy.contact.content"))
                     }
                     .font(Typography.body)
                     .foregroundColor(ColorPalette.textPrimary)
                 }
                 .padding(AppTheme.Spacing.standard)
             }
-            .navigationTitle(String(localized: "settings.privacyPolicy"))
+            .navigationTitle(L("settings.privacyPolicy"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(String(localized: "common.done")) {
+                    Button(L("common.done")) {
                         dismiss()
                     }
                 }
@@ -517,17 +516,17 @@ struct AboutView: View {
 
                 // App name and version
                 VStack(spacing: AppTheme.Spacing.sm) {
-                    Text("NutriBalance")
+                    Text(L("about.appName"))
                         .font(Typography.title1)
                         .foregroundColor(ColorPalette.textPrimary)
 
-                    Text("Version 1.0.0")
+                    Text(String(format: L("about.version"), "1.0.0"))
                         .font(Typography.body)
                         .foregroundColor(ColorPalette.textSecondary)
                 }
 
                 // Description
-                Text("Your personal nutrition companion for achieving sustainable weight loss and healthy eating habits.")
+                Text(L("about.description"))
                     .font(Typography.body)
                     .foregroundColor(ColorPalette.textSecondary)
                     .multilineTextAlignment(.center)
@@ -537,11 +536,11 @@ struct AboutView: View {
 
                 // Credits
                 VStack(spacing: AppTheme.Spacing.sm) {
-                    Text("Made with ❤️")
+                    Text(L("about.madeWith"))
                         .font(Typography.caption1)
                         .foregroundColor(ColorPalette.textTertiary)
 
-                    Text("© 2025 NutriBalance")
+                    Text(L("about.copyright"))
                         .font(Typography.caption2)
                         .foregroundColor(ColorPalette.textTertiary)
                 }
@@ -549,11 +548,11 @@ struct AboutView: View {
             }
             .frame(maxWidth: .infinity)
             .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "settings.about"))
+            .navigationTitle(L("settings.about"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(String(localized: "common.done")) {
+                    Button(L("common.done")) {
                         dismiss()
                     }
                 }

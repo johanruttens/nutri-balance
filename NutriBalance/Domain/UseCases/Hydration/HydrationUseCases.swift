@@ -13,6 +13,19 @@ struct LogDrinkUseCase {
     }
 }
 
+/// Use case for updating an existing drink entry.
+struct UpdateDrinkUseCase {
+    private let repository: DrinkEntryRepositoryProtocol
+
+    init(repository: DrinkEntryRepositoryProtocol) {
+        self.repository = repository
+    }
+
+    func execute(entry: DrinkEntry) async throws -> DrinkEntry {
+        try await repository.updateEntry(entry)
+    }
+}
+
 /// Use case for getting daily hydration data.
 struct GetDailyHydrationUseCase {
     private let repository: DrinkEntryRepositoryProtocol

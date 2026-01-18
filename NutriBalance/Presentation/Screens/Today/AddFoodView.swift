@@ -20,10 +20,10 @@ struct AddFoodView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: AppTheme.Spacing.lg) {
-                    // Search bar
+                    // Search bar (debouncing handled in ViewModel)
                     SearchField(
                         text: $viewModel.searchQuery,
-                        placeholder: String(localized: "food.searchPlaceholder"),
+                        placeholder: L("food.searchPlaceholder"),
                         onSubmit: { Task { await viewModel.search() } }
                     )
 
@@ -33,7 +33,7 @@ struct AddFoodView: View {
                     // Recent foods
                     if viewModel.searchQuery.isEmpty && !viewModel.recentFoods.isEmpty {
                         FoodSectionView(
-                            title: String(localized: "food.recent"),
+                            title: L("food.recent"),
                             foods: viewModel.recentFoods,
                             onSelect: { food in viewModel.selectFood(food) }
                         )
@@ -42,7 +42,7 @@ struct AddFoodView: View {
                     // Favorites
                     if viewModel.searchQuery.isEmpty && !viewModel.favorites.isEmpty {
                         FoodSectionView(
-                            title: String(localized: "food.favorites"),
+                            title: L("food.favorites"),
                             foods: viewModel.favorites,
                             onSelect: { food in viewModel.selectFood(food) }
                         )
@@ -53,14 +53,14 @@ struct AddFoodView: View {
                         if viewModel.searchResults.isEmpty && !viewModel.isSearching {
                             EmptyStateView(
                                 icon: "magnifyingglass",
-                                title: String(localized: "food.noResults"),
-                                message: String(localized: "food.noResultsMessage"),
-                                actionTitle: String(localized: "food.createCustom"),
+                                title: L("food.noResults"),
+                                message: L("food.noResultsMessage"),
+                                actionTitle: L("food.createCustom"),
                                 action: { viewModel.showCustomFood = true }
                             )
                         } else {
                             FoodSectionView(
-                                title: String(localized: "food.searchResults"),
+                                title: L("food.searchResults"),
                                 foods: viewModel.searchResults,
                                 onSelect: { food in viewModel.selectFood(food) }
                             )
@@ -69,18 +69,18 @@ struct AddFoodView: View {
 
                     // Create custom food button
                     SecondaryButton(
-                        title: String(localized: "food.createCustom"),
+                        title: L("food.createCustom"),
                         action: { viewModel.showCustomFood = true }
                     )
                 }
                 .padding(AppTheme.Spacing.standard)
             }
             .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "food.addTitle"))
+            .navigationTitle(L("food.addTitle"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(String(localized: "common.cancel")) {
+                    Button(L("common.cancel")) {
                         dismiss()
                     }
                 }
@@ -118,7 +118,7 @@ struct MealCategoryPicker: View {
                 ForEach(MealCategory.allCases) { category in
                     Button(action: { selection = category }) {
                         HStack(spacing: AppTheme.Spacing.xs) {
-                            Image(systemName: category.icon)
+                            Image(systemName: category.iconName)
                                 .font(.system(size: 12))
 
                             Text(category.displayName)
@@ -295,9 +295,9 @@ struct PortionSelectionView: View {
                             .foregroundColor(ColorPalette.textSecondary)
 
                         HStack(spacing: AppTheme.Spacing.xl) {
-                            NutrientLabel(name: "Protein", value: scaledProtein, color: .red.opacity(0.8))
-                            NutrientLabel(name: "Carbs", value: scaledCarbs, color: .orange.opacity(0.8))
-                            NutrientLabel(name: "Fat", value: scaledFat, color: .yellow.opacity(0.8))
+                            NutrientLabel(name: L("macro.protein"), value: scaledProtein, color: .red.opacity(0.8))
+                            NutrientLabel(name: L("macro.carbs"), value: scaledCarbs, color: .orange.opacity(0.8))
+                            NutrientLabel(name: L("macro.fat"), value: scaledFat, color: .yellow.opacity(0.8))
                         }
                     }
                     .padding(AppTheme.Spacing.lg)
@@ -306,19 +306,19 @@ struct PortionSelectionView: View {
 
                     // Add button
                     PrimaryButton(
-                        title: String(localized: "common.add"),
-                        isLoading: isSaving,
-                        action: addEntry
+                        title: L("common.add"),
+                        action: addEntry,
+                        isLoading: isSaving
                     )
                 }
                 .padding(AppTheme.Spacing.standard)
             }
             .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "food.portion"))
+            .navigationTitle(L("food.portion"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(String(localized: "common.cancel")) {
+                    Button(L("common.cancel")) {
                         dismiss()
                     }
                 }
@@ -401,27 +401,27 @@ struct CustomFoodView: View {
             Form {
                 Section {
                     LabeledTextField(
-                        label: String(localized: "food.name"),
+                        label: L("food.name"),
                         text: $name,
                         placeholder: "e.g., Banana",
                         isRequired: true
                     )
 
                     LabeledTextField(
-                        label: String(localized: "food.brand"),
+                        label: L("food.brand"),
                         text: $brand,
-                        placeholder: String(localized: "food.brandOptional")
+                        placeholder: L("food.brandOptional")
                     )
                 }
 
-                Section(header: Text(String(localized: "food.nutrition")), footer: Text("Values per 100g/100ml")) {
+                Section(header: Text(L("food.nutrition")), footer: Text("Values per 100g/100ml")) {
                     NumberInputField(title: "Calories", value: $caloriesPer100, unit: "kcal", step: 10)
-                    NumberInputField(title: "Protein", value: $proteinPer100, unit: "g", step: 1, decimalPlaces: 1)
-                    NumberInputField(title: "Carbs", value: $carbsPer100, unit: "g", step: 1, decimalPlaces: 1)
-                    NumberInputField(title: "Fat", value: $fatPer100, unit: "g", step: 1, decimalPlaces: 1)
+                    NumberInputField(title: L("macro.protein"), value: $proteinPer100, unit: "g", step: 1, decimalPlaces: 1)
+                    NumberInputField(title: L("macro.carbs"), value: $carbsPer100, unit: "g", step: 1, decimalPlaces: 1)
+                    NumberInputField(title: L("macro.fat"), value: $fatPer100, unit: "g", step: 1, decimalPlaces: 1)
                 }
 
-                Section(String(localized: "food.serving")) {
+                Section(L("food.serving")) {
                     NumberInputField(title: "Size", value: $defaultServingSize, step: 10)
                     Picker("Unit", selection: $defaultServingUnit) {
                         ForEach(PortionUnit.allCases) { unit in
@@ -430,17 +430,17 @@ struct CustomFoodView: View {
                     }
                 }
             }
-            .navigationTitle(String(localized: "food.createCustom"))
+            .navigationTitle(L("food.createCustom"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(String(localized: "common.cancel")) {
+                    Button(L("common.cancel")) {
                         dismiss()
                     }
                 }
 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(String(localized: "common.save")) {
+                    Button(L("common.save")) {
                         saveFood()
                     }
                     .disabled(name.isEmpty || isSaving)
@@ -466,7 +466,7 @@ struct CustomFoodView: View {
 
         Task {
             let useCase = container.makeAddToFavoritesUseCase()
-            try? await useCase.execute(foodItem: food)
+            try? await useCase.execute(item: food)
 
             isSaving = false
             onCreated(food)
@@ -482,6 +482,18 @@ struct FoodEntryDetailView: View {
     let onUpdate: () -> Void
 
     @Environment(\.dismiss) private var dismiss
+    @State private var isEditing = false
+    @State private var editedPortionSize: Double
+    @State private var editedMealCategory: MealCategory
+    @State private var isSaving = false
+
+    init(entry: FoodEntry, container: DependencyContainer, onUpdate: @escaping () -> Void) {
+        self.entry = entry
+        self.container = container
+        self.onUpdate = onUpdate
+        _editedPortionSize = State(initialValue: entry.portionSize)
+        _editedMealCategory = State(initialValue: entry.mealCategory)
+    }
 
     var body: some View {
         NavigationStack {
@@ -493,12 +505,26 @@ struct FoodEntryDetailView: View {
                             .font(Typography.title2)
                             .foregroundColor(ColorPalette.textPrimary)
 
-                        HStack {
-                            Image(systemName: entry.mealCategory.icon)
-                            Text(entry.mealCategory.displayName)
+                        if isEditing {
+                            // Editable meal category
+                            Picker(L("food.mealCategory"), selection: $editedMealCategory) {
+                                ForEach(MealCategory.allCases) { category in
+                                    HStack {
+                                        Image(systemName: category.iconName)
+                                        Text(category.displayName)
+                                    }
+                                    .tag(category)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        } else {
+                            HStack {
+                                Image(systemName: entry.mealCategory.iconName)
+                                Text(entry.mealCategory.displayName)
+                            }
+                            .font(Typography.callout)
+                            .foregroundColor(entry.mealCategory.color)
                         }
-                        .font(Typography.callout)
-                        .foregroundColor(entry.mealCategory.color)
                     }
 
                     // Nutrition info
@@ -513,9 +539,9 @@ struct FoodEntryDetailView: View {
                         }
 
                         HStack(spacing: AppTheme.Spacing.xl) {
-                            NutrientLabel(name: "Protein", value: entry.protein ?? 0, color: .red.opacity(0.8))
-                            NutrientLabel(name: "Carbs", value: entry.carbs ?? 0, color: .orange.opacity(0.8))
-                            NutrientLabel(name: "Fat", value: entry.fat ?? 0, color: .yellow.opacity(0.8))
+                            NutrientLabel(name: L("macro.protein"), value: entry.protein ?? 0, color: .red.opacity(0.8))
+                            NutrientLabel(name: L("macro.carbs"), value: entry.carbs ?? 0, color: .orange.opacity(0.8))
+                            NutrientLabel(name: L("macro.fat"), value: entry.fat ?? 0, color: .yellow.opacity(0.8))
                         }
                     }
                     .padding(AppTheme.Spacing.lg)
@@ -523,14 +549,48 @@ struct FoodEntryDetailView: View {
                     .cornerRadius(AppTheme.CornerRadius.large)
 
                     // Portion info
-                    HStack {
-                        Text("Portion:")
-                            .font(Typography.body)
-                            .foregroundColor(ColorPalette.textSecondary)
+                    if isEditing {
+                        VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
+                            Text(L("food.portion"))
+                                .font(Typography.caption1)
+                                .foregroundColor(ColorPalette.textSecondary)
 
-                        Text(entry.portionString)
-                            .font(Typography.body)
-                            .foregroundColor(ColorPalette.textPrimary)
+                            HStack {
+                                Button(action: { editedPortionSize = max(1, editedPortionSize - 10) }) {
+                                    Image(systemName: "minus.circle.fill")
+                                        .font(.system(size: 30))
+                                        .foregroundColor(ColorPalette.primary)
+                                }
+
+                                Text("\(Int(editedPortionSize))")
+                                    .font(.system(size: 36, weight: .bold, design: .rounded))
+                                    .foregroundColor(ColorPalette.textPrimary)
+                                    .frame(width: 100)
+
+                                Button(action: { editedPortionSize = min(2000, editedPortionSize + 10) }) {
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.system(size: 30))
+                                        .foregroundColor(ColorPalette.primary)
+                                }
+
+                                Text(entry.portionUnit.abbreviation)
+                                    .font(Typography.title3)
+                                    .foregroundColor(ColorPalette.textSecondary)
+                            }
+                        }
+                        .padding(AppTheme.Spacing.md)
+                        .background(ColorPalette.cardBackground)
+                        .cornerRadius(AppTheme.CornerRadius.medium)
+                    } else {
+                        HStack {
+                            Text(L("food.portion") + ":")
+                                .font(Typography.body)
+                                .foregroundColor(ColorPalette.textSecondary)
+
+                            Text(entry.portionString)
+                                .font(Typography.body)
+                                .foregroundColor(ColorPalette.textPrimary)
+                        }
                     }
 
                     // Notes if available
@@ -554,15 +614,44 @@ struct FoodEntryDetailView: View {
                 .padding(AppTheme.Spacing.standard)
             }
             .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "food.details"))
+            .navigationTitle(isEditing ? L("food.editTitle") : L("food.details"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(String(localized: "common.close")) {
+                    Button(L("common.close")) {
                         dismiss()
                     }
                 }
+                ToolbarItem(placement: .primaryAction) {
+                    if isEditing {
+                        Button(L("common.save")) {
+                            saveChanges()
+                        }
+                        .disabled(isSaving)
+                    } else {
+                        Button(L("common.edit")) {
+                            isEditing = true
+                        }
+                    }
+                }
             }
+        }
+    }
+
+    private func saveChanges() {
+        isSaving = true
+        Task {
+            var updatedEntry = entry
+            updatedEntry.portionSize = editedPortionSize
+            updatedEntry.mealCategory = editedMealCategory
+            updatedEntry.updatedAt = Date()
+
+            let useCase = container.makeUpdateFoodEntryUseCase()
+            try? await useCase.execute(entry: updatedEntry)
+
+            isSaving = false
+            onUpdate()
+            dismiss()
         }
     }
 }

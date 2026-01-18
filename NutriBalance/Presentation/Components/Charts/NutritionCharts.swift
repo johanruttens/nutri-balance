@@ -105,7 +105,7 @@ struct DailyMacroData: Identifiable {
     let fat: Double
 }
 
-/// Pie chart for macro distribution.
+/// Bar chart for macro distribution (iOS 16 compatible).
 struct MacroPieChart: View {
     let protein: Double
     let carbs: Double
@@ -126,14 +126,14 @@ struct MacroPieChart: View {
 
     var body: some View {
         Chart(data) { slice in
-            SectorMark(
-                angle: .value("Value", slice.value),
-                innerRadius: .ratio(0.5),
-                angularInset: 2
+            BarMark(
+                x: .value("Value", slice.value),
+                y: .value("Macro", slice.name)
             )
             .foregroundStyle(slice.color)
             .cornerRadius(4)
         }
+        .chartXAxis(.hidden)
     }
 }
 

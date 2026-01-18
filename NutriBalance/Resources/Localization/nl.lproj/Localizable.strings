@@ -130,6 +130,7 @@
 "hydration.remaining" = "%d ml resterend";
 "hydration.completed" = "Doel behaald!";
 "hydration.addDrink" = "Drank Toevoegen";
+"hydration.editDrink" = "Drank Bewerken";
 "hydration.quickAdd" = "Snel Toevoegen";
 
 // MARK: - Weight
@@ -286,6 +287,8 @@
 
 // MARK: - Food (Aanvullend)
 "food.addTitle" = "Voeding Toevoegen";
+"food.editTitle" = "Voeding Bewerken";
+"food.mealCategory" = "Maaltijdcategorie";
 "food.searchResults" = "Zoekresultaten";
 "food.noResultsMessage" = "Probeer een andere zoekterm of maak een eigen voedingsmiddel";
 "food.createCustom" = "Eigen Voeding Maken";
@@ -364,6 +367,10 @@
 // MARK: - Profiel
 "profile.name" = "Naam";
 "profile.namePlaceholder" = "Voer je naam in";
+"profile.firstName" = "Voornaam";
+"profile.firstNamePlaceholder" = "Voer je voornaam in";
+"profile.lastName" = "Achternaam";
+"profile.lastNamePlaceholder" = "Voer je achternaam in";
 "profile.email" = "E-mail";
 "profile.emailPlaceholder" = "Voer je e-mail in";
 "profile.height" = "Lengte";
@@ -388,3 +395,118 @@
 "achievements.unlockedOn" = "Ontgrendeld op";
 "achievements.keepGoing" = "Ga zo door!";
 "achievements.notYetUnlocked" = "Nog niet ontgrendeld";
+
+// MARK: - PDF Export
+"pdf.nutritionReport" = "Voedingsrapport";
+"pdf.preparedFor" = "Opgesteld voor";
+"pdf.period" = "Periode";
+"pdf.generated" = "Gegenereerd";
+"pdf.summary" = "Samenvatting";
+"pdf.totalCalories" = "Totaal Calorieën";
+"pdf.totalProtein" = "Totaal Eiwitten";
+"pdf.totalCarbs" = "Totaal Koolhydraten";
+"pdf.totalFat" = "Totaal Vetten";
+"pdf.totalWater" = "Totaal Waterinname";
+"pdf.footer" = "Gegenereerd door NutriBalance • Balanceer je voeding, transformeer je leven";
+
+// MARK: - Time Periods
+"period.week" = "Week";
+"period.month" = "Maand";
+"period.3months" = "3 Maanden";
+"period.year" = "Jaar";
+
+// MARK: - Common UI
+"ui.remaining" = "resterend";
+"ui.goal" = "doel";
+"ui.days" = "dagen";
+"ui.stable" = "Stabiel";
+"ui.over" = "Over";
+"ui.tapToAdd" = "Tik om toe te voegen";
+"ui.tapToAddMeal" = "Tik om %@ toe te voegen";
+
+// MARK: - Validation
+"validation.nameRequired" = "Naam is verplicht";
+"validation.nameTooLong" = "Naam is te lang";
+"validation.invalidWeight" = "Ongeldig gewicht";
+"validation.invalidTargetWeight" = "Ongeldig streefgewicht";
+"validation.genericError" = "Er is een fout opgetreden";
+
+// MARK: - Confirmation
+"common.confirmDelete" = "Verwijderen bevestigen";
+"common.deleteEntryMessage" = "Weet je zeker dat je dit wilt verwijderen?";
+"common.deleteDrinkMessage" = "Weet je zeker dat je deze %@ wilt verwijderen?";
+
+// MARK: - Macros
+"macro.protein" = "Eiwitten";
+"macro.carbs" = "Koolhydraten";
+"macro.fat" = "Vetten";
+
+// MARK: - Privacy Policy
+"privacy.title" = "Privacybeleid";
+"privacy.lastUpdated" = "Laatst bijgewerkt: januari 2025";
+"privacy.dataCollection.title" = "Gegevensverzameling";
+"privacy.dataCollection.content" = "NutriBalance slaat al je gegevens lokaal op je apparaat op. We verzamelen, verzenden of bewaren geen persoonlijke informatie op externe servers.";
+"privacy.dataStorage.title" = "Gegevensopslag";
+"privacy.dataStorage.content" = "Je voedingslogs, gewichtsinvoer en persoonlijke voorkeuren worden veilig opgeslagen in de lokale opslag van je apparaat met behulp van Apple's Core Data framework.";
+"privacy.thirdParty.title" = "Diensten van Derden";
+"privacy.thirdParty.content" = "Deze app integreert niet met analyse-, advertentie- of trackingdiensten van derden.";
+"privacy.rights.title" = "Jouw Rechten";
+"privacy.rights.content" = "Je kunt al je gegevens op elk moment exporteren of verwijderen via het menu Instellingen.";
+"privacy.contact.title" = "Contact";
+"privacy.contact.content" = "Voor vragen over dit privacybeleid kun je contact met ons opnemen via de feedbackfunctie van de app.";
+
+// MARK: - About
+"about.appName" = "NutriBalance";
+"about.version" = "Versie %@";
+"about.description" = "Je persoonlijke voedingsassistent voor duurzaam gewichtsverlies en gezonde eetgewoonten.";
+"about.madeWith" = "Gemaakt met ❤️";
+"about.copyright" = "© 2025 NutriBalance";
+
+// MARK: - Common Additional
+"common.notes" = "Notities";
+"common.kcal" = "kcal";
+"common.ml" = "ml";
+"common.g" = "g";
+"common.cm" = "cm";
+"common.kg" = "kg";
+"common.remaining" = "resterend";
+"common.selectDate" = "Selecteer Datum";
+"common.activityLevel" = "Activiteitsniveau";
+"common.unit" = "Eenheid";
+"common.size" = "Grootte";
+"common.calories" = "Calorieën";
+"common.example" = "bijv., %@";
+"common.valuesPer100" = "Waarden per 100g/100ml";
+"common.goalCompleted" = "Doel behaald!";
+"common.mlRemaining" = "%d ml resterend";
+
+// MARK: - BMI
+"bmi.title" = "BMI";
+"bmi.height" = "Lengte: %d cm";
+
+// MARK: - Toast Messages
+"toast.saved" = "Succesvol opgeslagen";
+"toast.deleted" = "Succesvol verwijderd";
+"toast.updated" = "Succesvol bijgewerkt";
+"toast.added" = "Succesvol toegevoegd";
+"toast.error" = "Er ging iets mis";
+"toast.undoAvailable" = "Tik om ongedaan te maken";
+"toast.undone" = "Actie ongedaan gemaakt";
+
+// MARK: - Accessibility
+"accessibility.addButton" = "Toevoegen";
+"accessibility.editButton" = "Bewerken";
+"accessibility.deleteButton" = "Verwijderen";
+"accessibility.closeButton" = "Sluiten";
+"accessibility.menuButton" = "Menu";
+"accessibility.calendarButton" = "Kalender openen";
+"accessibility.waterButton" = "Water toevoegen";
+"accessibility.refreshButton" = "Vernieuwen";
+"accessibility.swipeToEdit" = "Veeg naar links om te bewerken";
+"accessibility.swipeToDelete" = "Veeg naar rechts om te verwijderen";
+"accessibility.progressRing" = "Voortgang: %d procent";
+"accessibility.weightTrend.losing" = "Gewicht daalt";
+"accessibility.weightTrend.stable" = "Gewicht stabiel";
+"accessibility.weightTrend.gaining" = "Gewicht stijgt";
+"accessibility.achievementLocked" = "Prestatie vergrendeld";
+"accessibility.achievementUnlocked" = "Prestatie ontgrendeld";

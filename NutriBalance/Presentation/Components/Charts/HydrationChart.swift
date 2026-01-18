@@ -133,20 +133,20 @@ struct WaterGlassView: View {
     }
 }
 
-/// Drink type breakdown chart.
+/// Drink type breakdown chart (horizontal bar chart for iOS 16 compatibility).
 struct DrinkTypeChart: View {
     let data: [DrinkTypeData]
 
     var body: some View {
         Chart(data) { item in
-            SectorMark(
-                angle: .value("Amount", item.amount),
-                innerRadius: .ratio(0.5),
-                angularInset: 2
+            BarMark(
+                x: .value("Amount", item.amount),
+                y: .value("Type", item.type)
             )
             .foregroundStyle(item.color)
             .cornerRadius(4)
         }
+        .chartXAxis(.hidden)
     }
 }
 

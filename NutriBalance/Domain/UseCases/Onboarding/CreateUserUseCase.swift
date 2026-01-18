@@ -33,7 +33,7 @@ struct UpdateUserPreferencesUseCase {
         targetFat: Double? = nil,
         targetWeight: Double? = nil
     ) async throws {
-        guard var user = try await repository.getUser() else {
+        guard var user = try await repository.getCurrentUser() else {
             throw UserRepositoryError.userNotFound
         }
 
@@ -63,7 +63,7 @@ struct UpdateUserPreferencesUseCase {
         email: String? = nil,
         height: Double? = nil
     ) async throws {
-        guard var user = try await repository.getUser() else {
+        guard var user = try await repository.getCurrentUser() else {
             throw UserRepositoryError.userNotFound
         }
 

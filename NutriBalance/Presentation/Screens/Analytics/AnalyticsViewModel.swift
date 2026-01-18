@@ -48,6 +48,9 @@ final class AnalyticsViewModel: ObservableObject {
         var dailyHydration: [Double] = []
         var loggedDays = 0
 
+        // Get user for daily summaries
+        let user = try? await container.userRepository.getCurrentUser()
+
         // Load data for each day
         for dayOffset in 0..<period.days {
             guard let date = calendar.date(byAdding: .day, value: dayOffset, to: startDate) else {
@@ -55,24 +58,24 @@ final class AnalyticsViewModel: ObservableObject {
             }
 
             // Load food entries
-            do {
-                let getDailySummaryUseCase = container.makeGetDailySummaryUseCase()
-                if let summary = try await getDailySummaryUseCase.execute(for: date) {
+            if let user = user {
+                do {
+                    let getDailySummaryUseCase = container.makeGetDailySummaryUseCase()
+                    let summary = try await getDailySummaryUseCase.execute(for: date, user: user)
                     dailySummaries.append(summary)
                     if summary.totalCalories > 0 {
                         loggedDays += 1
                     }
+                } catch {
+                    // Skip day on error
                 }
-            } catch {
-                // Skip day on error
             }
 
             // Load hydration
             do {
                 let getHydrationUseCase = container.makeGetDailyHydrationUseCase()
-                let entries = try await getHydrationUseCase.execute(for: date)
-                let totalHydration = entries.reduce(0) { $0 + $1.amount }
-                dailyHydration.append(totalHydration)
+                let result = try await getHydrationUseCase.execute(for: date)
+                dailyHydration.append(result.totalHydration)
             } catch {
                 dailyHydration.append(0)
             }
@@ -135,8 +138,8 @@ final class AnalyticsViewModel: ObservableObject {
 
     private func loadUserGoals() async {
         do {
-            let repository = container.makeUserRepository()
-            if let user = try await repository.getUser() {
+            let repository = container.userRepository
+            if let user = try await repository.getCurrentUser() {
                 calorieGoal = user.dailyCalorieGoal
                 hydrationGoal = user.dailyWaterGoal
             }

@@ -37,8 +37,8 @@ final class SettingsViewModel: ObservableObject {
         isLoading = true
 
         do {
-            let repository = container.makeUserRepository()
-            user = try await repository.getUser()
+            let repository = container.userRepository
+            user = try await repository.getCurrentUser()
 
             // Load preferences
             notificationsEnabled = user?.notificationsEnabled ?? false
@@ -56,7 +56,7 @@ final class SettingsViewModel: ObservableObject {
         do {
             currentUser.notificationsEnabled = enabled
 
-            let repository = container.makeUserRepository()
+            let repository = container.userRepository
             _ = try await repository.updateUser(currentUser)
 
             // Request notification permissions if enabling
@@ -70,6 +70,29 @@ final class SettingsViewModel: ObservableObject {
         }
     }
 
+    func updateLanguage(language: AppLanguage) async {
+        guard var currentUser = user else { return }
+
+        let previousLanguage = selectedLanguage
+
+        do {
+            currentUser.preferredLanguage = language.rawValue
+
+            let repository = container.userRepository
+            _ = try await repository.updateUser(currentUser)
+
+            // Apply language change immediately using LocalizationManager
+            LocalizationManager.shared.setLanguage(language)
+
+            // Update user object
+            user = currentUser
+        } catch {
+            self.error = error
+            // Revert UI
+            selectedLanguage = previousLanguage
+        }
+    }
+
     func exportData() {
         // TODO: Implement data export
         // This would typically generate a JSON or CSV file with all user data
@@ -79,9 +102,8 @@ final class SettingsViewModel: ObservableObject {
         isLoading = true
 
         do {
-            // Delete all entries
-            let persistenceController = container.persistenceController
-            let context = persistenceController.container.viewContext
+            // Delete all entries using the shared view context
+            let context = container.viewContext
 
             // Delete food entries
             let foodEntryRequest = CDFoodEntry.fetchRequest()

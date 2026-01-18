@@ -5,12 +5,9 @@ struct NutriBalanceApp: App {
     // MARK: - Properties
 
     @StateObject private var appState = AppState()
+    @ObservedObject private var localizationManager = LocalizationManager.shared
     private let persistenceController = PersistenceController.shared
-    private let container: DependencyContainer
-
-    init() {
-        container = DependencyContainer(persistenceController: persistenceController)
-    }
+    private let container = DependencyContainer.shared
 
     // MARK: - Body
 
@@ -19,7 +16,15 @@ struct NutriBalanceApp: App {
             ContentView(container: container)
                 .environment(\.managedObjectContext, persistenceController.viewContext)
                 .environmentObject(appState)
+                .environmentObject(localizationManager)
                 .preferredColorScheme(.light)
+                .id(localizationManager.currentLanguage.rawValue)
+                .withToast()
+                .task {
+                    // Seed food database on first launch
+                    let seeder = FoodDataSeeder(context: persistenceController.viewContext)
+                    await seeder.seedIfNeeded()
+                }
         }
     }
 }

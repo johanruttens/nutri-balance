@@ -1,5 +1,7 @@
 import SwiftUI
 
+// Import L() function from LocalizationManager
+
 /// Container view for the onboarding flow.
 struct OnboardingContainerView: View {
     let container: DependencyContainer
@@ -81,21 +83,41 @@ struct WelcomeStepView: View {
                 .foregroundColor(ColorPalette.primary)
 
             VStack(spacing: AppTheme.Spacing.md) {
-                Text("onboarding.welcome.title")
+                Text(L("onboarding.welcome.title"))
                     .font(Typography.largeTitle)
                     .foregroundColor(ColorPalette.textPrimary)
                     .multilineTextAlignment(.center)
 
-                Text("onboarding.welcome.subtitle")
+                Text(L("onboarding.welcome.subtitle"))
                     .font(Typography.body)
                     .foregroundColor(ColorPalette.textSecondary)
                     .multilineTextAlignment(.center)
             }
 
+            // Language selector
+            VStack(spacing: AppTheme.Spacing.sm) {
+                Text(L("settings.language"))
+                    .font(Typography.caption1)
+                    .foregroundColor(ColorPalette.textSecondary)
+
+                Picker(selection: $viewModel.selectedLanguage) {
+                    ForEach(AppLanguage.allCases) { language in
+                        Text(language.displayName).tag(language)
+                    }
+                } label: {
+                    EmptyView()
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal, AppTheme.Spacing.xl)
+                .onChange(of: viewModel.selectedLanguage) { newLanguage in
+                    LocalizationManager.shared.setLanguage(newLanguage)
+                }
+            }
+
             Spacer()
 
             Button(action: { viewModel.nextStep() }) {
-                Text("onboarding.welcome.getStarted")
+                Text(L("onboarding.welcome.getStarted"))
                     .font(Typography.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
@@ -114,22 +136,36 @@ struct WelcomeStepView: View {
 struct NameStepView: View {
     @ObservedObject var viewModel: OnboardingViewModel
     @FocusState private var isFirstNameFocused: Bool
+    @State private var showValidationError = false
 
     var body: some View {
         VStack(spacing: AppTheme.Spacing.lg) {
             Spacer()
 
             VStack(spacing: AppTheme.Spacing.md) {
-                Text("onboarding.name.title")
+                Text(L("onboarding.name.title"))
                     .font(Typography.title1)
                     .foregroundColor(ColorPalette.textPrimary)
 
                 VStack(spacing: AppTheme.Spacing.md) {
-                    TextField("onboarding.name.placeholder", text: $viewModel.firstName)
-                        .textFieldStyle(NutriTextFieldStyle())
-                        .focused($isFirstNameFocused)
+                    VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
+                        TextField(L("onboarding.name.placeholder"), text: $viewModel.firstName)
+                            .textFieldStyle(NutriTextFieldStyle())
+                            .focused($isFirstNameFocused)
+                            .onChange(of: viewModel.firstName) { _ in
+                                if showValidationError && !viewModel.firstName.isEmpty {
+                                    showValidationError = false
+                                }
+                            }
 
-                    TextField("onboarding.name.lastName", text: $viewModel.lastName)
+                        if showValidationError && viewModel.firstName.isEmpty {
+                            Text(L("validation.nameRequired"))
+                                .font(Typography.caption2)
+                                .foregroundColor(ColorPalette.error)
+                        }
+                    }
+
+                    TextField(L("onboarding.name.lastName"), text: $viewModel.lastName)
                         .textFieldStyle(NutriTextFieldStyle())
                 }
                 .padding(.horizontal, AppTheme.Spacing.standard)
@@ -139,7 +175,7 @@ struct NameStepView: View {
 
             HStack(spacing: AppTheme.Spacing.md) {
                 Button(action: { viewModel.previousStep() }) {
-                    Text("common.back")
+                    Text(L("common.back"))
                         .font(Typography.headline)
                         .foregroundColor(ColorPalette.primary)
                         .frame(maxWidth: .infinity)
@@ -151,8 +187,15 @@ struct NameStepView: View {
                         )
                 }
 
-                Button(action: { viewModel.nextStep() }) {
-                    Text("common.next")
+                Button(action: {
+                    if viewModel.firstName.isEmpty {
+                        showValidationError = true
+                        HapticManager.shared.error()
+                    } else {
+                        viewModel.nextStep()
+                    }
+                }) {
+                    Text(L("common.next"))
                         .font(Typography.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -160,7 +203,6 @@ struct NameStepView: View {
                         .background(viewModel.firstName.isEmpty ? ColorPalette.divider : ColorPalette.primary)
                         .cornerRadius(AppTheme.CornerRadius.medium)
                 }
-                .disabled(viewModel.firstName.isEmpty)
             }
             .padding(.horizontal, AppTheme.Spacing.standard)
             .padding(.bottom, AppTheme.Spacing.xl)
@@ -176,7 +218,7 @@ struct GoalsStepView: View {
 
     var body: some View {
         VStack(spacing: AppTheme.Spacing.lg) {
-            Text("onboarding.goals.title")
+            Text(L("onboarding.goals.title"))
                 .font(Typography.title1)
                 .foregroundColor(ColorPalette.textPrimary)
                 .padding(.top, AppTheme.Spacing.xl)
@@ -185,21 +227,21 @@ struct GoalsStepView: View {
                 VStack(spacing: AppTheme.Spacing.lg) {
                     // Current Weight
                     GoalInputRow(
-                        title: String(localized: "onboarding.goals.currentWeight"),
+                        title: L("onboarding.goals.currentWeight"),
                         value: $viewModel.currentWeight,
                         unit: "kg"
                     )
 
                     // Target Weight
                     GoalInputRow(
-                        title: String(localized: "onboarding.goals.targetWeight"),
+                        title: L("onboarding.goals.targetWeight"),
                         value: $viewModel.targetWeight,
                         unit: "kg"
                     )
 
                     // Activity Level
                     VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                        Text("onboarding.goals.activityLevel")
+                        Text(L("onboarding.goals.activityLevel"))
                             .font(Typography.headline)
                             .foregroundColor(ColorPalette.textPrimary)
 
@@ -216,7 +258,7 @@ struct GoalsStepView: View {
 
             HStack(spacing: AppTheme.Spacing.md) {
                 Button(action: { viewModel.previousStep() }) {
-                    Text("common.back")
+                    Text(L("common.back"))
                         .font(Typography.headline)
                         .foregroundColor(ColorPalette.primary)
                         .frame(maxWidth: .infinity)
@@ -228,7 +270,7 @@ struct GoalsStepView: View {
                 }
 
                 Button(action: { viewModel.nextStep() }) {
-                    Text("common.next")
+                    Text(L("common.next"))
                         .font(Typography.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -276,33 +318,38 @@ struct PreferencesStepView: View {
 
     var body: some View {
         VStack(spacing: AppTheme.Spacing.lg) {
-            Text("onboarding.preferences.title")
+            Text(L("onboarding.preferences.title"))
                 .font(Typography.title1)
                 .foregroundColor(ColorPalette.textPrimary)
                 .padding(.top, AppTheme.Spacing.xl)
 
             VStack(spacing: AppTheme.Spacing.lg) {
+                // Language selection
+                VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
+                    Text(L("settings.language"))
+                        .font(Typography.headline)
+                        .foregroundColor(ColorPalette.textPrimary)
+
+                    Picker(selection: $viewModel.selectedLanguage) {
+                        ForEach(AppLanguage.allCases) { language in
+                            Text(language.displayName).tag(language)
+                        }
+                    } label: {
+                        EmptyView()
+                    }
+                    .pickerStyle(.segmented)
+                    .onChange(of: viewModel.selectedLanguage) { newLanguage in
+                        LocalizationManager.shared.setLanguage(newLanguage)
+                    }
+                }
+                .padding(.horizontal, AppTheme.Spacing.standard)
+
                 Toggle(isOn: $viewModel.notificationsEnabled) {
-                    Text("onboarding.preferences.notifications")
+                    Text(L("onboarding.preferences.notifications"))
                         .font(Typography.body)
                         .foregroundColor(ColorPalette.textPrimary)
                 }
                 .tint(ColorPalette.primary)
-                .padding(.horizontal, AppTheme.Spacing.standard)
-
-                Divider()
-
-                VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                    Text("onboarding.preferences.language")
-                        .font(Typography.headline)
-                        .foregroundColor(ColorPalette.textPrimary)
-
-                    Picker("Language", selection: $viewModel.preferredLanguage) {
-                        Text("English").tag("en")
-                        Text("Nederlands").tag("nl")
-                    }
-                    .pickerStyle(.segmented)
-                }
                 .padding(.horizontal, AppTheme.Spacing.standard)
             }
 
@@ -310,7 +357,7 @@ struct PreferencesStepView: View {
 
             HStack(spacing: AppTheme.Spacing.md) {
                 Button(action: { viewModel.previousStep() }) {
-                    Text("common.back")
+                    Text(L("common.back"))
                         .font(Typography.headline)
                         .foregroundColor(ColorPalette.primary)
                         .frame(maxWidth: .infinity)
@@ -322,7 +369,7 @@ struct PreferencesStepView: View {
                 }
 
                 Button(action: { viewModel.nextStep() }) {
-                    Text("common.next")
+                    Text(L("common.next"))
                         .font(Typography.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -352,11 +399,11 @@ struct CompleteStepView: View {
                 .foregroundColor(ColorPalette.success)
 
             VStack(spacing: AppTheme.Spacing.md) {
-                Text("onboarding.complete.title")
+                Text(L("onboarding.complete.title"))
                     .font(Typography.largeTitle)
                     .foregroundColor(ColorPalette.textPrimary)
 
-                Text("onboarding.complete.subtitle")
+                Text(L("onboarding.complete.subtitle"))
                     .font(Typography.body)
                     .foregroundColor(ColorPalette.textSecondary)
             }
@@ -364,7 +411,7 @@ struct CompleteStepView: View {
             Spacer()
 
             Button(action: onComplete) {
-                Text("onboarding.complete.start")
+                Text(L("onboarding.complete.start"))
                     .font(Typography.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)

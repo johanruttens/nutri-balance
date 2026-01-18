@@ -5,6 +5,9 @@ struct TodayView: View {
     @StateObject private var viewModel: TodayViewModel
     @State private var selectedMealCategory: MealCategory?
     @State private var showAddFood = false
+    @State private var showAddDrink = false
+    @State private var showDeleteConfirmation = false
+    @State private var entryToDelete: FoodEntry?
 
     init(container: DependencyContainer) {
         _viewModel = StateObject(wrappedValue: TodayViewModel(container: container))
@@ -12,15 +15,16 @@ struct TodayView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: AppTheme.Spacing.lg) {
-                    // Date selector
-                    DateSelectorView(
-                        selectedDate: $viewModel.selectedDate,
-                        onDateChange: { date in
-                            Task { await viewModel.loadEntries() }
-                        }
-                    )
+            ZStack {
+                ScrollView {
+                    VStack(spacing: AppTheme.Spacing.lg) {
+                        // Date selector
+                        DateSelectorView(
+                            selectedDate: $viewModel.selectedDate,
+                            onDateChange: { date in
+                                Task { await viewModel.loadEntries() }
+                            }
+                        )
 
                     // Daily summary
                     DailySummaryHeader(
@@ -29,6 +33,13 @@ struct TodayView: View {
                         protein: viewModel.totalProtein,
                         carbs: viewModel.totalCarbs,
                         fat: viewModel.totalFat
+                    )
+
+                    // Hydration quick summary
+                    HydrationQuickView(
+                        intake: viewModel.hydrationIntake,
+                        goal: viewModel.hydrationGoal,
+                        onAddDrink: { showAddDrink = true }
                     )
 
                     // Meal categories
@@ -44,20 +55,36 @@ struct TodayView: View {
                                 viewModel.selectedEntry = entry
                             },
                             onDeleteEntry: { entry in
-                                Task { await viewModel.deleteEntry(entry) }
+                                entryToDelete = entry
+                                showDeleteConfirmation = true
                             }
                         )
                     }
+                    }
+                    .padding(AppTheme.Spacing.standard)
                 }
-                .padding(AppTheme.Spacing.standard)
+                .background(ColorPalette.backgroundSecondary)
+
+                // Loading overlay
+                if viewModel.isLoading {
+                    LoadingOverlay()
+                }
             }
-            .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "today.title"))
+            .navigationTitle(L("today.title"))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Button(action: { showAddFood = true }) {
-                        Image(systemName: "plus")
+                    HStack(spacing: AppTheme.Spacing.md) {
+                        Button(action: { showAddDrink = true }) {
+                            Image(systemName: "drop.fill")
+                                .foregroundColor(ColorPalette.water)
+                        }
+                        .accessibilityLabel(L("accessibility.waterButton"))
+
+                        Button(action: { showAddFood = true }) {
+                            Image(systemName: "plus")
+                        }
+                        .accessibilityLabel(L("accessibility.addButton"))
                     }
                 }
             }
@@ -84,7 +111,86 @@ struct TodayView: View {
                     Task { await viewModel.loadEntries() }
                 }
             }
+            .sheet(isPresented: $showAddDrink) {
+                AddDrinkView(container: viewModel.container) {
+                    Task { await viewModel.loadEntries() }
+                }
+            }
+            .alert(
+                L("common.confirmDelete"),
+                isPresented: $showDeleteConfirmation,
+                presenting: entryToDelete
+            ) { entry in
+                Button(L("common.cancel"), role: .cancel) {
+                    entryToDelete = nil
+                }
+                Button(L("common.delete"), role: .destructive) {
+                    Task {
+                        await viewModel.deleteEntry(entry)
+                        entryToDelete = nil
+                    }
+                }
+            } message: { entry in
+                Text(L("common.deleteEntryMessage") + " \(entry.foodName)")
+            }
         }
+    }
+}
+
+/// Compact hydration view for Today screen.
+struct HydrationQuickView: View {
+    let intake: Double
+    let goal: Double
+    let onAddDrink: () -> Void
+
+    private var progress: Double {
+        guard goal > 0 else { return 0 }
+        return intake / goal
+    }
+
+    var body: some View {
+        HStack(spacing: AppTheme.Spacing.md) {
+            // Progress indicator
+            ZStack {
+                Circle()
+                    .stroke(ColorPalette.water.opacity(0.2), lineWidth: 6)
+                    .frame(width: 50, height: 50)
+
+                Circle()
+                    .trim(from: 0, to: min(progress, 1.0))
+                    .stroke(ColorPalette.water, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                    .rotationEffect(.degrees(-90))
+                    .frame(width: 50, height: 50)
+
+                Image(systemName: "drop.fill")
+                    .font(.system(size: 16))
+                    .foregroundColor(ColorPalette.water)
+            }
+
+            // Info
+            VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
+                Text(L("hydration.title"))
+                    .font(Typography.headline)
+                    .foregroundColor(ColorPalette.textPrimary)
+
+                Text("\(Int(intake)) / \(Int(goal)) ml")
+                    .font(Typography.callout)
+                    .foregroundColor(ColorPalette.textSecondary)
+            }
+
+            Spacer()
+
+            // Add button
+            Button(action: onAddDrink) {
+                Image(systemName: "plus.circle.fill")
+                    .font(.system(size: 32))
+                    .foregroundColor(ColorPalette.water)
+            }
+            .accessibilityLabel(L("accessibility.waterButton"))
+        }
+        .padding(AppTheme.Spacing.md)
+        .background(ColorPalette.cardBackground)
+        .cornerRadius(AppTheme.CornerRadius.medium)
     }
 }
 
@@ -109,12 +215,12 @@ struct DateSelectorView: View {
 
             VStack(spacing: AppTheme.Spacing.xs) {
                 if isToday {
-                    Text(String(localized: "common.today"))
+                    Text(L("common.today"))
                         .font(Typography.caption1)
                         .foregroundColor(ColorPalette.primary)
                 }
 
-                Text(selectedDate, format: .dateTime.weekday(.wide).month().day())
+                Text(LDate(selectedDate, style: .full))
                     .font(Typography.headline)
                     .foregroundColor(ColorPalette.textPrimary)
             }
@@ -192,9 +298,9 @@ struct DailySummaryHeader: View {
 
             // Macros
             VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                MacroRow(name: "Protein", value: protein, color: .red.opacity(0.8))
-                MacroRow(name: "Carbs", value: carbs, color: .orange.opacity(0.8))
-                MacroRow(name: "Fat", value: fat, color: .yellow.opacity(0.8))
+                MacroRow(name: L("macro.protein"), value: protein, color: .red.opacity(0.8))
+                MacroRow(name: L("macro.carbs"), value: carbs, color: .orange.opacity(0.8))
+                MacroRow(name: L("macro.fat"), value: fat, color: .yellow.opacity(0.8))
             }
 
             Spacer()
@@ -204,7 +310,7 @@ struct DailySummaryHeader: View {
                 Text("\(remaining)")
                     .font(Typography.numberMedium)
                     .foregroundColor(consumed > goal ? ColorPalette.error : ColorPalette.success)
-                Text("remaining")
+                Text(L("ui.remaining"))
                     .font(Typography.caption2)
                     .foregroundColor(ColorPalette.textSecondary)
             }
@@ -254,7 +360,7 @@ struct MealCategorySection: View {
             // Header
             HStack {
                 HStack(spacing: AppTheme.Spacing.sm) {
-                    Image(systemName: category.icon)
+                    Image(systemName: category.iconName)
                         .font(.system(size: 16))
                         .foregroundColor(category.color)
 
@@ -276,6 +382,7 @@ struct MealCategorySection: View {
                         .font(.system(size: 24))
                         .foregroundColor(category.color)
                 }
+                .accessibilityLabel(L("accessibility.addButton"))
             }
             .padding(AppTheme.Spacing.md)
             .background(ColorPalette.cardBackground)
@@ -293,7 +400,7 @@ struct MealCategorySection: View {
                                 Button(role: .destructive) {
                                     onDeleteEntry(entry)
                                 } label: {
-                                    Label(String(localized: "common.delete"), systemImage: "trash")
+                                    Label(L("common.delete"), systemImage: "trash")
                                 }
                             }
 
@@ -318,7 +425,7 @@ struct EmptyMealView: View {
     var body: some View {
         Button(action: onAddTap) {
             HStack {
-                Text("Tap to add \(category.displayName.lowercased())")
+                Text(String(format: L("ui.tapToAddMeal"), category.displayName.lowercased()))
                     .font(Typography.body)
                     .foregroundColor(ColorPalette.textTertiary)
 
@@ -362,6 +469,30 @@ struct FoodEntryRow: View {
             }
         }
         .padding(AppTheme.Spacing.md)
+    }
+}
+
+/// Loading overlay for async operations.
+struct LoadingOverlay: View {
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.2)
+                .ignoresSafeArea()
+
+            VStack(spacing: AppTheme.Spacing.md) {
+                ProgressView()
+                    .scaleEffect(1.2)
+                    .tint(ColorPalette.primary)
+
+                Text(L("common.loading"))
+                    .font(Typography.caption1)
+                    .foregroundColor(ColorPalette.textSecondary)
+            }
+            .padding(AppTheme.Spacing.xl)
+            .background(ColorPalette.cardBackground)
+            .cornerRadius(AppTheme.CornerRadius.medium)
+            .shadow(color: Color.black.opacity(0.1), radius: 10)
+        }
     }
 }
 

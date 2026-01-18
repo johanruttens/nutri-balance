@@ -1,5 +1,6 @@
 import SwiftUI
 import Charts
+import UIKit
 
 /// Main analytics view with weekly/monthly reports.
 struct AnalyticsView: View {
@@ -52,7 +53,7 @@ struct AnalyticsView: View {
 
                     // Export button
                     SecondaryButton(
-                        title: String(localized: "analytics.exportReport"),
+                        title: L("analytics.exportReport"),
                         icon: "square.and.arrow.up",
                         action: { viewModel.showExport = true }
                     )
@@ -60,7 +61,7 @@ struct AnalyticsView: View {
                 .padding(AppTheme.Spacing.standard)
             }
             .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "analytics.title"))
+            .navigationTitle(L("analytics.title"))
             .navigationBarTitleDisplayMode(.large)
             .refreshable {
                 await viewModel.loadData(for: selectedPeriod)
@@ -77,10 +78,17 @@ struct AnalyticsView: View {
 
 /// Analytics period options.
 enum AnalyticsPeriod: String, CaseIterable, Identifiable {
-    case week = "Week"
-    case month = "Month"
+    case week
+    case month
 
     var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .week: return L("period.week")
+        case .month: return L("period.month")
+        }
+    }
 
     var days: Int {
         switch self {
@@ -102,7 +110,7 @@ struct PeriodPicker: View {
                     selection = period
                     onChange()
                 }) {
-                    Text(period.rawValue)
+                    Text(period.displayName)
                         .font(Typography.body)
                         .foregroundColor(selection == period ? .white : ColorPalette.textSecondary)
                         .frame(maxWidth: .infinity)
@@ -123,7 +131,7 @@ struct AnalyticsSummarySection: View {
     var body: some View {
         HStack(spacing: AppTheme.Spacing.md) {
             SummaryStatCard(
-                title: String(localized: "analytics.avgCalories"),
+                title: L("analytics.avgCalories"),
                 value: "\(summary.avgCalories)",
                 unit: "kcal",
                 icon: "flame.fill",
@@ -131,7 +139,7 @@ struct AnalyticsSummarySection: View {
             )
 
             SummaryStatCard(
-                title: String(localized: "analytics.avgHydration"),
+                title: L("analytics.avgHydration"),
                 value: "\(Int(summary.avgHydration))",
                 unit: "ml",
                 icon: "drop.fill",
@@ -185,7 +193,7 @@ struct CalorieChartSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            Text(String(localized: "analytics.calorieIntake"))
+            Text(L("analytics.calorieIntake"))
                 .font(Typography.headline)
                 .foregroundColor(ColorPalette.textPrimary)
 
@@ -209,7 +217,7 @@ struct EmptyChartPlaceholder: View {
                 .font(.system(size: 40))
                 .foregroundColor(ColorPalette.textTertiary)
 
-            Text(String(localized: "analytics.noData"))
+            Text(L("analytics.noData"))
                 .font(Typography.body)
                 .foregroundColor(ColorPalette.textSecondary)
         }
@@ -230,7 +238,7 @@ struct MacroBreakdownSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            Text(String(localized: "analytics.macroBreakdown"))
+            Text(L("analytics.macroBreakdown"))
                 .font(Typography.headline)
                 .foregroundColor(ColorPalette.textPrimary)
 
@@ -244,21 +252,21 @@ struct MacroBreakdownSection: View {
                 // Legend
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
                     MacroLegendItem(
-                        name: "Protein",
+                        name: L("macro.protein"),
                         value: protein,
                         percentage: total > 0 ? protein / total * 100 : 0,
                         color: .red.opacity(0.8)
                     )
 
                     MacroLegendItem(
-                        name: "Carbs",
+                        name: L("macro.carbs"),
                         value: carbs,
                         percentage: total > 0 ? carbs / total * 100 : 0,
                         color: .orange.opacity(0.8)
                     )
 
                     MacroLegendItem(
-                        name: "Fat",
+                        name: L("macro.fat"),
                         value: fat,
                         percentage: total > 0 ? fat / total * 100 : 0,
                         color: .yellow.opacity(0.8)
@@ -308,25 +316,25 @@ struct GoalsProgressSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            Text(String(localized: "analytics.goalProgress"))
+            Text(L("analytics.goalProgress"))
                 .font(Typography.headline)
                 .foregroundColor(ColorPalette.textPrimary)
 
             VStack(spacing: AppTheme.Spacing.md) {
                 GoalProgressRow(
-                    title: String(localized: "analytics.calorieGoal"),
+                    title: L("analytics.calorieGoal"),
                     progress: calorieProgress,
                     color: ColorPalette.primary
                 )
 
                 GoalProgressRow(
-                    title: String(localized: "analytics.proteinGoal"),
+                    title: L("analytics.proteinGoal"),
                     progress: proteinProgress,
                     color: .red.opacity(0.8)
                 )
 
                 GoalProgressRow(
-                    title: String(localized: "analytics.hydrationGoal"),
+                    title: L("analytics.hydrationGoal"),
                     progress: hydrationProgress,
                     color: ColorPalette.water
                 )
@@ -385,7 +393,7 @@ struct ConsistencySection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            Text(String(localized: "analytics.consistency"))
+            Text(L("analytics.consistency"))
                 .font(Typography.headline)
                 .foregroundColor(ColorPalette.textPrimary)
 
@@ -402,7 +410,7 @@ struct ConsistencySection: View {
                             .foregroundColor(ColorPalette.textPrimary)
                     }
 
-                    Text(String(localized: "analytics.dayStreak"))
+                    Text(L("analytics.dayStreak"))
                         .font(Typography.caption1)
                         .foregroundColor(ColorPalette.textSecondary)
                 }
@@ -416,7 +424,7 @@ struct ConsistencySection: View {
                         .font(Typography.numberMedium)
                         .foregroundColor(ColorPalette.textPrimary)
 
-                    Text(String(localized: "analytics.daysLogged"))
+                    Text(L("analytics.daysLogged"))
                         .font(Typography.caption1)
                         .foregroundColor(ColorPalette.textSecondary)
                 }
@@ -430,7 +438,7 @@ struct ConsistencySection: View {
                         .font(Typography.numberMedium)
                         .foregroundColor(percentage >= 80 ? ColorPalette.success : ColorPalette.textPrimary)
 
-                    Text(String(localized: "analytics.completion"))
+                    Text(L("analytics.completion"))
                         .font(Typography.caption1)
                         .foregroundColor(ColorPalette.textSecondary)
                 }
@@ -443,26 +451,29 @@ struct ConsistencySection: View {
     }
 }
 
-/// Export view placeholder.
+/// Export view for generating PDF reports.
 struct ExportView: View {
     let container: DependencyContainer
     @Environment(\.dismiss) private var dismiss
     @State private var startDate = Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date()
     @State private var endDate = Date()
     @State private var isExporting = false
+    @State private var exportError: String?
+    @State private var showShareSheet = false
+    @State private var pdfData: Data?
 
     var body: some View {
         NavigationStack {
             VStack(spacing: AppTheme.Spacing.xl) {
                 // Date range
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                    Text(String(localized: "export.dateRange"))
+                    Text(L("export.dateRange"))
                         .font(Typography.headline)
                         .foregroundColor(ColorPalette.textPrimary)
 
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(String(localized: "export.from"))
+                            Text(L("export.from"))
                                 .font(Typography.caption1)
                                 .foregroundColor(ColorPalette.textSecondary)
 
@@ -473,7 +484,7 @@ struct ExportView: View {
                         Spacer()
 
                         VStack(alignment: .leading) {
-                            Text(String(localized: "export.to"))
+                            Text(L("export.to"))
                                 .font(Typography.caption1)
                                 .foregroundColor(ColorPalette.textSecondary)
 
@@ -491,7 +502,7 @@ struct ExportView: View {
                     Image(systemName: "info.circle")
                         .foregroundColor(ColorPalette.primary)
 
-                    Text(String(localized: "export.info"))
+                    Text(L("export.info"))
                         .font(Typography.caption1)
                         .foregroundColor(ColorPalette.textSecondary)
                 }
@@ -499,25 +510,44 @@ struct ExportView: View {
                 .background(ColorPalette.primary.opacity(0.1))
                 .cornerRadius(AppTheme.CornerRadius.medium)
 
+                // Error message
+                if let error = exportError {
+                    HStack(spacing: AppTheme.Spacing.sm) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundColor(ColorPalette.error)
+                        Text(error)
+                            .font(Typography.caption1)
+                            .foregroundColor(ColorPalette.error)
+                    }
+                    .padding(AppTheme.Spacing.md)
+                    .background(ColorPalette.error.opacity(0.1))
+                    .cornerRadius(AppTheme.CornerRadius.medium)
+                }
+
                 Spacer()
 
                 // Export button
                 PrimaryButton(
-                    title: String(localized: "export.generatePDF"),
+                    title: L("export.generatePDF"),
                     icon: "doc.fill",
-                    isLoading: isExporting,
-                    action: exportPDF
+                    action: exportPDF,
+                    isLoading: isExporting
                 )
             }
             .padding(AppTheme.Spacing.standard)
             .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "export.title"))
+            .navigationTitle(L("export.title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(String(localized: "common.cancel")) {
+                    Button(L("common.cancel")) {
                         dismiss()
                     }
+                }
+            }
+            .sheet(isPresented: $showShareSheet) {
+                if let data = pdfData {
+                    ShareSheet(items: [data])
                 }
             }
         }
@@ -525,14 +555,32 @@ struct ExportView: View {
 
     private func exportPDF() {
         isExporting = true
+        exportError = nil
 
         Task {
-            // TODO: Implement actual PDF export
-            try? await Task.sleep(for: .seconds(1))
+            do {
+                let useCase = container.makeGeneratePDFReportUseCase()
+                let data = try await useCase.execute(from: startDate, to: endDate)
+                pdfData = data
+                showShareSheet = true
+            } catch {
+                exportError = error.localizedDescription
+            }
             isExporting = false
-            dismiss()
         }
     }
+}
+
+/// Share sheet for exporting PDF.
+struct ShareSheet: UIViewControllerRepresentable {
+    let items: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
 
 #Preview {

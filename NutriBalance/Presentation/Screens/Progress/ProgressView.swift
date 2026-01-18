@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Main progress/weight tracking view.
-struct ProgressView: View {
+struct WeightProgressView: View {
     @StateObject private var viewModel: ProgressViewModel
     @State private var showLogWeight = false
     @State private var selectedTimeRange: TimeRange = .month
@@ -57,13 +57,14 @@ struct ProgressView: View {
                 .padding(AppTheme.Spacing.standard)
             }
             .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "progress.title"))
+            .navigationTitle(L("progress.title"))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: { showLogWeight = true }) {
                         Image(systemName: "plus")
                     }
+                    .accessibilityLabel(L("accessibility.addButton"))
                 }
             }
             .refreshable {
@@ -83,12 +84,21 @@ struct ProgressView: View {
 
 /// Time range options.
 enum TimeRange: String, CaseIterable, Identifiable {
-    case week = "Week"
-    case month = "Month"
-    case threeMonths = "3 Months"
-    case year = "Year"
+    case week
+    case month
+    case threeMonths
+    case year
 
     var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .week: return L("period.week")
+        case .month: return L("period.month")
+        case .threeMonths: return L("period.3months")
+        case .year: return L("period.year")
+        }
+    }
 
     var days: Int {
         switch self {
@@ -112,7 +122,7 @@ struct TimeRangePicker: View {
                     selection = range
                     onChange()
                 }) {
-                    Text(range.rawValue)
+                    Text(range.displayName)
                         .font(Typography.caption1)
                         .foregroundColor(selection == range ? .white : ColorPalette.textSecondary)
                         .padding(.horizontal, AppTheme.Spacing.md)
@@ -148,7 +158,7 @@ struct CurrentWeightCard: View {
         VStack(spacing: AppTheme.Spacing.lg) {
             HStack {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                    Text(String(localized: "progress.currentWeight"))
+                    Text(L("progress.currentWeight"))
                         .font(Typography.caption1)
                         .foregroundColor(ColorPalette.textSecondary)
 
@@ -157,7 +167,7 @@ struct CurrentWeightCard: View {
                             .font(.system(size: 48, weight: .bold, design: .rounded))
                             .foregroundColor(ColorPalette.textPrimary)
 
-                        Text("kg")
+                        Text(L("common.kg"))
                             .font(Typography.title3)
                             .foregroundColor(ColorPalette.textSecondary)
                     }
@@ -188,7 +198,7 @@ struct CurrentWeightCard: View {
                             .font(Typography.numberSmall)
                             .foregroundColor(ColorPalette.textPrimary)
 
-                        Text("goal")
+                        Text(L("ui.goal"))
                             .font(Typography.caption2)
                             .foregroundColor(ColorPalette.textSecondary)
                     }
@@ -199,7 +209,7 @@ struct CurrentWeightCard: View {
             // Target info
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(String(localized: "progress.target"))
+                    Text(L("progress.target"))
                         .font(Typography.caption2)
                         .foregroundColor(ColorPalette.textTertiary)
 
@@ -212,7 +222,7 @@ struct CurrentWeightCard: View {
 
                 if remaining > 0 {
                     VStack(alignment: .trailing, spacing: 2) {
-                        Text(String(localized: "progress.remaining"))
+                        Text(L("progress.remaining"))
                             .font(Typography.caption2)
                             .foregroundColor(ColorPalette.textTertiary)
 
@@ -221,7 +231,7 @@ struct CurrentWeightCard: View {
                             .foregroundColor(ColorPalette.textPrimary)
                     }
                 } else {
-                    Text(String(localized: "progress.goalReached"))
+                    Text(L("progress.goalReached"))
                         .font(Typography.callout)
                         .foregroundColor(ColorPalette.success)
                 }
@@ -229,7 +239,7 @@ struct CurrentWeightCard: View {
 
             // Log weight button
             PrimaryButton(
-                title: String(localized: "progress.logWeight"),
+                title: L("progress.logWeight"),
                 icon: "scalemass",
                 action: onLogTap
             )
@@ -248,12 +258,12 @@ struct WeightChartCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            Text(String(localized: "progress.weightTrend"))
+            Text(L("progress.weightTrend"))
                 .font(Typography.headline)
                 .foregroundColor(ColorPalette.textPrimary)
 
             if entries.isEmpty {
-                Text(String(localized: "progress.noData"))
+                Text(L("progress.noData"))
                     .font(Typography.body)
                     .foregroundColor(ColorPalette.textSecondary)
                     .frame(maxWidth: .infinity)
@@ -275,29 +285,29 @@ struct WeightStatisticsCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            Text(String(localized: "progress.statistics"))
+            Text(L("progress.statistics"))
                 .font(Typography.headline)
                 .foregroundColor(ColorPalette.textPrimary)
 
             HStack(spacing: AppTheme.Spacing.lg) {
                 StatisticItem(
-                    title: String(localized: "progress.totalLost"),
+                    title: L("progress.totalLost"),
                     value: String(format: "%.1f", stats.totalLost),
                     unit: "kg",
                     color: stats.totalLost > 0 ? ColorPalette.success : ColorPalette.error
                 )
 
                 StatisticItem(
-                    title: String(localized: "progress.weeklyAvg"),
+                    title: L("progress.weeklyAvg"),
                     value: String(format: "%.2f", stats.weeklyAverage),
                     unit: "kg/week",
                     color: ColorPalette.textPrimary
                 )
 
                 StatisticItem(
-                    title: String(localized: "progress.daysTracked"),
+                    title: L("progress.daysTracked"),
                     value: "\(stats.daysTracked)",
-                    unit: "days",
+                    unit: L("ui.days"),
                     color: ColorPalette.textPrimary
                 )
             }
@@ -345,7 +355,7 @@ struct BMICard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
             HStack {
-                Text("BMI")
+                Text(L("bmi.title"))
                     .font(Typography.headline)
                     .foregroundColor(ColorPalette.textPrimary)
 
@@ -366,7 +376,7 @@ struct BMICard: View {
 
                 Spacer()
 
-                Text("Height: \(Int(height)) cm")
+                Text(String(format: L("bmi.height"), Int(height)))
                     .font(Typography.caption1)
                     .foregroundColor(ColorPalette.textSecondary)
             }
@@ -385,10 +395,10 @@ enum BMICategory {
 
     var name: String {
         switch self {
-        case .underweight: return "Underweight"
-        case .normal: return "Normal"
-        case .overweight: return "Overweight"
-        case .obese: return "Obese"
+        case .underweight: return L("bmi.underweight")
+        case .normal: return L("bmi.normal")
+        case .overweight: return L("bmi.overweight")
+        case .obese: return L("bmi.obese")
         }
     }
 
@@ -453,12 +463,12 @@ struct WeightHistorySection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            Text(String(localized: "progress.recentEntries"))
+            Text(L("progress.recentEntries"))
                 .font(Typography.headline)
                 .foregroundColor(ColorPalette.textPrimary)
 
             if entries.isEmpty {
-                Text(String(localized: "progress.noEntries"))
+                Text(L("progress.noEntries"))
                     .font(Typography.body)
                     .foregroundColor(ColorPalette.textSecondary)
                     .frame(maxWidth: .infinity)
@@ -473,7 +483,7 @@ struct WeightHistorySection: View {
                                 Button(role: .destructive) {
                                     onDelete(entry)
                                 } label: {
-                                    Label(String(localized: "common.delete"), systemImage: "trash")
+                                    Label(L("common.delete"), systemImage: "trash")
                                 }
                             }
 
@@ -507,7 +517,7 @@ struct LogWeightView: View {
                 VStack(spacing: AppTheme.Spacing.xl) {
                     // Weight input
                     VStack(spacing: AppTheme.Spacing.lg) {
-                        Text(String(localized: "progress.enterWeight"))
+                        Text(L("progress.enterWeight"))
                             .font(Typography.headline)
                             .foregroundColor(ColorPalette.textPrimary)
 
@@ -530,7 +540,7 @@ struct LogWeightView: View {
                             }
                         }
 
-                        Text("kg")
+                        Text(L("common.kg"))
                             .font(Typography.title2)
                             .foregroundColor(ColorPalette.textSecondary)
 
@@ -552,7 +562,7 @@ struct LogWeightView: View {
 
                     // Date picker
                     VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                        Text(String(localized: "progress.date"))
+                        Text(L("progress.date"))
                             .font(Typography.caption1)
                             .foregroundColor(ColorPalette.textSecondary)
 
@@ -567,11 +577,11 @@ struct LogWeightView: View {
 
                     // Notes
                     VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                        Text(String(localized: "progress.notes"))
+                        Text(L("progress.notes"))
                             .font(Typography.caption1)
                             .foregroundColor(ColorPalette.textSecondary)
 
-                        TextField(String(localized: "progress.notesPlaceholder"), text: $notes, axis: .vertical)
+                        TextField(L("progress.notesPlaceholder"), text: $notes, axis: .vertical)
                             .font(Typography.body)
                             .lineLimit(3...6)
                             .padding(AppTheme.Spacing.md)
@@ -581,19 +591,19 @@ struct LogWeightView: View {
 
                     // Save button
                     PrimaryButton(
-                        title: String(localized: "common.save"),
-                        isLoading: isSaving,
-                        action: saveWeight
+                        title: L("common.save"),
+                        action: saveWeight,
+                        isLoading: isSaving
                     )
                 }
                 .padding(AppTheme.Spacing.standard)
             }
             .background(ColorPalette.backgroundSecondary)
-            .navigationTitle(String(localized: "progress.logWeight"))
+            .navigationTitle(L("progress.logWeight"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(String(localized: "common.cancel")) {
+                    Button(L("common.cancel")) {
                         dismiss()
                     }
                 }
@@ -606,7 +616,7 @@ struct LogWeightView: View {
 
     private func loadLastWeight() async {
         let useCase = container.makeGetWeightHistoryUseCase()
-        if let entries = try? await useCase.execute(limit: 1),
+        if let entries = try? await useCase.execute(days: 1),
            let lastEntry = entries.first {
             weight = lastEntry.weight
         }
@@ -627,6 +637,7 @@ struct LogWeightView: View {
             try? await useCase.execute(entry: entry)
 
             isSaving = false
+            ToastManager.shared.showSuccess(L("toast.saved"))
             onComplete()
             dismiss()
         }
@@ -634,5 +645,5 @@ struct LogWeightView: View {
 }
 
 #Preview {
-    ProgressView(container: DependencyContainer.preview)
+    WeightProgressView(container: DependencyContainer.preview)
 }

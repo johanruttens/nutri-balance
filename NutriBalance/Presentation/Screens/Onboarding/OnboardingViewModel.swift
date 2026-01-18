@@ -14,7 +14,8 @@ final class OnboardingViewModel: ObservableObject {
     @Published var targetWeight: Double = 71.0
     @Published var activityLevel: ActivityLevel = .moderatelyActive
     @Published var notificationsEnabled: Bool = true
-    @Published var preferredLanguage: String = "en"
+    @Published var preferredLanguage: String = LocalizationManager.shared.currentLanguage.rawValue
+    @Published var selectedLanguage: AppLanguage = LocalizationManager.shared.currentLanguage
 
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
@@ -33,6 +34,15 @@ final class OnboardingViewModel: ObservableObject {
         self.container = container
     }
 
+    // MARK: - Validation Constants
+
+    private enum ValidationConstants {
+        static let minWeight: Double = 20.0
+        static let maxWeight: Double = 500.0
+        static let minNameLength: Int = 1
+        static let maxNameLength: Int = 50
+    }
+
     // MARK: - Computed Properties
 
     var canProceed: Bool {
@@ -40,9 +50,9 @@ final class OnboardingViewModel: ObservableObject {
         case 0:
             return true
         case 1:
-            return !firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            return isValidName(firstName)
         case 2:
-            return currentWeight > 0 && targetWeight > 0
+            return isValidWeight(currentWeight) && isValidWeight(targetWeight)
         case 3:
             return true
         case 4:
@@ -50,6 +60,53 @@ final class OnboardingViewModel: ObservableObject {
         default:
             return false
         }
+    }
+
+    /// Validation error message for current step
+    var validationError: String? {
+        switch currentStep {
+        case 1:
+            if firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                return L("validation.nameRequired")
+            }
+            if firstName.count > ValidationConstants.maxNameLength {
+                return L("validation.nameTooLong")
+            }
+            return nil
+        case 2:
+            if !isValidWeight(currentWeight) {
+                return L("validation.invalidWeight")
+            }
+            if !isValidWeight(targetWeight) {
+                return L("validation.invalidTargetWeight")
+            }
+            return nil
+        default:
+            return nil
+        }
+    }
+
+    // MARK: - Validation Methods
+
+    private func isValidName(_ name: String) -> Bool {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.count >= ValidationConstants.minNameLength &&
+               trimmed.count <= ValidationConstants.maxNameLength
+    }
+
+    private func isValidWeight(_ weight: Double) -> Bool {
+        return weight >= ValidationConstants.minWeight &&
+               weight <= ValidationConstants.maxWeight
+    }
+
+    /// Sanitize input before saving
+    private func sanitizedFirstName() -> String {
+        firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private func sanitizedLastName() -> String? {
+        let trimmed = lastName.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
     }
 
     var weightDifference: Double {
@@ -90,14 +147,24 @@ final class OnboardingViewModel: ObservableObject {
     // MARK: - Save User
 
     func saveUser() async {
+        // Validate before saving
+        guard canProceed else {
+            errorMessage = validationError ?? L("validation.genericError")
+            return
+        }
+
         isLoading = true
         errorMessage = nil
 
+        // Clamp weight values to valid range
+        let safeCurrentWeight = max(ValidationConstants.minWeight, min(ValidationConstants.maxWeight, currentWeight))
+        let safeTargetWeight = max(ValidationConstants.minWeight, min(ValidationConstants.maxWeight, targetWeight))
+
         let user = User(
-            firstName: firstName.trimmingCharacters(in: .whitespacesAndNewlines),
-            lastName: lastName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : lastName,
-            currentWeight: currentWeight,
-            targetWeight: targetWeight,
+            firstName: sanitizedFirstName(),
+            lastName: sanitizedLastName(),
+            currentWeight: safeCurrentWeight,
+            targetWeight: safeTargetWeight,
             dailyCalorieGoal: estimatedCalorieGoal,
             dailyWaterGoal: 2000,
             activityLevel: activityLevel,

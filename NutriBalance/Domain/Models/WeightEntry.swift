@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 /// Represents a weight measurement entry.
 struct WeightEntry: Identifiable, Equatable, Codable {
@@ -136,11 +137,11 @@ enum WeightTrend: String, Codable {
     var displayName: String {
         switch self {
         case .losing:
-            return String(localized: "weight.trend.losing", defaultValue: "Losing")
+            return L("weight.trend.losing")
         case .stable:
-            return String(localized: "weight.trend.stable", defaultValue: "Stable")
+            return L("weight.trend.stable")
         case .gaining:
-            return String(localized: "weight.trend.gaining", defaultValue: "Gaining")
+            return L("weight.trend.gaining")
         }
     }
 
@@ -152,6 +153,17 @@ enum WeightTrend: String, Codable {
             return "arrow.right"
         case .gaining:
             return "arrow.up.right"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .losing:
+            return ColorPalette.success
+        case .stable:
+            return ColorPalette.warning
+        case .gaining:
+            return ColorPalette.error
         }
     }
 }

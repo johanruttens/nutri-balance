@@ -51,7 +51,7 @@ final class ProgressViewModel: ObservableObject {
 
     func loadHistory(for timeRange: TimeRange) async {
         do {
-            let entries = try await getWeightHistoryUseCase.execute(limit: timeRange.days)
+            let entries = try await getWeightHistoryUseCase.execute(days: timeRange.days)
 
             recentEntries = entries
 
@@ -76,8 +76,8 @@ final class ProgressViewModel: ObservableObject {
 
     func deleteEntry(_ entry: WeightEntry) async {
         do {
-            let repository = container.makeWeightRepository()
-            try await repository.delete(id: entry.id)
+            let repository = container.weightRepository
+            try await repository.deleteEntry(entry)
             await loadData()
         } catch {
             self.error = error
@@ -88,8 +88,8 @@ final class ProgressViewModel: ObservableObject {
 
     private func loadUserData() async {
         do {
-            let repository = container.makeUserRepository()
-            if let user = try await repository.getUser() {
+            let repository = container.userRepository
+            if let user = try await repository.getCurrentUser() {
                 targetWeight = user.targetWeight
                 userHeight = user.height ?? 175
                 startWeight = user.currentWeight // This should ideally be stored as starting weight

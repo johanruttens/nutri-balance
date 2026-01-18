@@ -28,7 +28,7 @@ struct MealCategoryCard: View {
                         .foregroundColor(ColorPalette.textPrimary)
 
                     if entries.isEmpty {
-                        Text("Tap to add")
+                        Text(L("ui.tapToAdd"))
                             .font(Typography.caption1)
                             .foregroundColor(ColorPalette.textTertiary)
                     } else {

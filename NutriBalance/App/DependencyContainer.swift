@@ -50,9 +50,16 @@ final class DependencyContainer: ObservableObject {
         self.persistenceController = persistenceController
     }
 
-    // For testing
-    init(persistenceController: PersistenceController) {
-        self.persistenceController = persistenceController
+    // MARK: - Preview Support
+
+    static var preview: DependencyContainer {
+        let container = DependencyContainer(persistenceController: .preview)
+        return container
+    }
+
+    // For testing with custom persistence controller
+    static func forTesting(persistenceController: PersistenceController) -> DependencyContainer {
+        DependencyContainer(persistenceController: persistenceController)
     }
 
     // MARK: - Use Case Factories
@@ -99,6 +106,10 @@ final class DependencyContainer: ObservableObject {
     // Hydration
     func makeLogDrinkUseCase() -> LogDrinkUseCase {
         LogDrinkUseCase(repository: drinkEntryRepository)
+    }
+
+    func makeUpdateDrinkUseCase() -> UpdateDrinkUseCase {
+        UpdateDrinkUseCase(repository: drinkEntryRepository)
     }
 
     func makeGetDailyHydrationUseCase() -> GetDailyHydrationUseCase {

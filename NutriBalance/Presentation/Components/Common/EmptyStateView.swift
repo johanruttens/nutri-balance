@@ -128,10 +128,97 @@ struct LabeledDivider: View {
     }
 }
 
+// MARK: - Toast System
+
+/// Toast message type.
+enum ToastType {
+    case success
+    case error
+    case info
+    case undo
+
+    var icon: String {
+        switch self {
+        case .success: return "checkmark.circle.fill"
+        case .error: return "xmark.circle.fill"
+        case .info: return "info.circle.fill"
+        case .undo: return "arrow.uturn.backward.circle.fill"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .success: return ColorPalette.success
+        case .error: return ColorPalette.error
+        case .info: return ColorPalette.primary
+        case .undo: return ColorPalette.warning
+        }
+    }
+}
+
+/// Toast message data.
+struct ToastMessage: Identifiable, Equatable {
+    let id = UUID()
+    let type: ToastType
+    let message: String
+    var undoAction: (() -> Void)?
+
+    static func == (lhs: ToastMessage, rhs: ToastMessage) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+/// Observable toast manager for showing toast notifications.
+@MainActor
+class ToastManager: ObservableObject {
+    static let shared = ToastManager()
+
+    @Published var currentToast: ToastMessage?
+    private var dismissTask: Task<Void, Never>?
+
+    private init() {}
+
+    func show(_ message: String, type: ToastType = .info, duration: TimeInterval = 3.0, undoAction: (() -> Void)? = nil) {
+        dismissTask?.cancel()
+
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+            currentToast = ToastMessage(type: type, message: message, undoAction: undoAction)
+        }
+
+        dismissTask = Task {
+            try? await Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000))
+            guard !Task.isCancelled else { return }
+            dismiss()
+        }
+    }
+
+    func showSuccess(_ message: String = L("toast.saved")) {
+        HapticManager.shared.success()
+        show(message, type: .success)
+    }
+
+    func showError(_ message: String = L("toast.error")) {
+        HapticManager.shared.error()
+        show(message, type: .error)
+    }
+
+    func showUndo(_ message: String, action: @escaping () -> Void) {
+        show(message, type: .undo, duration: 5.0, undoAction: action)
+    }
+
+    func dismiss() {
+        withAnimation(.easeOut(duration: 0.2)) {
+            currentToast = nil
+        }
+    }
+}
+
 /// Toast notification view.
 struct ToastView: View {
     let message: String
     var type: ToastType = .info
+    var undoAction: (() -> Void)? = nil
+    var onDismiss: (() -> Void)? = nil
 
     var body: some View {
         HStack(spacing: AppTheme.Spacing.md) {
@@ -142,6 +229,28 @@ struct ToastView: View {
             Text(message)
                 .font(Typography.callout)
                 .foregroundColor(.white)
+
+            Spacer()
+
+            if let undoAction = undoAction {
+                Button(action: {
+                    undoAction()
+                    onDismiss?()
+                }) {
+                    Text(L("common.undo"))
+                        .font(Typography.callout)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                }
+            }
+
+            if let onDismiss = onDismiss {
+                Button(action: onDismiss) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(.white.opacity(0.8))
+                }
+            }
         }
         .padding(.horizontal, AppTheme.Spacing.standard)
         .padding(.vertical, AppTheme.Spacing.md)
@@ -149,27 +258,39 @@ struct ToastView: View {
         .cornerRadius(AppTheme.CornerRadius.medium)
         .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 4)
     }
+}
 
-    enum ToastType {
-        case success
-        case error
-        case info
+/// View modifier to add toast overlay to any view.
+struct ToastModifier: ViewModifier {
+    @ObservedObject var toastManager = ToastManager.shared
 
-        var icon: String {
-            switch self {
-            case .success: return "checkmark.circle.fill"
-            case .error: return "xmark.circle.fill"
-            case .info: return "info.circle.fill"
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+
+            VStack {
+                Spacer()
+
+                if let toast = toastManager.currentToast {
+                    ToastView(
+                        message: toast.message,
+                        type: toast.type,
+                        undoAction: toast.undoAction,
+                        onDismiss: toastManager.dismiss
+                    )
+                    .padding(.horizontal, AppTheme.Spacing.standard)
+                    .padding(.bottom, AppTheme.Spacing.xl)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
             }
         }
+    }
+}
 
-        var color: Color {
-            switch self {
-            case .success: return ColorPalette.success
-            case .error: return ColorPalette.error
-            case .info: return ColorPalette.primary
-            }
-        }
+extension View {
+    /// Adds toast notification overlay to the view.
+    func withToast() -> some View {
+        modifier(ToastModifier())
     }
 }
 
@@ -214,9 +335,9 @@ struct BadgeView: View {
             LabeledDivider(label: "OR")
 
             VStack(spacing: 8) {
-                ToastView(message: "Food added successfully!", type: .success)
-                ToastView(message: "Failed to save", type: .error)
-                ToastView(message: "Syncing data...", type: .info)
+                ToastView(message: L("toast.saved"), type: .success)
+                ToastView(message: L("toast.error"), type: .error)
+                ToastView(message: L("toast.deleted"), type: .undo, undoAction: {})
             }
 
             HStack(spacing: 20) {
