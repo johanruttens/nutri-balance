@@ -1,0 +1,62 @@
+NutriBalance - Support
+
+Thank you for using NutriBalance!
+
+FREQUENTLY ASKED QUESTIONS
+
+Q: How do I track a meal?
+A: Go to the "Today" tab, tap the + button or tap on a meal category (Breakfast, Lunch, Dinner, or Snacks), then search for a food item or add a custom entry.
+
+Q: How do I edit or delete a food entry?
+A: On the Today screen, tap on an entry to view details and edit, or swipe left on an entry to delete it.
+
+Q: How do I track my water intake?
+A: Go to the "Hydration" tab and use the quick-add buttons or tap + to log a drink. You can track water, coffee, tea, juice, and more.
+
+Q: How do I edit a hydration entry?
+A: Swipe right on a drink entry to edit it, or swipe left to delete it.
+
+Q: How do I change my nutrition goals?
+A: Go to Settings > Nutrition Goals to adjust your daily calorie, protein, carbohydrate, and fat targets.
+
+Q: How do I change the app language?
+A: Go to Settings > Language and select English or Dutch.
+
+Q: Where is my data stored?
+A: All your data is stored locally on your device. We do not collect or store any personal information on external servers.
+
+Q: How do I export my data?
+A: Go to Analytics > Export Report to generate a PDF summary of your nutrition data for a selected date range.
+
+Q: How do I log my weight?
+A: Go to the "Progress" tab and tap the + button to log your current weight.
+
+
+CONTACT SUPPORT
+
+If you have questions, feedback, or need assistance, please contact us:
+
+Email: support@nutribalance.app
+
+We typically respond within 24-48 hours.
+
+
+REPORT A BUG
+
+Found a bug? Please send us an email with:
+- A description of the issue
+- Steps to reproduce the problem
+- Your device model and iOS version
+- Screenshots if applicable
+
+Email: support@nutribalance.app
+
+
+FEATURE REQUESTS
+
+We love hearing your ideas! Send your feature suggestions to:
+
+Email: feedback@nutribalance.app
+
+
+Thank you for helping us improve NutriBalance!

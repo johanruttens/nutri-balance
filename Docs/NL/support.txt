@@ -1,0 +1,62 @@
+NutriBalance - Ondersteuning
+
+Bedankt voor het gebruik van NutriBalance!
+
+VEELGESTELDE VRAGEN
+
+V: Hoe registreer ik een maaltijd?
+A: Ga naar het tabblad "Vandaag", tik op de + knop of tik op een maaltijdcategorie (Ontbijt, Lunch, Avondeten of Snacks) en zoek vervolgens naar een voedingsmiddel of voeg een aangepaste invoer toe.
+
+V: Hoe bewerk of verwijder ik een voedingsinvoer?
+A: Tik op het Vandaag-scherm op een invoer om details te bekijken en te bewerken, of veeg naar links op een invoer om deze te verwijderen.
+
+V: Hoe registreer ik mijn waterinname?
+A: Ga naar het tabblad "Hydratatie" en gebruik de sneltoevoegen-knoppen of tik op + om een drankje te loggen. Je kunt water, koffie, thee, sap en meer bijhouden.
+
+V: Hoe bewerk ik een hydratatie-invoer?
+A: Veeg naar rechts op een drankinvoer om deze te bewerken, of veeg naar links om te verwijderen.
+
+V: Hoe wijzig ik mijn voedingsdoelen?
+A: Ga naar Instellingen > Voedingsdoelen om je dagelijkse calorie-, eiwit-, koolhydraat- en vetdoelen aan te passen.
+
+V: Hoe wijzig ik de app-taal?
+A: Ga naar Instellingen > Taal en selecteer Engels of Nederlands.
+
+V: Waar worden mijn gegevens opgeslagen?
+A: Al je gegevens worden lokaal op je apparaat opgeslagen. Wij verzamelen of bewaren geen persoonlijke informatie op externe servers.
+
+V: Hoe exporteer ik mijn gegevens?
+A: Ga naar Statistieken > Rapport Exporteren om een PDF-samenvatting van je voedingsgegevens te genereren voor een geselecteerde periode.
+
+V: Hoe registreer ik mijn gewicht?
+A: Ga naar het tabblad "Voortgang" en tik op de + knop om je huidige gewicht te loggen.
+
+
+CONTACT OPNEMEN MET ONDERSTEUNING
+
+Heb je vragen, feedback of hulp nodig? Neem contact met ons op:
+
+E-mail: support@nutribalance.app
+
+We reageren meestal binnen 24-48 uur.
+
+
+EEN BUG MELDEN
+
+Een bug gevonden? Stuur ons een e-mail met:
+- Een beschrijving van het probleem
+- Stappen om het probleem te reproduceren
+- Je apparaatmodel en iOS-versie
+- Screenshots indien van toepassing
+
+E-mail: support@nutribalance.app
+
+
+FUNCTIEVERZOEKEN
+
+We horen graag je ideeën! Stuur je functiesuggesties naar:
+
+E-mail: feedback@nutribalance.app
+
+
+Bedankt voor het helpen verbeteren van NutriBalance!

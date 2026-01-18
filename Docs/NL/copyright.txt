@@ -1,0 +1,63 @@
+NutriBalance - Auteursrechtvermelding
+
+Copyright (c) 2025 NutriBalance. Alle rechten voorbehouden.
+
+
+SOFTWARELICENTIE
+
+Deze applicatie en de inhoud ervan zijn beschermd door het auteursrecht. De NutriBalance-app, inclusief maar niet beperkt tot het ontwerp, de code, afbeeldingen, pictogrammen en gebruikersinterface, is het exclusieve eigendom van NutriBalance.
+
+
+TOEGESTAAN GEBRUIK
+
+U krijgt een beperkte, niet-exclusieve, niet-overdraagbare licentie om:
+- De app te downloaden en te installeren op uw persoonlijke iOS-apparaten
+- De app te gebruiken voor persoonlijke, niet-commerciële doeleinden
+- Persoonlijke voedingsrapporten te maken en te exporteren
+
+
+VERBODEN GEBRUIK
+
+U mag niet:
+- De app of enig deel daarvan kopiëren, wijzigen of verspreiden
+- De app reverse-engineeren, decompileren of demonteren
+- Auteursrechtvermelding of eigendomsmarkeringen verwijderen of wijzigen
+- De app gebruiken voor commerciële doeleinden zonder schriftelijke toestemming
+- De app herverdelen of beschikbaar maken op een ander platform dan de officiële App Store
+
+
+INHOUD VAN DERDEN
+
+De app kan bibliotheken en componenten van derden bevatten, elk onderworpen aan hun respectieve licenties. Een lijst met licenties van derden is beschikbaar in de app.
+
+
+HANDELSMERKEN
+
+"NutriBalance" en het NutriBalance-logo zijn handelsmerken van NutriBalance. Alle andere handelsmerken zijn eigendom van hun respectieve eigenaren.
+
+
+DISCLAIMER
+
+DE APP WORDT GELEVERD "ZOALS HIJ IS" ZONDER ENIGE GARANTIE, EXPLICIET OF IMPLICIET. NUTRIBALANCE GARANDEERT NIET DAT DE APP FOUTLOOS OF ONONDERBROKEN ZAL WERKEN.
+
+De voedingsinformatie die door deze app wordt verstrekt, is uitsluitend bedoeld voor informatieve doeleinden en mag niet worden beschouwd als medisch of dieetadvies. Raadpleeg altijd een zorgprofessional voordat u wijzigingen aanbrengt in uw dieet.
+
+
+BEPERKING VAN AANSPRAKELIJKHEID
+
+IN GEEN GEVAL ZAL NUTRIBALANCE AANSPRAKELIJK ZIJN VOOR ENIGE INDIRECTE, INCIDENTELE, SPECIALE, GEVOLGSCHADE OF PUNITIEVE SCHADE DIE VOORTVLOEIT UIT OF VERBAND HOUDT MET UW GEBRUIK VAN DE APP.
+
+
+TOEPASSELIJK RECHT
+
+Deze overeenkomst wordt beheerst door en geïnterpreteerd in overeenstemming met de wetten van België, zonder rekening te houden met de conflicterende wettelijke bepalingen.
+
+
+CONTACT
+
+Voor licentievragen of toestemmingen kunt u contact opnemen via:
+
+E-mail: legal@nutribalance.app
+
+
+Laatst bijgewerkt: januari 2025

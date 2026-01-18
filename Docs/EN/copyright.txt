@@ -1,0 +1,63 @@
+NutriBalance - Copyright Notice
+
+Copyright (c) 2025 NutriBalance. All rights reserved.
+
+
+SOFTWARE LICENSE
+
+This application and its contents are protected by copyright law. The NutriBalance app, including but not limited to its design, code, graphics, icons, and user interface, is the exclusive property of NutriBalance.
+
+
+PERMITTED USE
+
+You are granted a limited, non-exclusive, non-transferable license to:
+- Download and install the app on your personal iOS devices
+- Use the app for personal, non-commercial purposes
+- Create and export personal nutrition reports
+
+
+PROHIBITED USE
+
+You may not:
+- Copy, modify, or distribute the app or any part thereof
+- Reverse engineer, decompile, or disassemble the app
+- Remove or alter any copyright notices or proprietary markings
+- Use the app for any commercial purpose without written permission
+- Redistribute the app or make it available on any platform other than the official App Store
+
+
+THIRD-PARTY CONTENT
+
+The app may include third-party libraries and components, each subject to their respective licenses. A list of third-party licenses is available within the app.
+
+
+TRADEMARKS
+
+"NutriBalance" and the NutriBalance logo are trademarks of NutriBalance. All other trademarks are the property of their respective owners.
+
+
+DISCLAIMER
+
+THE APP IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. NUTRIBALANCE DOES NOT WARRANT THAT THE APP WILL BE ERROR-FREE OR UNINTERRUPTED.
+
+The nutritional information provided by this app is for informational purposes only and should not be considered medical or dietary advice. Always consult with a healthcare professional before making changes to your diet.
+
+
+LIMITATION OF LIABILITY
+
+IN NO EVENT SHALL NUTRIBALANCE BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATED TO YOUR USE OF THE APP.
+
+
+GOVERNING LAW
+
+This agreement shall be governed by and construed in accordance with the laws of Belgium, without regard to its conflict of law provisions.
+
+
+CONTACT
+
+For licensing inquiries or permissions, please contact:
+
+Email: legal@nutribalance.app
+
+
+Last updated: January 2025
